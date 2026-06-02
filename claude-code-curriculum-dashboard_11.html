@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude講座｜教材ダッシュボード</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #b8860b;
+  --gold-light: #fdf3d8;
+  --gold-mid: #c9970e;
+  --gold-dark: #7a5a07;
+  --black: #111;
+  --gray-700: #444;
+  --gray-500: #777;
+  --gray-300: #ccc;
+  --gray-200: #e8e8e0;
+  --gray-100: #f5f5f0;
+  --gray-50: #fafaf7;
+  --white: #fff;
+  --green: #1a7a4a;
+  --green-light: #eafaf1;
+  --green-border: #a8d5b8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var(--black); min-height:100vh; }
+
+header { background:var(--black); color:var(--white); padding:56px 40px 48px; position:relative; overflow:hidden; }
+header::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 48px,rgba(184,134,11,.05) 48px,rgba(184,134,11,.05) 49px); pointer-events:none; }
+.header-inner { position:relative; max-width:1100px; margin:0 auto; }
+.eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:22px; }
+.eyebrow-line { height:1px; width:36px; background:var(--gold); }
+.eyebrow-text { font-size:11px; letter-spacing:.2em; color:var(--gold); font-weight:700; text-transform:uppercase; }
+header h1 { font-family:'Shippori Mincho',serif; font-size:clamp(26px,3.5vw,40px); font-weight:800; line-height:1.3; margin-bottom:14px; }
+header h1 span { color:var(--gold); }
+.header-desc { font-size:14px; color:rgba(255,255,255,.5); max-width:520px; line-height:1.85; margin-bottom:32px; }
+.header-stats { display:flex; gap:36px; flex-wrap:wrap; }
+.stat-num { font-family:'JetBrains Mono',monospace; font-size:26px; font-weight:600; color:var(--gold); line-height:1; }
+.stat-label { font-size:11px; color:rgba(255,255,255,.35); margin-top:4px; letter-spacing:.06em; }
+
+.progress-bar-wrap { background:var(--gray-100); border-bottom:1px solid var(--gray-200); padding:24px 40px; }
+.progress-inner { max-width:1100px; margin:0 auto; }
+.progress-label { font-size:11px; letter-spacing:.14em; color:var(--gray-500); text-transform:uppercase; margin-bottom:10px; }
+.progress-track { height:4px; background:var(--gray-200); border-radius:2px; position:relative; }
+.progress-fill { height:100%; width:33.333%; background:linear-gradient(90deg,var(--gold-dark),var(--gold-mid)); border-radius:2px; position:relative; }
+.progress-fill::after { content:''; position:absolute; right:-4px; top:-3px; width:10px; height:10px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 3px rgba(184,134,11,.2); }
+.progress-steps { display:flex; justify-content:space-between; margin-top:10px; }
+.ps-label { font-size:11px; color:var(--gray-300); font-weight:500; }
+.ps-label.active { color:var(--gold); font-weight:700; }
+
+main { max-width:1100px; margin:0 auto; padding:48px 40px 80px; }
+
+.curriculum-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px; margin-bottom:48px; }
+
+.card { background:var(--white); border:1.5px solid var(--gray-200); border-radius:14px; padding:26px; position:relative; overflow:hidden; transition:all .22s; }
+.card.ready { border-color:rgba(184,134,11,.4); background:var(--gold-light); }
+.card.coming { background:var(--gray-50); opacity:.6; }
+.card::before { content:attr(data-num); position:absolute; right:-8px; top:-14px; font-family:'JetBrains Mono',monospace; font-size:80px; font-weight:700; color:rgba(0,0,0,.04); line-height:1; pointer-events:none; user-select:none; }
+.card.ready::before { color:rgba(184,134,11,.08); }
+
+.card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.card-num { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; color:var(--gray-300); letter-spacing:.1em; }
+.card.ready .card-num { color:var(--gold); }
+
+.card-status { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700; letter-spacing:.1em; padding:3px 10px; border-radius:20px; text-transform:uppercase; }
+.status-ready { background:rgba(184,134,11,.12); color:var(--gold-dark); border:1px solid rgba(184,134,11,.3); }
+.status-coming { background:var(--gray-100); color:var(--gray-500); border:1px solid var(--gray-200); }
+.status-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+.status-ready .status-dot { animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.card-title { font-family:'Shippori Mincho',serif; font-size:17px; font-weight:700; line-height:1.45; margin-bottom:5px; color:var(--black); }
+.card.coming .card-title { color:var(--gray-500); }
+.card-subtitle { font-size:12px; color:var(--gray-500); margin-bottom:18px; }
+.card.ready .card-subtitle { color:var(--gray-700); }
+
+.card-topics { list-style:none; display:flex; flex-direction:column; gap:5px; margin-bottom:18px; }
+.card-topics li { font-size:12px; color:var(--gray-500); display:flex; align-items:flex-start; gap:8px; line-height:1.55; }
+.card.ready .card-topics li { color:var(--gray-700); }
+.topic-dot { width:3px; height:3px; border-radius:50%; background:var(--gray-300); flex-shrink:0; margin-top:6px; }
+.card.ready .topic-dot { background:var(--gold); }
+
+.card-deliverable { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; padding:5px 11px; border-radius:6px; margin-bottom:18px; background:var(--gray-100); color:var(--gray-500); border:1px solid var(--gray-200); }
+.card.ready .card-deliverable { background:rgba(184,134,11,.1); color:var(--gold-dark); border-color:rgba(184,134,11,.25); }
+
+.card-footer { display:flex; align-items:center; justify-content:space-between; padding-top:16px; border-top:1px solid var(--gray-200); gap:8px; flex-wrap:wrap; }
+.card.ready .card-footer { border-top-color:rgba(184,134,11,.2); }
+.card-time { font-size:11px; color:var(--gray-300); font-family:'JetBrains Mono',monospace; }
+.card.ready .card-time { color:var(--gray-500); }
+.card-btns { display:flex; gap:8px; flex-wrap:wrap; }
+
+.btn-app { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:var(--green); background:var(--green-light); border:1px solid var(--green-border); padding:6px 12px; border-radius:6px; text-decoration:none; transition:all .18s; }
+.btn-app:hover { background:#d0f0e0; }
+
+.btn-material { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:var(--gold-dark); background:rgba(184,134,11,.1); border:1px solid rgba(184,134,11,.3); padding:6px 12px; border-radius:6px; cursor:pointer; transition:all .18s; font-family:'Noto Sans JP',sans-serif; }
+.btn-material:hover { background:rgba(184,134,11,.2); }
+.arrow { transition:transform .18s; }
+.btn-material:hover .arrow { transform:translateX(2px); }
+
+.btn-legend { background:var(--gray-50); border:1px solid var(--gray-200); border-radius:10px; padding:16px 20px; margin-bottom:48px; display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+.legend-title { font-size:11px; font-weight:700; letter-spacing:.1em; color:var(--gray-500); text-transform:uppercase; margin-bottom:12px; width:100%; }
+.legend-item { display:flex; align-items:flex-start; gap:12px; flex:1; min-width:220px; }
+.legend-btn-sample { flex-shrink:0; margin-top:2px; }
+.legend-desc strong { display:block; font-size:13px; color:var(--black); margin-bottom:3px; }
+.legend-desc p { font-size:12px; color:var(--gray-500); line-height:1.6; }
+
+.detail-panel { background:var(--white); border:1.5px solid rgba(184,134,11,.25); border-radius:18px; padding:40px; display:none; box-shadow:0 4px 32px rgba(184,134,11,.08); margin-bottom:32px; }
+.detail-panel.open { display:block; animation:slideDown .28s ease; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+
+.detail-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:12px; padding-bottom:20px; border-bottom:1.5px solid var(--gray-200); }
+.detail-title { font-family:'Shippori Mincho',serif; font-size:20px; font-weight:700; color:var(--black); }
+.detail-title span { color:var(--gold); }
+
+.btn-close { background:var(--gray-100); border:1px solid var(--gray-200); color:var(--gray-500); font-size:12px; padding:7px 14px; border-radius:6px; cursor:pointer; transition:all .18s; font-family:'Noto Sans JP',sans-serif; }
+.btn-close:hover { background:var(--gray-200); color:var(--black); }
+
+.steps-nav { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:28px; }
+.step-tab { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; padding:7px 13px; border-radius:8px; cursor:pointer; transition:all .18s; border:1.5px solid var(--gray-200); background:var(--white); color:var(--gray-500); }
+.step-tab:hover { border-color:var(--gold); color:var(--gold-dark); }
+.step-tab.active { background:var(--gold-light); border-color:rgba(184,134,11,.4); color:var(--gold-dark); }
+.step-tab-num { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; background:var(--gray-200); font-size:10px; color:var(--gray-700); }
+.step-tab.active .step-tab-num { background:var(--gold); color:var(--white); }
+
+.step-content { display:none; }
+.step-content.active { display:block; animation:fadeIn .2s ease; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.step-content h3 { font-size:15px; font-weight:700; color:var(--black); margin-bottom:14px; display:flex; align-items:center; gap:9px; }
+.step-content h3::before { content:''; display:inline-block; width:3px; height:17px; background:var(--gold); border-radius:2px; flex-shrink:0; }
+
+.instruction-list { list-style:none; counter-reset:inst; display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+.instruction-list li { counter-increment:inst; display:flex; align-items:flex-start; gap:12px; padding:11px 15px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:8px; font-size:14px; color:var(--gray-700); line-height:1.6; }
+.instruction-list li::before { content:counter(inst); display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--black); color:var(--white); font-size:11px; font-weight:700; flex-shrink:0; margin-top:1px; }
+
+.checkpoint { display:none; align-items:flex-start; gap:11px; padding:13px 17px; background:var(--green-light); border:1.5px solid var(--green-border); border-radius:8px; margin-top:16px; }
+.instructor-mode .checkpoint { display:flex; }
+.checkpoint-icon { width:20px; height:20px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; font-size:11px; font-weight:700; }
+.checkpoint p { font-size:13px; color:var(--green); font-weight:500; line-height:1.5; }
+
+.instructor-note { border-left:3px solid var(--gold); padding:13px 17px; background:#fffbf0; border-radius:0 8px 8px 0; margin:16px 0; display:none; }
+.instructor-mode .instructor-note { display:block; }
+.note-label { font-size:10px; font-weight:700; letter-spacing:.12em; color:var(--gold-dark); text-transform:uppercase; margin-bottom:5px; }
+.instructor-note p { font-size:13px; color:#5a4200; line-height:1.7; }
+.instructor-tab { display:none; }
+.instructor-mode .instructor-tab { display:inline-flex; }
+.instructor-badge { position:fixed; bottom:20px; right:20px; background:var(--gold); color:var(--white); font-size:11px; font-weight:700; padding:6px 14px; border-radius:20px; opacity:0; transition:opacity .4s; pointer-events:none; z-index:999; }
+.instructor-badge.show { opacity:1; }
+
+.code-wrap { background:#1e1e2e; border-radius:10px; overflow:hidden; margin:16px 0; }
+.code-header { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:#13131f; border-bottom:1px solid rgba(255,255,255,.06); }
+.code-filename { font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(255,255,255,.4); display:flex; align-items:center; gap:8px; }
+.code-dot { width:8px; height:8px; border-radius:50%; }
+.dot-md { background:#4caf50; }
+.copy-btn { font-size:11px; color:rgba(255,255,255,.35); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:4px; padding:3px 10px; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.copy-btn:hover { color:rgba(255,255,255,.7); }
+.copy-btn.copied { color:#4caf50; border-color:#4caf50; }
+pre { padding:20px; overflow-x:auto; font-family:'JetBrains Mono',monospace; font-size:12.5px; line-height:1.75; color:#cdd3de; }
+.tok-comment { color:#546e7a; font-style:italic; }
+.tok-key { color:#ffcb6b; }
+.tok-val { color:#c3e88d; }
+.tok-head { color:#82aaff; font-weight:600; }
+
+.info-table { width:100%; border-collapse:collapse; font-size:13px; margin:16px 0; border-radius:8px; overflow:hidden; border:1px solid var(--gray-200); }
+.info-table th { background:var(--black); color:var(--white); padding:10px 14px; text-align:left; font-size:11px; font-weight:700; letter-spacing:.07em; }
+.info-table td { padding:10px 14px; color:var(--gray-700); border-bottom:1px solid var(--gray-200); vertical-align:top; }
+.info-table tr:last-child td { border-bottom:none; }
+.info-table tbody tr:hover td { background:var(--gray-50); }
+
+code { font-family:'JetBrains Mono',monospace; background:#f0ede8; color:#c0392b; font-size:12px; padding:2px 6px; border-radius:4px; }
+
+.msg-card { padding:14px 18px; border:1.5px solid rgba(184,134,11,.3); border-radius:8px; font-size:14px; font-weight:700; color:var(--gold-dark); background:var(--gold-light); margin-bottom:10px; }
+
+.demo-box { background:#f0f7ff; border:1.5px solid #b3d4f5; border-radius:10px; padding:20px 24px; margin:16px 0; }
+.demo-box-title { font-size:11px; font-weight:700; letter-spacing:.1em; color:#2a6db5; text-transform:uppercase; margin-bottom:12px; }
+.demo-box p { font-size:14px; color:#1a3a5c; line-height:1.75; }
+
+/* 機能デモカード（新規） */
+.feature-demo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; margin:16px 0; }
+.feature-card { border:1.5px solid var(--gray-200); border-radius:10px; padding:16px 18px; background:var(--white); }
+.feature-card-icon { font-size:22px; margin-bottom:8px; }
+.feature-card-title { font-size:13px; font-weight:700; color:var(--black); margin-bottom:4px; }
+.feature-card-desc { font-size:12px; color:var(--gray-500); line-height:1.6; margin-bottom:8px; }
+.feature-card-example { font-size:12px; color:var(--gold-dark); font-weight:500; background:var(--gold-light); border-radius:5px; padding:5px 10px; display:inline-block; }
+
+footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-200); font-size:11px; color:var(--gray-300); letter-spacing:.08em; background:var(--gray-50); }
+
+@media(max-width:640px) {
+  header,.progress-bar-wrap,main { padding-left:20px; padding-right:20px; }
+  header { padding-top:40px; }
+  .curriculum-grid { grid-template-columns:1fr; }
+  .detail-panel { padding:24px; }
+  .btn-legend { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">
+      <div class="eyebrow-line"></div>
+      <div class="eyebrow-text">moatrock × Claude</div>
+      <div class="eyebrow-line"></div>
+    </div>
+    <h1>飲食店経営者のための<br><span>Claude 講座</span></h1>
+    <p class="header-desc">AIと一緒に業務アプリ・HP・LPを自分で作る。コード未経験でも、6回の授業で「自分の店のツール」が完成する。</p>
+    <div class="header-stats">
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">回の授業</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">回公開済み</div></div>
+      <div class="stat"><div class="stat-num">2h</div><div class="stat-label">／回の所要時間</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="progress-label">カリキュラム進捗 — 第1回・第2回・第5回 公開済み</div>
+    <div class="progress-track"><div class="progress-fill" style="width:50%;"></div></div>
+    <div class="progress-steps">
+      <span class="ps-label active">第1回 ✓</span>
+      <span class="ps-label active">第2回 ✓</span>
+      <span class="ps-label">第3回</span>
+      <span class="ps-label">第4回</span>
+      <span class="ps-label active">第5回 ✓</span>
+      <span class="ps-label">第6回</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <div class="btn-legend">
+    <div class="legend-title">公開済み回のボタンについて</div>
+    <div class="legend-item">
+      <div class="legend-btn-sample">
+        <a class="btn-app" href="#" onclick="return false;">🚀 アプリを開く</a>
+      </div>
+      <div class="legend-desc">
+        <strong>アプリを開く（緑）</strong>
+        <p>授業で実際に完成させた<br>業務アプリ本体を開きます。<br>受講者が日々使う「製品」です。</p>
+      </div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-btn-sample">
+        <button class="btn-material" onclick="return false;">教材を見る →</button>
+      </div>
+      <div class="legend-desc">
+        <strong>教材を見る（ゴールド）</strong>
+        <p>アプリの作り方の手順書を<br>このページ内で開きます。<br>講師がディレクションに使う資料です。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="curriculum-grid">
+
+    <div class="card ready" data-num="01">
+      <div class="card-header">
+        <span class="card-num">第01回</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開済み</span>
+      </div>
+      <div class="card-title">導入 — Claude Codeの全体像と環境構築</div>
+      <div class="card-subtitle">飲食業での実ユースケース紹介からスタート</div>
+      <ul class="card-topics">
+        <li><span class="topic-dot"></span>Claudeで何ができるか（チャット・コネクタ・Cowork・Claude Code）</li>
+        <li><span class="topic-dot"></span>初期設定（アプリ導入・コネクタ・プロジェクト）</li>
+        <li><span class="topic-dot"></span>モデル選択（Sonnet/Opus/Haiku）とコスト感覚</li>
+        <li><span class="topic-dot"></span>グローバル vs プロジェクトCLAUDE.mdの使い分け</li>
+        <li><span class="topic-dot"></span>「極」の見本を参考に自店舗CLAUDE.md作成</li>
+      </ul>
+      <div class="card-deliverable">📦 自店舗CLAUDE.md完成</div>
+      <div class="card-footer">
+        <span class="card-time">約3時間</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-1')">教材を見る <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card ready" data-num="02">
+      <div class="card-header">
+        <span class="card-num">第02回</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開済み</span>
+      </div>
+      <div class="card-title">業務ツール作成 — 数字・文章を自動化する</div>
+      <div class="card-subtitle">Vibe Codingで「何を作るか」から始める</div>
+      <ul class="card-topics">
+        <li><span class="topic-dot"></span>Vibe Coding体験（逆質問でアイデアを発散・収束）</li>
+        <li><span class="topic-dot"></span>原価計算ツールを見本として作成</li>
+        <li><span class="topic-dot"></span>各自で自分のお店のツールを作成</li>
+        <li><span class="topic-dot"></span>次回発表の宿題</li>
+      </ul>
+      <div class="card-deliverable">📦 翌日から使えるツール1本</div>
+      <div class="card-footer">
+        <span class="card-time">約2時間</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-2')">教材を見る <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card coming" data-num="03">
+      <div class="card-header">
+        <span class="card-num">第03回</span>
+        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+      </div>
+      <div class="card-title">Cowork — ブラウザ・PC操作を自動化する</div>
+      <div class="card-subtitle">Claude in Chromeで繰り返し作業をゼロにする</div>
+      <ul class="card-topics">
+        <li><span class="topic-dot"></span>Coworkとは・Claude in Chromeの仕組み</li>
+        <li><span class="topic-dot"></span>予約サイトの情報収集を自動化</li>
+        <li><span class="topic-dot"></span>定期レポートの自動生成</li>
+        <li><span class="topic-dot"></span>MCP連携の入口紹介（Gmail・カレンダー活用）</li>
+      </ul>
+      <div class="card-deliverable">📦 繰り返し作業を自動化したワークフロー1本</div>
+      <div class="card-footer">
+        <span class="card-time">約2時間</span>
+        <span style="font-size:11px;color:var(--gray-300);">壁打ち後に公開予定</span>
+      </div>
+    </div>
+
+    <div class="card coming" data-num="04">
+      <div class="card-header">
+        <span class="card-num">第04回</span>
+        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+      </div>
+      <div class="card-title">HP・LP作成 — 自店舗サイトを公開する</div>
+      <div class="card-subtitle">HPとLPを一回の授業でまとめて作る</div>
+      <ul class="card-topics">
+        <li><span class="topic-dot"></span>HPとLPの違い・使い分けを理解する</li>
+        <li><span class="topic-dot"></span>CLAUDE.mdからHP生成・スマホ対応</li>
+        <li><span class="topic-dot"></span>キャンペーン用LPをClaude Codeで作成</li>
+        <li><span class="topic-dot"></span>GitHub → Vercelで両方を公開</li>
+      </ul>
+      <div class="card-deliverable">📦 本番公開済みHP + LP（URLあり）</div>
+      <div class="card-footer">
+        <span class="card-time">約3時間</span>
+        <span style="font-size:11px;color:var(--gray-300);">壁打ち後に公開予定</span>
+      </div>
+    </div>
+
+    <div class="card ready" data-num="05">
+      <div class="card-header">
+        <span class="card-num">第05回</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開済み</span>
+      </div>
+      <div class="card-title">アプリ開発 — 自店舗の業務Webアプリを作る</div>
+      <div class="card-subtitle">売上ダッシュボードを0から完成・Vercel公開</div>
+      <ul class="card-topics">
+        <li><span class="topic-dot"></span>WebアプリとHP/LPの違いを理解</li>
+        <li><span class="topic-dot"></span>VS Code・GitHub・Vercelの環境構築</li>
+        <li><span class="topic-dot"></span>HTML/CSS/JSで売上ダッシュボードを作成</li>
+        <li><span class="topic-dot"></span>グラフ・CSV出力・客単価自動計算</li>
+        <li><span class="topic-dot"></span>GitHub → Vercelでアプリを公開</li>
+      </ul>
+      <div class="card-deliverable">📦 実際に動く業務Webアプリ（公開済みURL）</div>
+      <div class="card-footer">
+        <span class="card-time">約3時間</span>
+        <div class="card-btns">
+          <a class="btn-app" href="https://goku-dashboard-woad.vercel.app" target="_blank">🚀 アプリを開く</a>
+          <button class="btn-material" onclick="toggleDetail('detail-5')">教材を見る <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card coming" data-num="06">
+      <div class="card-header">
+        <span class="card-num">第06回</span>
+        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+      </div>
+      <div class="card-title">運用設計 — 定着させる仕組みづくり</div>
+      <div class="card-subtitle">HP・LP・アプリを自分で育てる運用へ</div>
+      <ul class="card-topics">
+        <li><span class="topic-dot"></span>CLAUDE.mdを育てる習慣</li>
+        <li><span class="topic-dot"></span>アプリのアップデートをClaude Codeで回す</li>
+        <li><span class="topic-dot"></span>スタッフ引き継ぎ・コネクタの共有</li>
+        <li><span class="topic-dot"></span>拡張ロードマップ（Make・Notion・LINE Bot）</li>
+      </ul>
+      <div class="card-deliverable">📦 AI導入マニュアル＋各種更新ガイド</div>
+      <div class="card-footer">
+        <span class="card-time">約3時間</span>
+        <span style="font-size:11px;color:var(--gray-300);">壁打ち後に公開予定</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 第1回 詳細パネル -->
+  <div class="detail-panel" id="detail-1">
+    <div class="detail-header">
+      <div class="detail-title">第01回｜<span>Claude Codeの全体像と環境構築</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-1')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s1',1)"><span class="step-tab-num">1</span>できること全体像</div>
+      <div class="step-tab" onclick="showStep('s1',2)"><span class="step-tab-num">2</span>ダッシュボード</div>
+      <div class="step-tab" onclick="showStep('s1',3)"><span class="step-tab-num">3</span>初期設定</div>
+      <div class="step-tab" onclick="showStep('s1',4)"><span class="step-tab-num">4</span>Codeタブ</div>
+      <div class="step-tab" onclick="showStep('s1',5)"><span class="step-tab-num">5</span>モデル選択</div>
+      <div class="step-tab" onclick="showStep('s1',6)"><span class="step-tab-num">6</span>CLAUDE.mdとは</div>
+      <div class="step-tab" onclick="showStep('s1',7)"><span class="step-tab-num">7</span>CLAUDE.md作成</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s1',8)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+    <!-- STEP 1: できること全体像 -->
+    <div class="step-content active" id="s1-1">
+      <h3>Claudeで何ができるか（目安：10分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：全体像を先に見せる</div>
+        <p>「細かい説明は後でいい。まず『Claudeでこんなことができる』という全体像を掴んでもらう。4つの使い方をサクッと見せて、次のダッシュボードデモへの期待値を上げてください。」</p>
+      </div>
+
+      <table class="info-table">
+        <thead>
+          <tr><th>使い方</th><th>何ができる？</th><th>飲食店での例</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>💬 チャット</strong></td>
+            <td>会話・文章作成・調査・相談</td>
+            <td>メール文・SNS投稿・競合リサーチ・メニュー説明文</td>
+          </tr>
+          <tr>
+            <td><strong>🔗 コネクタ</strong></td>
+            <td>Gmail・カレンダーなど外部サービスと連携</td>
+            <td>「今日のメールまとめて」「今週の予約整理して」</td>
+          </tr>
+          <tr>
+            <td><strong>🖥️ Cowork</strong></td>
+            <td>ブラウザ・PC操作の自動化</td>
+            <td>定期的なデータ収集・ファイル整理の自動化</td>
+          </tr>
+          <tr>
+            <td><strong>⚡ Claude Code</strong></td>
+            <td>ツール・HP・LP・Webアプリ開発</td>
+            <td>売上管理アプリ・原価計算ツール・店舗HP公開</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
+        <p>「ClaudeはAnthropicというアメリカの会社が作ったAIです。大きく4つの使い方があります。チャット・コネクタ・Cowork・Claude Code。この講座でメインで使うのはClaude Codeですが、今日は初期設定も兼ねてコネクタも全員やります。では、Claude Codeで何が作れるか、まず実例を見てください。」</p>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>「4つの使い方がある」と全員が把握できていればOK。すぐ次のデモへ。</p>
+      </div>
+    </div>
+
+    <!-- STEP 2: ダッシュボードデモ -->
+    <div class="step-content" id="s1-2">
+      <h3>極のダッシュボードをデモする（目安：15分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：つかみの本命</div>
+        <p>「ここで受講者の目の色が変わるかどうか決まります。『コードを一行も書いていない』という事実を強調してください。」</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li>ブラウザで <strong>https://goku-dashboard-woad.vercel.app</strong> を開いてスクリーン共有</li>
+        <li>売上・客数を入力 → グラフが動くのをリアルタイムで見せる</li>
+        <li>CSVエクスポートを実演 → 「Excelに貼り付けられます」と伝える</li>
+        <li>スマホからも同じURLでアクセスできることを見せる</li>
+      </ol>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
+        <p>「これ、コードを一行も書いていません。ClaudeというAIと会話しながら作りました。かかった時間は約3時間。皆さんも第5回の授業でこれと同じものを作って、自分のURLでスマホから見られるようになります。」</p>
+      </div>
+
+      <h3 style="margin-top:24px;">6回のロードマップを示す</h3>
+      <ol class="instruction-list">
+        <li>この教材ダッシュボード自体をスクリーンに映す</li>
+        <li>「6回終わると何ができるか」を各カードを指差しながら説明</li>
+        <li>「今日は第1回。まずClaudeに自分のお店を覚えさせます」と宣言</li>
+      </ol>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>「自分のお店でも使えそう」という反応が出ていればOK！</p>
+      </div>
+    </div>
+
+    <!-- STEP 3: 初期設定 -->
+    <div class="step-content" id="s1-3">
+      <h3>初期設定を完了させる（目安：20分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：全員が完了するまで次に進まない</div>
+        <p>「アプリ導入・コネクタ・プロジェクトの3つを今日中に全員終わらせます。ここを飛ばすと次回以降が詰まります。」</p>
+      </div>
+
+      <h3 style="margin-top:20px;">① デスクトップアプリをインストール・ログインする</h3>
+      <ol class="instruction-list">
+        <li>ブラウザで <strong>https://claude.ai/download</strong> を開く</li>
+        <li>「Download for Mac」をクリックしてダウンロード</li>
+        <li>ダウンロードされた <code>.dmg</code> ファイルを開く → ApplicationsフォルダにClaudeをドラッグ → 起動</li>
+        <li>法人アカウントのメールアドレス・パスワードでログイン</li>
+        <li>左上に「Chat」「Cowork」「Code」の3タブが表示されればOK</li>
+      </ol>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>「Code」タブが表示されていればOK！</p>
+      </div>
+
+      <h3 style="margin-top:24px;">② コネクタを繋ぐ</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ</div>
+        <p>「法人プランなのでコネクタは全員使えます。ただし組織設定でコード実行がオフになっていると繋げません。事前に確認しておいてください。」</p>
+      </div>
+      <ol class="instruction-list">
+        <li>チャット入力欄の「＋」→「コネクタ」→ GmailをON</li>
+        <li>新しいチャットを開いて「今日のメールまとめて」と入力して送信</li>
+        <li>メールの一覧が返ってきたらOK</li>
+      </ol>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>Gmailの内容がチャットに返ってきたらOK！</p>
+      </div>
+
+      <h3 style="margin-top:24px;">③ プロジェクトを作る</h3>
+      <ol class="instruction-list">
+        <li>左サイドバーの「プロジェクト」をクリック</li>
+        <li>「新しいプロジェクト」→ 名前を自分の店名にする</li>
+        <li>箱だけ作ればOK（中身はCLAUDE.md完成後に入れる）</li>
+      </ol>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>プロジェクトが作れていればOK！</p>
+      </div>
+    </div>
+
+    <!-- STEP 4: Codeタブ -->
+    <div class="step-content" id="s1-4">
+      <h3>Codeタブの使い方を理解する（目安：10分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ</div>
+        <p>「3つのタブの違いを表で見せてから、実際にCodeタブで『こんにちは』を送るところまでやらせてください。」</p>
+      </div>
+
+      <table class="info-table">
+        <thead>
+          <tr><th>タブ</th><th>何ができる？</th><th>使いどころ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Chat</strong></td><td>会話・文章作成・質問</td><td>SNS文・メール・コネクタ経由の操作</td></tr>
+          <tr><td><strong>Cowork</strong></td><td>PC操作の自動化</td><td>ブラウザ操作・アプリ操作（第6回で紹介）</td></tr>
+          <tr><td><strong>Code</strong></td><td>ファイル作成・コード生成・フォルダ操作</td><td>ツール・HP・LP・アプリ作成（この講座のメイン）</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:20px;">Codeタブで動作確認する</h3>
+      <ol class="instruction-list">
+        <li>左上「Code」タブをクリック</li>
+        <li>画面下部が「Desktop」になっていることを確認</li>
+        <li>「New session」をクリック</li>
+        <li>「こんにちは」と入力してEnter → 返答が来ればOK</li>
+      </ol>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>Codeタブで返答が来ればOK！Claude Codeが使える状態です。</p>
+      </div>
+    </div>
+
+    <!-- STEP 5: モデル選択 -->
+    <div class="step-content" id="s1-5">
+      <h3>モデル選択とコスト感覚を理解する（目安：15分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ</div>
+        <p>「料理で例えると：Haiku＝電子レンジ、Sonnet＝ガスコンロ、Opus＝フランス料理のシェフ。この講座ではSonnetを使います。」</p>
+      </div>
+
+      <table class="info-table">
+        <thead>
+          <tr><th>モデル</th><th>特徴</th><th>飲食店での使いどころ</th><th>速度</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Haiku</code></td><td>軽量・高速・低コスト</td><td>定型文作成・簡単な計算・返信文生成</td><td>⚡⚡⚡</td></tr>
+          <tr><td><code>Sonnet</code>（推奨）</td><td>バランス型・日常使いに最適</td><td>HP/LP作成・業務ツール開発・CLAUDE.md作成</td><td>⚡⚡</td></tr>
+          <tr><td><code>Opus</code></td><td>最高性能・複雑なタスク向け</td><td>複雑なアプリ開発・長文分析・戦略立案</td><td>⚡</td></tr>
+        </tbody>
+      </table>
+
+      <div class="instructor-note">
+        <div class="note-label">講師メモ</div>
+        <p>「この講座ではSonnetを使います。日常業務の9割はSonnetで十分。Opusは特別なときだけ。法人プランは定額ですが使いすぎると上限に近づくので、迷ったらSonnetで始めるのが基本です。」</p>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>3つのモデルの使い分けイメージが掴めていればOK！</p>
+      </div>
+    </div>
+
+    <!-- STEP 6: CLAUDE.mdとは -->
+    <div class="step-content" id="s1-6">
+      <h3>CLAUDE.mdとは何かを理解する（目安：15分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：ここが第1回の核心</div>
+        <p>「CLAUDE.mdはClaudeへの『店のトリセツ』。新しいアルバイトに渡すマニュアルと同じ感覚で作ってください。」</p>
+      </div>
+
+      <table class="info-table">
+        <thead>
+          <tr><th>種類</th><th>場所</th><th>影響範囲</th><th>何を書く？</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>グローバル</strong></td><td><code>~/.claude/CLAUDE.md</code></td><td>全プロジェクト共通</td><td>自分のスタイル・会社情報・よく使うルール</td></tr>
+          <tr><td><strong>プロジェクト</strong></td><td>各プロジェクトフォルダ内</td><td>そのプロジェクトのみ</td><td>店舗情報・このアプリ特有のルール</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
+        <p>「グローバルは『会社全体のマニュアル』、プロジェクトは『この店舗専用マニュアル』のイメージです。今日はまずグローバルのCLAUDE.mdを作ります。ここに自分のお店の基本情報を全部入れておくと、Claude Codeが毎回それを読んでから作業してくれます。」</p>
+      </div>
+
+      <div class="code-wrap">
+        <div class="code-header">
+          <div class="code-filename"><div class="code-dot dot-md"></div>CLAUDE.md（極の見本）</div>
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+        </div>
+        <pre><span class="tok-head"># 店舗情報</span>
+<span class="tok-key">店名：</span><span class="tok-val">WAGYU SUKIYAKI 極〜GOKU〜 原宿店</span>
+<span class="tok-key">業態：</span><span class="tok-val">一人すき焼き専門店・カウンター10席</span>
+<span class="tok-key">客単価：</span><span class="tok-val">¥4,800〜¥5,500</span>
+<span class="tok-key">営業時間：</span><span class="tok-val">11:00〜22:00（LO 21:30）</span>
+<span class="tok-key">定休日：</span><span class="tok-val">なし（年中無休）</span>
+<span class="tok-key">所在地：</span><span class="tok-val">東京都渋谷区神宮前1-XX-XX</span>
+
+<span class="tok-head"># 店舗のこだわり</span>
+- 黒毛和牛A5ランクのみ使用
+- 一人でも気軽に入れる完全カウンタースタイル
+- ランチ・ディナー通し営業で観光客にも対応
+
+<span class="tok-head"># スタッフ構成</span>
+<span class="tok-key">店長：</span><span class="tok-val">1名</span>
+<span class="tok-key">アルバイト：</span><span class="tok-val">4〜6名（シフト制）</span>
+
+<span class="tok-head"># よく使うツール・連携</span>
+- 売上管理：業務ダッシュボード（Vercel公開済み）
+- 予約管理：食べログ・ホットペッパー
+- シフト管理：手書き → デジタル化検討中
+
+<span class="tok-head"># Claude Codeへの指示スタイル</span>
+- 出力は日本語で統一する
+- コードにはコメントを必ず入れる
+- ファイル名はすべて小文字・ハイフン区切りにする</pre>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>「自分の店版を作るイメージが湧いた」という反応が出ていればOK！</p>
+      </div>
+    </div>
+
+    <!-- STEP 7: CLAUDE.md作成 -->
+    <div class="step-content" id="s1-7">
+      <h3>自店舗のCLAUDE.mdを作成する（目安：40分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：ここが成果物</div>
+        <p>「受講者が自分で手を動かす時間です。完璧を求めず、まず作ることが大事。書けない項目は空欄でOKと伝えてください。」</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li>Codeタブのテキストボックスに下記を貼り付けて送信する</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-header">
+          <div class="code-filename">Codeタブへの入力</div>
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+        </div>
+        <pre>グローバルのCLAUDE.mdを作成してください。
+場所は~/.claude/CLAUDE.mdです。
+以下の情報を入れてください：
+
+店名：[自分の店名]
+業態：[業態・席数]
+客単価：[客単価]
+営業時間：[営業時間]
+定休日：[定休日]
+所在地：[住所]
+こだわり：[お店のこだわり・強み]
+スタッフ構成：[店長・スタッフ人数]
+よく使うツール：[予約システムなど]
+Claude Codeへの指示スタイル：出力は日本語で統一・コメントを必ず入れる</pre>
+      </div>
+
+      <table class="info-table">
+        <thead><tr><th>項目</th><th>例</th><th>必須？</th></tr></thead>
+        <tbody>
+          <tr><td>店名</td><td>○○ 渋谷店</td><td>✅ 必須</td></tr>
+          <tr><td>業態</td><td>ラーメン専門店・カウンター8席</td><td>✅ 必須</td></tr>
+          <tr><td>客単価</td><td>¥1,200〜¥1,500</td><td>✅ 必須</td></tr>
+          <tr><td>営業時間</td><td>11:00〜23:00</td><td>✅ 必須</td></tr>
+          <tr><td>所在地</td><td>東京都渋谷区〇〇</td><td>推奨</td></tr>
+          <tr><td>スタッフ構成</td><td>店長1名・バイト3名</td><td>推奨</td></tr>
+          <tr><td>こだわり・強み</td><td>自家製麺・無化調スープ</td><td>推奨</td></tr>
+          <tr><td>今使っているツール</td><td>食べログ・Airレジ</td><td>任意</td></tr>
+          <tr><td>Claude Codeへの指示スタイル</td><td>日本語で・コメント必須</td><td>推奨</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:20px;">動作確認</h3>
+      <ol class="instruction-list">
+        <li>Codeタブで新しいセッションを開始する</li>
+        <li>「私のお店について教えてください」と入力して送信</li>
+        <li>Claudeが正確に答えてくれることを確認</li>
+      </ol>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>ClaudeがCLAUDE.mdの内容を正確に答えてくれればOK！自分のお店をClaudeが覚えた瞬間です。</p>
+      </div>
+    </div>
+
+    <!-- STEP 8: 講師メモ -->
+    <div class="step-content" id="s1-8">
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>STEP 1</td><td>Claudeで何ができるか・全体像</td><td>10分</td></tr>
+          <tr><td>STEP 2</td><td>ダッシュボードデモ・ロードマップ説明</td><td>15分</td></tr>
+          <tr><td>STEP 3</td><td>初期設定（アプリ導入・コネクタ・プロジェクト）</td><td>20分</td></tr>
+          <tr><td>STEP 4</td><td>Codeタブの使い方・動作確認</td><td>10分</td></tr>
+          <tr><td>休憩</td><td>詰まった人のフォロー</td><td>10分</td></tr>
+          <tr><td>STEP 5</td><td>モデル選択・コスト感覚</td><td>15分</td></tr>
+          <tr><td>STEP 6</td><td>CLAUDE.mdの概念説明・見本提示</td><td>15分</td></tr>
+          <tr><td>STEP 7</td><td>自店舗CLAUDE.md作成・動作確認</td><td>40分</td></tr>
+          <tr><td>まとめ</td><td>発表・次回予告</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間50分</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:28px;">つまずきやすいポイント</h3>
+      <ol class="instruction-list">
+        <li><strong>アプリがダウンロードできない</strong> → ブラウザで https://claude.ai/download を直接開く</li>
+        <li><strong>ログインできない</strong> → 法人アカウントのメールアドレスを確認する</li>
+        <li><strong>Codeタブが表示されない</strong> → アプリを再起動・再ログインを試す</li>
+        <li><strong>コネクタのGmailが読めない</strong> → 組織設定でコード実行がオフの可能性。事前に確認する</li>
+        <li><strong>CLAUDE.mdに何を書けばいいかわからない</strong> → 極の見本を画面に残したまま作業させる</li>
+      </ol>
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「アプリを入れてログインするだけ。それだけでClaude Codeが使えます」</div>
+        <div class="msg-card">「CLAUDE.mdは育てるもの。今日は60点で十分」</div>
+        <div class="msg-card">「今日でClaudeが自分のお店を覚えました」</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 第2回 詳細パネル -->
+  <div class="detail-panel" id="detail-2">
+    <div class="detail-header">
+      <div class="detail-title">第02回｜<span>業務ツール作成</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-2')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s2',1)"><span class="step-tab-num">1</span>Vibe Coding</div>
+      <div class="step-tab" onclick="showStep('s2',2)"><span class="step-tab-num">2</span>見本を作る</div>
+      <div class="step-tab" onclick="showStep('s2',3)"><span class="step-tab-num">3</span>自分で作る</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s2',4)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+    <div class="step-content active" id="s2-1">
+      <h3>Vibe Codingとは（目安：15分）</h3>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「さらっと紹介するだけでOKです。概念の説明より体験を優先してください。」</p></div>
+      <div class="demo-box"><div class="demo-box-title">💬 講師からの一言アドバイス</div><p>「今日のポイントはVibe Codingです。何を作るか最初から決めなくていいです。Claudeに質問してもらいながら、アイデアを発散させて、最終的に何を作るか収束させる。この流れで進めます。」</p></div>
+      <ol class="instruction-list">
+        <li>Codeタブを開く</li>
+        <li>以下をそのまま送信する</li>
+      </ol>
+      <div class="code-wrap">
+        <div class="code-header"><div class="code-filename">Codeタブへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>飲食店で使えるツールを作りたいです。
+何を作ればいいか、いくつか質問してもらえますか？</pre>
+      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Claudeが提案を出してくれたらOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s2-2">
+      <h3>原価計算ツールを見本として作る（目安：30分）</h3>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「一発で完成させず、Claudeとやりとりしながら作る過程を見せるのがポイントです。」</p></div>
+      <div class="code-wrap">
+        <div class="code-header"><div class="code-filename">Codeタブへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>飲食店向けの原価計算ツールをHTMLで作ってください。
+
+要件：
+- 食材名・仕入れ値・購入量・使用量を入力できる
+- 原価率が自動計算される
+- 売価を入力すると利益額も出る
+- デスクトップに「genka-calculator」フォルダを作って保存する</pre>
+      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>受講者から「自分のお店でも使えそう」という反応が出ていればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s2-3">
+      <h3>各自で自分のお店のツールを作る（目安：60分）</h3>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「完成した人には『もう一個作ってみよう』と促してください。」</p></div>
+      <table class="info-table">
+        <thead><tr><th>種類</th><th>ツール例</th></tr></thead>
+        <tbody>
+          <tr><td>数字系</td><td>原価計算・売上目標達成率・シフトコスト計算・発注量計算</td></tr>
+          <tr><td>文章系</td><td>SNS投稿文・メニュー説明文・求人文・クレーム返信文ひな形</td></tr>
+        </tbody>
+      </table>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員がツールを1本完成させてブラウザで動作確認できていればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s2-4">
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>前回の振り返り</td><td>CLAUDE.mdの発表・共有</td><td>15分</td></tr>
+          <tr><td>STEP 1</td><td>Vibe Codingの概念説明・体験</td><td>15分</td></tr>
+          <tr><td>STEP 2</td><td>原価計算ツールの見本作成・実演</td><td>30分</td></tr>
+          <tr><td>STEP 3</td><td>各自でツール作成</td><td>60分</td></tr>
+          <tr><td>まとめ</td><td>発表・次回予告・宿題説明</td><td>20分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間20分</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;">
+        <div class="msg-card">「何を作るか最初から決めなくていい。Claudeに聞けばいい」</div>
+        <div class="msg-card">「コードの意味は理解しなくていい。動けばOK」</div>
+        <div class="msg-card">「今日作ったツールを明日から使ってみてください」</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第5回 詳細パネル -->
+  <div class="detail-panel" id="detail-5">
+    <div class="detail-header">
+      <div class="detail-title">第05回｜<span>業務Webアプリ開発</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-5')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s5',1)"><span class="step-tab-num">1</span>VS Code</div>
+      <div class="step-tab" onclick="showStep('s5',2)"><span class="step-tab-num">2</span>フォルダ</div>
+      <div class="step-tab" onclick="showStep('s5',3)"><span class="step-tab-num">3</span>ファイル</div>
+      <div class="step-tab" onclick="showStep('s5',4)"><span class="step-tab-num">4</span>コード</div>
+      <div class="step-tab" onclick="showStep('s5',5)"><span class="step-tab-num">5</span>動作確認</div>
+      <div class="step-tab" onclick="showStep('s5',6)"><span class="step-tab-num">6</span>GitHub</div>
+      <div class="step-tab" onclick="showStep('s5',7)"><span class="step-tab-num">7</span>Vercel</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s5',8)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+    <div class="step-content active" id="s5-1">
+      <h3>VS Codeのインストール（目安：10分）</h3>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「コードを書く専用のメモ帳です。VS Codeは色分けや自動補完があって格段に書きやすいです。」</p></div>
+      <ol class="instruction-list">
+        <li><strong>https://code.visualstudio.com</strong> をブラウザで開く</li>
+        <li>「Download for Mac / Windows」をクリックしてダウンロード</li>
+        <li>ダウンロードしたファイルを開いてインストール・起動</li>
+        <li>サインイン画面 → 右下「<strong>Continue without Signing In</strong>」をクリック</li>
+        <li>カラーテーマ選択 → 好みを選んで「<strong>Continue</strong>」</li>
+        <li>AI Agents紹介画面 → 「<strong>Get Started</strong>」をクリック</li>
+      </ol>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>VS Codeが起動していればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s5-2">
+      <h3>プロジェクトフォルダの作成（目安：5分）</h3>
+      <ol class="instruction-list">
+        <li>デスクトップで右クリック → 「新規フォルダ」を選択</li>
+        <li>フォルダ名を <code>goku-dashboard</code> にする</li>
+        <li>VS Code「ファイル」→「フォルダーを開く...」→ 作ったフォルダを選択</li>
+        <li>「このフォルダーの作成者を信頼しますか？」→「<strong>はい、作成者を信頼します</strong>」</li>
+      </ol>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>左サイドバーに「GOKU-DASHBOARD」と表示されていればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s5-3">
+      <h3>ファイルを3つ作る（目安：3分）</h3>
+      <table class="info-table">
+        <thead><tr><th>ファイル名</th><th>役割</th><th>飲食店で例えると</th></tr></thead>
+        <tbody>
+          <tr><td><code>index.html</code></td><td>画面の骨格</td><td>店の内装・レイアウト</td></tr>
+          <tr><td><code>style.css</code></td><td>デザイン</td><td>内装の色・雰囲気・看板</td></tr>
+          <tr><td><code>app.js</code></td><td>機能・動き</td><td>スタッフの業務フロー</td></tr>
+        </tbody>
+      </table>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>左サイドバーに3つのファイルが表示されていればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s5-4">
+      <h3>コードを貼り付ける（目安：15分）</h3>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「全部理解しなくていい。<strong>Cmd+S（Mac）/ Ctrl+S（Win）</strong>で保存。タブに●が出たら未保存のサインです。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3ファイル全てのタブに●がない（保存済み）状態であればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s5-5">
+      <h3>ブラウザで動作確認（目安：10分）</h3>
+      <ol class="instruction-list">
+        <li>Finderでデスクトップの <code>goku-dashboard</code> フォルダを開く</li>
+        <li><code>index.html</code> をダブルクリック → ブラウザが開く</li>
+        <li>売上48000・客数10・メモ「満席」を入力して「保存する」をクリック</li>
+      </ol>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>グラフに棒が表示され、客単価が自動計算されていればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s5-6">
+      <h3>GitHubにアップロード（目安：15分）</h3>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「GitHubはコードをクラウドに保存する場所。Dropboxのコード版と思ってください。」</p></div>
+      <ol class="instruction-list">
+        <li><strong>https://github.com</strong> を開く → 「Sign up」→ メール・パスワード・ユーザー名を登録</li>
+        <li>左上「<strong>New</strong>」→ Repository name に <code>goku-dashboard</code> → 「Create repository」</li>
+        <li>「<strong>uploading an existing file</strong>」をクリック</li>
+        <li>3ファイルを <strong>Cmd+A</strong> で全選択してドラッグ＆ドロップ</li>
+        <li>「<strong>Commit changes</strong>」をクリック</li>
+      </ol>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3ファイルがGitHub上に表示されていればOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s5-7">
+      <h3>Vercelで公開（目安：15分）</h3>
+      <div class="instructor-note"><div class="note-label">講師メモ：重要</div><p>プラン選択で必ず <strong>「Hobby（無料）」</strong> を選ぶよう強調してください。</p></div>
+      <ol class="instruction-list">
+        <li><strong>https://vercel.com</strong> → 「Sign Up」→「<strong>Continue with GitHub</strong>」</li>
+        <li>プラン：「<strong>I'm working on personal projects（Hobby）</strong>」→ Continue</li>
+        <li>「Continue with GitHub」→「Add GitHub Account」→「<strong>Install</strong>」</li>
+        <li><code>goku-dashboard</code> の「<strong>Import</strong>」→ 設定そのまま → 「<strong>Deploy</strong>」</li>
+        <li>「<strong>Congratulations!</strong>」が表示されたら成功</li>
+      </ol>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>URLでアプリが開けばOK！</p></div>
+    </div>
+
+    <div class="step-content" id="s5-8">
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>導入</td><td>ゴール説明・HTML/CSS/JSの概念</td><td>15分</td></tr>
+          <tr><td>STEP 1–2</td><td>VS Code・フォルダ準備</td><td>20分</td></tr>
+          <tr><td>STEP 3–4</td><td>ファイル作成・コード貼り付け</td><td>30分</td></tr>
+          <tr><td>STEP 5</td><td>動作確認・機能説明</td><td>20分</td></tr>
+          <tr><td>振り返り</td><td>できたこと・仕組みの整理</td><td>20分</td></tr>
+          <tr><td>STEP 6–7</td><td>GitHub・Vercel公開</td><td>45分</td></tr>
+          <tr><td>まとめ</td><td>次のステップ・拡張アイデア</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約3時間</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;">
+        <div class="msg-card">「コードの意味を全部理解しなくていいです」</div>
+        <div class="msg-card">「わからないことはAIに聞けばすぐ直せます」</div>
+        <div class="msg-card">「今日だけで自分のアプリのURLができました」</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="instructor-badge" id="instructor-badge"></div>
+
+<footer>Claude講座 教材ダッシュボード　／　moatrock × Claude　／　2026年6月　／　ver.1.7（第1回・第2回・第5回公開）</footer>
+
+<script>
+function toggleDetail(id) {
+  const p = document.getElementById(id);
+  p.classList.contains('open') ? closeDetail(id) : openDetail(id);
+}
+function openDetail(id) {
+  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('open'));
+  const p = document.getElementById(id);
+  p.classList.add('open');
+  setTimeout(() => p.scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+}
+function closeDetail(id) {
+  document.getElementById(id).classList.remove('open');
+}
+function showStep(prefix, num) {
+  const panelMap = { 's1': '1', 's2': '2', 's5': '5' };
+  const panel = document.getElementById('detail-' + panelMap[prefix]);
+  panel.querySelectorAll('.step-content').forEach(e => e.classList.remove('active'));
+  panel.querySelectorAll('.step-tab').forEach(e => e.classList.remove('active'));
+  document.getElementById(prefix + '-' + num).classList.add('active');
+  panel.querySelectorAll('.step-tab')[num - 1].classList.add('active');
+}
+let lastShift = 0;
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Shift') {
+    const now = Date.now();
+    if (now - lastShift < 500) {
+      document.body.classList.toggle('instructor-mode');
+      const badge = document.getElementById('instructor-badge');
+      badge.textContent = document.body.classList.contains('instructor-mode') ? '👨‍🏫 講師モード ON' : '講師モード OFF';
+      badge.classList.add('show');
+      setTimeout(() => badge.classList.remove('show'), 2000);
+    }
+    lastShift = now;
+  }
+});
+function copyCode(btn) {
+  const pre = btn.closest('.code-wrap').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = 'コピー完了！';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'コピー'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
