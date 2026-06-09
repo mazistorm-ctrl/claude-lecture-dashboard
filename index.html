@@ -208,7 +208,7 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     <p class="header-desc">AIと一緒に業務アプリ・HP・LPを自分で作る。コード未経験でも、6回の授業で「自分の店のツール」が完成する。</p>
     <div class="header-stats">
       <div class="stat"><div class="stat-num">6</div><div class="stat-label">回の授業</div></div>
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">回公開済み</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">回公開済み</div></div>
       <div class="stat"><div class="stat-num">2h</div><div class="stat-label">／回の所要時間</div></div>
     </div>
   </div>
@@ -216,13 +216,13 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="progress-label">カリキュラム進捗 — 第1回・第2回・第5回 公開済み</div>
-    <div class="progress-track"><div class="progress-fill" style="width:50%;"></div></div>
+    <div class="progress-label">カリキュラム進捗 — 第1回〜第5回 公開済み</div>
+    <div class="progress-track"><div class="progress-fill" style="width:83%;"></div></div>
     <div class="progress-steps">
       <span class="ps-label active">第1回 ✓</span>
       <span class="ps-label active">第2回 ✓</span>
-      <span class="ps-label">第3回</span>
-      <span class="ps-label">第4回</span>
+      <span class="ps-label active">第3回 ✓</span>
+      <span class="ps-label active">第4回 ✓</span>
       <span class="ps-label active">第5回 ✓</span>
       <span class="ps-label">第6回</span>
     </div>
@@ -300,43 +300,48 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
       </div>
     </div>
 
-    <div class="card coming" data-num="03">
+    <div class="card ready" data-num="03">
       <div class="card-header">
         <span class="card-num">第03回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開済み</span>
       </div>
       <div class="card-title">Cowork — ブラウザ・PC操作を自動化する</div>
-      <div class="card-subtitle">Claude in Chromeで繰り返し作業をゼロにする</div>
+      <div class="card-subtitle">「判断はあなた、作業はClaude」3つの型を体験する</div>
       <ul class="card-topics">
-        <li><span class="topic-dot"></span>Coworkとは・Claude in Chromeの仕組み</li>
-        <li><span class="topic-dot"></span>予約サイトの情報収集を自動化</li>
-        <li><span class="topic-dot"></span>定期レポートの自動生成</li>
-        <li><span class="topic-dot"></span>MCP連携の入口紹介（Gmail・カレンダー活用）</li>
+        <li><span class="topic-dot"></span>つなぐ（コネクタ）：Gmail接続→領収書メールを一覧化</li>
+        <li><span class="topic-dot"></span>覚えさせる（スキル）：スキル化＋毎週自動実行</li>
+        <li><span class="topic-dot"></span>ブラウザ（Claude in Chrome）：クチコミ収集</li>
+        <li><span class="topic-dot"></span>応用：予約サイト収集・定期レポートも同じ型で</li>
       </ul>
-      <div class="card-deliverable">📦 繰り返し作業を自動化したワークフロー1本</div>
+      <div class="card-deliverable">📦 自動化ワークフロー（領収書ダイジェスト＋クチコミ収集）</div>
       <div class="card-footer">
-        <span class="card-time">約2時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">壁打ち後に公開予定</span>
+        <span class="card-time">約1時間</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-3')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
-    <div class="card coming" data-num="04">
+    <div class="card ready" data-num="04">
       <div class="card-header">
         <span class="card-num">第04回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開済み</span>
       </div>
-      <div class="card-title">HP・LP作成 — 自店舗サイトを公開する</div>
-      <div class="card-subtitle">HPとLPを一回の授業でまとめて作る</div>
+      <div class="card-title">HP作成 — 自店舗サイトを公開する</div>
+      <div class="card-subtitle">5ステップフローで迷わず作ってVercel公開まで</div>
       <ul class="card-topics">
-        <li><span class="topic-dot"></span>HPとLPの違い・使い分けを理解する</li>
-        <li><span class="topic-dot"></span>CLAUDE.mdからHP生成・スマホ対応</li>
-        <li><span class="topic-dot"></span>キャンペーン用LPをClaude Codeで作成</li>
-        <li><span class="topic-dot"></span>GitHub → Vercelで両方を公開</li>
+        <li><span class="topic-dot"></span>HP vs Webアプリの違いを理解する</li>
+        <li><span class="topic-dot"></span>5ステップフローで構成・デザインを先に決める</li>
+        <li><span class="topic-dot"></span>Claude CodeでHP生成・スマホ対応</li>
+        <li><span class="topic-dot"></span>GitHub → Vercelで公開・削除方法も習得</li>
       </ul>
-      <div class="card-deliverable">📦 本番公開済みHP + LP（URLあり）</div>
+      <div class="card-deliverable">📦 GitHubに登録・Vercel公開済みHP（URLあり）</div>
       <div class="card-footer">
-        <span class="card-time">約3時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">壁打ち後に公開予定</span>
+        <span class="card-time">約1時間</span>
+        <div class="card-btns">
+          <a class="btn-app" href="https://moatrock-hp.vercel.app/" target="_blank">🚀 HPを開く</a>
+          <button class="btn-material" onclick="toggleDetail('detail-4')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
@@ -838,6 +843,589 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
     </div>
   </div>
 
+  <!-- 第3回 詳細パネル -->
+  <div class="detail-panel" id="detail-3">
+    <div class="detail-header">
+      <div class="detail-title">第03回｜<span>Cowork — ブラウザ・PC操作を自動化する</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-3')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s3',1)"><span class="step-tab-num">0</span>事前準備</div>
+      <div class="step-tab" onclick="showStep('s3',2)"><span class="step-tab-num">1</span>Coworkとは</div>
+      <div class="step-tab" onclick="showStep('s3',3)"><span class="step-tab-num">2</span>つなぐ（コネクタ）</div>
+      <div class="step-tab" onclick="showStep('s3',4)"><span class="step-tab-num">3</span>覚えさせる（スキル）</div>
+      <div class="step-tab" onclick="showStep('s3',5)"><span class="step-tab-num">4</span>ブラウザ（Chrome）</div>
+      <div class="step-tab" onclick="showStep('s3',6)"><span class="step-tab-num">5</span>まとめ</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s3',7)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+    <!-- STEP 0: 事前準備 -->
+    <div class="step-content active" id="s3-1">
+      <h3>授業前にすませておく準備</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：ここは事前課題</div>
+        <p>「このSTEP 0は授業前に各自やってきてもらう前提です。授業内でゼロからやると1時間では絶対終わりません。授業冒頭は『動作確認だけ』に留めてください。当日できていない人がいたら、隣でフォローしながら他の人はSTEP1の座学を進める運用が安全です。」</p>
+      </div>
+
+      <p style="margin:14px 0 6px;font-weight:700;">準備①：Coworkを有効にする</p>
+      <ol class="instruction-list">
+        <li>デスクトップアプリを開き、左上のタブに「Chat」「Cowork」「Code」があるか確認</li>
+        <li>「Cowork」タブをクリック</li>
+        <li>初回は「Claudeのワークスペースを準備中」という表示とともに環境のダウンロード（約2GB）が走る。完了まで数分かかるので、時間に余裕をもって行う</li>
+      </ol>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Coworkタブで「New task」が押せる状態になっていればOK！</p></div>
+
+      <p style="margin:18px 0 6px;font-weight:700;">準備②：Claude in Chrome（拡張機能）を入れる</p>
+      <table class="info-table">
+        <thead><tr><th>手順</th><th>やること</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Google Chromeを開く（※Safari・Edgeは非対応）</td></tr>
+          <tr><td>2</td><td>Chromeウェブストアで「Claude」を検索（または公式の案内リンクから開く）</td></tr>
+          <tr><td>3</td><td>「Chromeに追加」をクリックしてインストール</td></tr>
+          <tr><td>4</td><td>表示されたら自分のClaudeアカウントでサインイン</td></tr>
+        </tbody>
+      </table>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Chromeの拡張機能一覧に「Claude」が表示されていればOK！</p></div>
+
+      <p style="margin:18px 0 6px;font-weight:700;">準備③：デスクトップアプリ側で連携をオンにする</p>
+      <ol class="instruction-list">
+        <li>デスクトップアプリ左下の自分のアイコン →「設定」</li>
+        <li>「コネクター」を開く</li>
+        <li>一覧の「Claude in Chrome」で連携をオンにする</li>
+      </ol>
+      <div class="demo-box">
+        <div class="demo-box-title">💡 プランによって使えるモデルが違います</div>
+        <p>Proプランのブラウザ操作はHaiku（軽量モデル）に限定されます。法人・Max・Team・Enterpriseプランなら、より賢いSonnetやOpusも選べます。同じ指示でも結果の精度が変わる場合があります。</p>
+      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3つの準備が終わっていれば、当日はすぐ自動化を作り始められます！</p></div>
+    </div>
+
+    <!-- STEP 1: Coworkとは -->
+    <div class="step-content" id="s3-2">
+      <h3>Coworkとは何か（目安：8分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：今日の合言葉を最初に刷り込む</div>
+        <p>「『判断はあなた、作業はClaude』をこのSTEPで必ず言い切ってください。今日の全部がこの一言に集約されます。あと、権限の安心設計（読み取りは自動・書き込みは確認制）を先に説明しておくと、受講者が怖がらずに手を動かせます。」</p>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 今日の合言葉</div>
+        <p>「判断はあなた、作業はClaude。面倒な作業をClaudeに任せて、人にしかできない判断に時間を使う。これが今日のテーマです。」</p>
+      </div>
+
+      <p style="margin:14px 0 6px;font-weight:700;">ChatとCoworkの違い</p>
+      <table class="info-table">
+        <thead><tr><th></th><th>Chat</th><th>Cowork</th></tr></thead>
+        <tbody>
+          <tr><td>できること</td><td>会話・文章作成・調べもの</td><td>実際に作業を代行（メール整理・ファイル作成・ブラウザ操作）</td></tr>
+          <tr><td>動き方</td><td>1回の質問に1回答える</td><td>複数の手順をまとめて自動で実行</td></tr>
+          <tr><td>自動実行</td><td>できない</td><td>毎週決まった時間に自動で動かせる</td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin:14px 0 6px;font-weight:700;">Coworkの2層構造</p>
+      <table class="info-table">
+        <thead><tr><th>レイヤー</th><th>役割</th><th>飲食店での例</th></tr></thead>
+        <tbody>
+          <tr><td>Cowork（デスクトップ）</td><td>手元のファイル操作・文書作成・整理</td><td>領収書をExcelにまとめる</td></tr>
+          <tr><td>Claude in Chrome（拡張）</td><td>ログイン済みサイトのブラウザ操作</td><td>Googleマップのクチコミを集める</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-box-title">🔒 権限の安心設計（先に伝える）</div>
+        <p>「メールやファイルを『読む』操作は自動で進みます。でも『送る・消す・書き換える』操作は、必ず一度あなたに確認が入ります。勝手に送信されたり削除されたりはしません。だから安心して繋いでください。」</p>
+      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「判断は自分、作業はClaude」というイメージが伝わっていればOK！</p></div>
+    </div>
+
+    <!-- STEP 2: つなぐ（コネクタ） -->
+    <div class="step-content" id="s3-3">
+      <h3>つなぐ（コネクタ）— Gmailの領収書を一覧にする（目安：12分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：まず「話すだけで動く」を体験させる</div>
+        <p>「ここでの感動ポイントは『コードもブラウザ操作もなしに、日本語で頼むだけで動いた』こと。Claudeが逆に質問してくることがありますが、それはむしろ良いサイン。『精度を上げる相談をしてくれている』と前向きに伝えてください。お題は全員『領収書・請求書メール』で統一します。受講者に考えさせず、下のコピペをそのまま使わせてください。」</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li>デスクトップアプリの「Cowork」タブを開く</li>
+        <li>事前にGmailコネクターがオンになっているかをCustomize→コネクタで確認（オフなら接続）</li>
+        <li>「New task」を押して、下の文をそのまま送信する</li>
+      </ol>
+
+      <div class="code-wrap">
+        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>今月届いた領収書・請求書のメールを探して
+件名・送信者・金額・日付の一覧にしてください。</pre>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 もしClaudeが質問してきたら</div>
+        <p>「業者名やメールアドレスを教えてください」と聞かれることがあります。これは精度を上げるための確認です。よく使う業者名（例：Amazon・楽天・◯◯酒店）を答えると、より正確に絞り込めます。わからなければ「キーワードで候補を出して」と返せばOK。</p>
+      </div>
+
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>領収書メールが件名・送信者・金額・日付の表で返ってきたらOK！「話すだけで動いた」を体感できた瞬間です。</p></div>
+    </div>
+
+    <!-- STEP 3: 覚えさせる（スキル） -->
+    <div class="step-content" id="s3-4">
+      <h3>覚えさせる（スキル）— スキル化＋毎週自動実行（目安：20分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：ここが第3回のクライマックス・成果物1本目</div>
+        <p>「STEP2でやった作業を『毎週自動でやって』と頼むだけで、Claudeがスケジュール登録とスキルファイル（.plugin）作成を一気にやってくれます。画面右側に plugin.json / SKILL.md などのファイルが自動生成されるのを実際に見せてください。『一度設定すれば毎週勝手に動く』が腹落ちする瞬間です。スケジュールの初回承認だけ要注意（下記）。」</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li>STEP2の会話を続けたまま、下の文を送信する</li>
+      </ol>
+
+      <div class="code-wrap">
+        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>この作業をスキルとして保存して、
+毎週月曜の朝9時に自動で実行してください。</pre>
+      </div>
+
+      <ol class="instruction-list">
+        <li>Claudeが選択肢を出したら、内容を確認して進める</li>
+        <li>スケジュール内容（毎週月曜9:00・タスク名）が表示されたら「Schedule（スケジュール）」を押して確定</li>
+        <li>左サイドバーの「Scheduled」に登録されたことを確認する</li>
+      </ol>
+
+      <div class="demo-box">
+        <div class="demo-box-title">⚠️ 自動実行を確実に動かすコツ（初回承認）</div>
+        <p>登録した直後に、Scheduledから一度「今すぐ実行（Run now）」を押して手動で動かしてください。初回はGmail接続などの承認が入ります。ここで一度承認しておけば、以降の自動実行が「承認待ち」で止まらなくなります。</p>
+      </div>
+
+      <p style="margin:14px 0 6px;font-weight:700;">スケジュール実行の仕組み（受講者に伝える）</p>
+      <table class="info-table">
+        <thead><tr><th>ポイント</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>動く条件</td><td>PCが起動していて、デスクトップアプリが開いている間だけ動く</td></tr>
+          <tr><td>PCが寝てたら？</td><td>その時刻は一度スキップ。次にPCを開いた時に自動で実行され、通知が来る</td></tr>
+          <tr><td>使い方イメージ</td><td>「朝、開店準備でPCを開いたら、その週のレポートができている」</td></tr>
+          <tr><td>注意</td><td>Coworkは通常チャットよりトークンを多く使う。自動実行は週次くらいが現実的</td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin:18px 0 6px;font-weight:700;">作ったスキルを呼び出す（ここが「覚えさせる」価値）</p>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：スキルの本当の価値はここ</div>
+        <p>「スキルは『作って終わり』ではなく『あとから一言で呼び出せる』のが価値です。自動実行を待たなくても、思い立ったときにいつでも同じ作業を呼び出せる、と実演してください。」</p>
+      </div>
+      <p style="margin:8px 0 6px;">一度スキルにしておけば、次回からは作り直す必要がありません。呼び出し方は2通りです。</p>
+      <table class="info-table">
+        <thead><tr><th>方法</th><th>やり方</th></tr></thead>
+        <tbody>
+          <tr><td>① スラッシュで呼ぶ</td><td>Coworkの入力欄で <strong>/</strong> を入力するとスキル一覧が出る。作ったスキルを選べばすぐ実行</td></tr>
+          <tr><td>② 普通に話しかける</td><td>「領収書のメールを一覧にして」のように頼めば、登録したスキルが自動で使われる</td></tr>
+        </tbody>
+      </table>
+      <div class="code-wrap">
+        <div class="code-header"><div class="code-filename">Coworkへの入力（試しに呼び出してみる）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>さっき作ったスキルを使って、
+今月の領収書メールをもう一度一覧にして。</pre>
+      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「Scheduled」に毎週月曜のタスクが登録され、Run nowで一度動けばOK！さらに / やひと言で同じ作業を呼び出せれば完璧です。これが成果物1本目です。</p></div>
+    </div>
+
+    <!-- STEP 4: ブラウザ（Claude in Chrome） -->
+    <div class="step-content" id="s3-5">
+      <h3>ブラウザ（Claude in Chrome）— クチコミ収集（目安：12分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：一番インパクトが大きいので最後に</div>
+        <p>「Claudeが実際にChromeを開いてカチカチ操作する様子を、必ず画面共有で見せてください。『AIが自分の代わりにブラウザを触っている』のビジュアルが一番刺さります。事前準備でClaude in Chromeを入れていない人がいると、ここで止まります。STEP0の準備②③が終わっているか、授業冒頭で必ず確認を。」</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li>Coworkタブで「New task」を押す</li>
+        <li>店名は自分のお店（または練習用に有名店）に置き換えて、下の文を送信する</li>
+      </ol>
+
+      <div class="code-wrap">
+        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>Googleマップで「（あなたのお店の名前）」を開いて、
+最新のクチコミ10件を
+・投稿者名 ・星評価 ・投稿日 ・本文の要約
+の形式で一覧にしてください。</pre>
+      </div>
+
+      <ol class="instruction-list">
+        <li>ClaudeがChromeを開いて操作し始めるのを見守る（初回は操作の許可を求められる）</li>
+        <li>クチコミ一覧が返ってきたら、続けて下の文を送って自動実行に登録する</li>
+      </ol>
+
+      <div class="code-wrap">
+        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>このクチコミ収集も、毎週月曜の朝に
+自動で実行するようにスケジュール登録してください。</pre>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 規約・マナーの注意（軽く触れる）</div>
+        <p>自分のお店の情報を集めるのは問題ありません。ただし他店の情報を大量に自動収集し続けるのは、サイトの利用規約に触れる場合があります。「手作業でやっていたことの代わり」の範囲で使うのが安全です。</p>
+      </div>
+
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Chromeが自動で動いてクチコミ一覧が返り、Scheduledに登録できればOK！成果物2本目の完成です。</p></div>
+    </div>
+
+    <!-- STEP 5: まとめ -->
+    <div class="step-content" id="s3-6">
+      <h3>まとめ — 3つの型と応用（目安：3分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：今日の本質を一言で締める</div>
+        <p>「今日やった3つ（つなぐ・覚えさせる・ブラウザ）は、たった3つの『型』です。当初カードにあった『予約サイト収集』『定期レポート』『MCP連携』も、全部この3つの応用でしかありません。新しい技を覚えるのではなく、この3つの型に指示を流し込むだけ、と締めてください。」</p>
+      </div>
+
+      <table class="info-table">
+        <thead><tr><th>型</th><th>やったこと</th><th>応用すると</th></tr></thead>
+        <tbody>
+          <tr><td>つなぐ（コネクタ）</td><td>Gmailで領収書を一覧化</td><td>予約通知・問い合わせメールの整理にも</td></tr>
+          <tr><td>覚えさせる（スキル）</td><td>スキル化＋毎週自動実行</td><td>定期レポート・売上まとめの自動生成にも</td></tr>
+          <tr><td>ブラウザ（Chrome）</td><td>クチコミを自動収集</td><td>予約サイト・競合の公開情報チェックにも</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-box-title">📝 宿題</div>
+        <p>自分の業務の中で「毎週・毎月くり返している面倒な作業」を1つ選び、今日の3つの型（つなぐ・覚えさせる・ブラウザ）のどれかで自動化してみる。次回、何を自動化したか共有してもらいます。</p>
+      </div>
+
+      <div style="margin-top:16px;">
+        <div class="msg-card">「判断はあなた、作業はClaude」</div>
+        <div class="msg-card">「新しい技を覚えるんじゃない。3つの型に指示を流すだけ」</div>
+        <div class="msg-card">「一度設定すれば、毎週Claudeが勝手に働いてくれる」</div>
+      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3つの型（つなぐ・覚えさせる・ブラウザ）が振り返れて、自動化ワークフローが手元に残っていればOK！</p></div>
+    </div>
+
+    <!-- STEP 6: 講師メモ（時間配分） -->
+    <div class="step-content" id="s3-7">
+      <h3>時間配分の目安（全体1時間）</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>STEP 0</td><td>事前準備の動作確認（※準備自体は事前課題）</td><td>5分</td></tr>
+          <tr><td>STEP 1</td><td>Coworkとは・2層構造・権限の安心設計</td><td>8分</td></tr>
+          <tr><td>STEP 2</td><td>つなぐ（コネクタ）：Gmail接続→領収書メール一覧</td><td>12分</td></tr>
+          <tr><td>STEP 3</td><td>覚えさせる（スキル）：スキル化＋スケジュール（成果物1本目）</td><td>20分</td></tr>
+          <tr><td>STEP 4</td><td>ブラウザ（Chrome）：クチコミ収集（成果物2本目）</td><td>12分</td></tr>
+          <tr><td>STEP 5</td><td>まとめ・応用の示唆・宿題</td><td>3分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約1時間</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:22px;">つまずきやすいポイント</h3>
+      <table class="info-table">
+        <thead><tr><th>症状</th><th>対処</th></tr></thead>
+        <tbody>
+          <tr><td>Coworkが初回起動で重い・進まない</td><td>約2GBの環境DL中。事前課題で済ませておく。当日はWi-Fi環境を確認</td></tr>
+          <tr><td>「コネクタ」の意味がわからない</td><td>「外部アプリをClaudeに繋ぐこと」と説明。GmailやGoogleカレンダーが代表例</td></tr>
+          <tr><td>メールを見せるのが不安</td><td>読み取りは自動・書き込みは確認制、という権限設計を先に説明する</td></tr>
+          <tr><td>お題が抽象的で結果がブレる</td><td>「領収書・請求書メール」で全員統一。コピペ文をそのまま使わせる</td></tr>
+          <tr><td>Claude in Chromeが動かない</td><td>準備②③（拡張機能インストール＋連携オン）が未完了。Chrome以外のブラウザは非対応</td></tr>
+          <tr><td>自動実行が動かない／止まる</td><td>Scheduledから一度Run nowで初回承認しておく。PCとアプリが開いている必要あり</td></tr>
+          <tr><td>受講者間で結果の精度が違う</td><td>プランによるモデル差（ProはHaiku限定）。法人プランならSonnet/Opusが選べる</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:22px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:8px;">
+        <div class="msg-card">「判断はあなた、作業はClaude」</div>
+        <div class="msg-card">「3つの型（つなぐ・覚えさせる・ブラウザ）さえ覚えれば、あとは指示を変えるだけ」</div>
+        <div class="msg-card">「一度設定すれば、毎週Claudeが勝手に働いてくれる」</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第4回 詳細パネル -->
+  <div class="detail-panel" id="detail-4">
+    <div class="detail-header">
+      <div class="detail-title">第04回｜<span>HP作成 — 自店舗サイトを公開する</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-4')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s4',1)"><span class="step-tab-num">1</span>導入</div>
+      <div class="step-tab" onclick="showStep('s4',2)"><span class="step-tab-num">2</span>5ステップ</div>
+      <div class="step-tab" onclick="showStep('s4',3)"><span class="step-tab-num">3</span>講師デモ</div>
+      <div class="step-tab" onclick="showStep('s4',4)"><span class="step-tab-num">4</span>各自作業</div>
+      <div class="step-tab" onclick="showStep('s4',5)"><span class="step-tab-num">5</span>GitHub</div>
+      <div class="step-tab" onclick="showStep('s4',6)"><span class="step-tab-num">6</span>Vercel</div>
+      <div class="step-tab" onclick="showStep('s4',7)"><span class="step-tab-num">7</span>削除方法</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s4',8)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+    <!-- STEP 1: 導入 -->
+    <div class="step-content active" id="s4-1">
+      <h3>今日作るものを確認する（目安：5分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ</div>
+        <p>「技術の説明は不要です。『なぜ作るのか』の動機づけだけしてください。moatrockのHPを実際に見せるのが一番効果的です。」</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li>ブラウザで <strong>https://moatrock-hp.vercel.app/</strong> を開く</li>
+        <li>これが今日作るものの完成イメージ</li>
+        <li>作成時間は約1時間。完成したURLは名刺・InstagramのプロフィールLINKに貼れる</li>
+        <li>次のSTEPから実際に作っていく</li>
+      </ol>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
+        <p>「HPがない飲食店は、地図に載っていない店と同じです。今日1時間で、あなたのお店をインターネットに存在させます。」</p>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>完成イメージが掴めたらOK！すぐ次へ。</p>
+      </div>
+    </div>
+
+    <!-- STEP 2: 5ステップフロー -->
+    <div class="step-content" id="s4-2">
+      <h3>5ステップフローを理解する（目安：5分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：ここが第4回の核心</div>
+        <p>「いきなりClaudeに投げると50点のものができます。なぜか？先に構成とデザインを言語化していないから。このフローを守るだけで手戻りがなくなります。」</p>
+      </div>
+
+      <table class="info-table">
+        <thead>
+          <tr><th>STEP</th><th>内容</th><th>やること</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1️⃣</strong></td><td>HP構成の詳細決定</td><td>載せるセクションをClaudeと壁打ちして確定する</td></tr>
+          <tr><td><strong>2️⃣</strong></td><td>デザイン設定の壁打ち</td><td>4パターンのサンプルを作って好みを決める</td></tr>
+          <tr><td><strong>3️⃣</strong></td><td>手直し＆素材差し込み</td><td>文章・数値・画像スペースを反映する</td></tr>
+          <tr><td><strong>4️⃣</strong></td><td>最終修正</td><td>数値・表現の微調整をする</td></tr>
+          <tr><td><strong>5️⃣</strong></td><td>FIX</td><td>内容を確定する</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
+        <p>「このフローはHPだけでなく、LPでも、アプリでも使えます。『何を作るかを先に決めてから手を動かす』というのがClaude Codeを使いこなすコツです。」</p>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>5ステップの流れが頭に入ったらOK！次は講師デモへ。</p>
+      </div>
+    </div>
+
+    <!-- STEP 3: 講師デモ -->
+    <div class="step-content" id="s4-3">
+      <h3>デモを見る — 5ステップの流れを確認する（目安：10分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：スピード感が大事</div>
+        <p>「10分で5ステップを駆け足で実演します。完成度より『流れ』を見せることが目的。moatrockのHPを例に使ってください。」</p>
+      </div>
+
+      <p style="font-size:14px;color:var(--gray-700);margin-bottom:16px;">講師が実際に操作しながら5ステップの流れをデモします。次のSTEPで自分のお店のHPを作るので、流れを確認してください。</p>
+
+      <table class="info-table">
+        <thead><tr><th>STEP</th><th>講師がやること</th><th>ポイント</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1️⃣</strong></td><td>「HPの構成を一緒に決めたい」とClaudeに送信</td><td>Claudeが逆質問してくる</td></tr>
+          <tr><td><strong>2️⃣</strong></td><td>「デザインを4パターン提案して」と送信</td><td>4案が出てくる・好みを選ぶだけ</td></tr>
+          <tr><td><strong>3️⃣</strong></td><td>採用案で「全ページ作って」と送信</td><td>ファイルが自動生成される</td></tr>
+          <tr><td><strong>4️⃣</strong></td><td>ブラウザで動作確認・微調整</td><td>気になる点をClaudeに伝えて修正</td></tr>
+          <tr><td><strong>5️⃣</strong></td><td>FIX・GitHub・Vercel公開</td><td>URLが発行される</td></tr>
+        </tbody>
+      </table>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>流れが掴めたら次のSTEPへ！自分のお店のHPを作ります。</p>
+      </div>
+    </div>
+
+    <!-- STEP 4: 各自作業 -->
+    <div class="step-content" id="s4-4">
+      <h3>各自作業 — HPを作る（目安：20分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ</div>
+        <p>「20分では完成しなくて当然です。5ステップのSTEP1〜2（構成とデザイン決め）だけでも終わらせるよう促してください。残りは宿題です。」</p>
+      </div>
+
+      <h3 style="margin-top:20px;">① まず構成をClaudeと決める</h3>
+      <div class="code-wrap">
+        <div class="code-header">
+          <div class="code-filename">Codeタブへの入力（STEP1）</div>
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+        </div>
+        <pre>私のお店のHPを作りたいです。
+まず載せるべきセクションを一緒に決めたいので、
+いくつか質問してもらえますか？</pre>
+      </div>
+
+      <h3 style="margin-top:20px;">② デザインの方向性を決める</h3>
+      <div class="code-wrap">
+        <div class="code-header">
+          <div class="code-filename">Codeタブへの入力（STEP2）</div>
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+        </div>
+        <pre>デザインの方向性を4パターン提案してください。
+それぞれ：カラー・雰囲気・特徴を教えてください。
+実際にHTMLのサンプルも作ってもらえますか？</pre>
+      </div>
+
+      <h3 style="margin-top:20px;">③ 採用したデザインで全ページ作成</h3>
+      <div class="code-wrap">
+        <div class="code-header">
+          <div class="code-filename">Codeタブへの入力（STEP3〜5）</div>
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+        </div>
+        <pre>[採用したデザイン案]のデザインで、
+先ほど決めた構成でHPを作ってください。
+
+要件：
+- スマホ対応（レスポンシブ）
+- 日本語メイン・英語サブタイトルあり
+- 画像は後から差し込めるスペースを確保
+- デスクトップの「[店名]-hp」フォルダに保存する</pre>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>ブラウザでHPが開いて自分の店名が表示されていればOK！</p>
+      </div>
+    </div>
+
+    <!-- STEP 5: GitHub -->
+    <div class="step-content" id="s4-5">
+      <h3>GitHubにアップロードする（目安：10分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ</div>
+        <p>「第5回で登録済みの受講者はログインだけでOKです。フォルダごとではなく中身のファイルをドロップするよう強調してください。」</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li><strong>https://github.com</strong> を開いてログイン</li>
+        <li>左上「<strong>New</strong>」→ Repository name に <code>[店名]-hp</code> と入力 → 「Create repository」</li>
+        <li>「<strong>uploading an existing file</strong>」をクリック</li>
+        <li>Finderでデスクトップの <code>[店名]-hp</code> フォルダを開く（ダブルクリックで中身を表示）</li>
+        <li>中のファイルを全選択（<strong>Cmd+A</strong>）してドラッグ＆ドロップ ※フォルダごとではなく中身を選択</li>
+        <li>「<strong>Commit changes</strong>」をクリック</li>
+      </ol>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>GitHubのリポジトリ画面にファイルが並んで表示されればOK！</p>
+      </div>
+    </div>
+
+    <!-- STEP 6: Vercel -->
+    <div class="step-content" id="s4-6">
+      <h3>Vercelで公開する（目安：5分）</h3>
+      <div class="instructor-note">
+        <div class="note-label">講師メモ：重要</div>
+        <p>「第5回で登録済みの方はStep3から。プラン選択で必ず<strong>「Hobby（無料）」</strong>を選ぶよう強調してください。</p>
+      </div>
+
+      <ol class="instruction-list">
+        <li><strong>https://vercel.com</strong> を開いてログイン（未登録の方は「Sign Up」→「Continue with GitHub」）</li>
+        <li>「Add New Project」→ <code>[店名]-hp</code> の「<strong>Import</strong>」をクリック</li>
+        <li>設定はそのまま → 「<strong>Deploy</strong>」をクリック</li>
+        <li>「<strong>Congratulations!</strong>」が表示されたら成功</li>
+        <li>発行されたURLをコピーしてスマホからアクセスしてみる</li>
+      </ol>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
+        <p>「このURLを知っている人だけがアクセスできます。Googleで検索しても出てきません。堀さんへの承認確認や社内共有はこのURLで十分です。本番公開したいときは独自ドメイン取得が必要です（次のSTEPで説明します）。」</p>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>発行されたURLでHPが開けばOK！</p>
+      </div>
+    </div>
+
+    <!-- STEP 7: 削除方法 -->
+    <div class="step-content" id="s4-7">
+      <h3>削除方法・本番公開への道（目安：5分）</h3>
+
+      <h3 style="margin-top:0;">① Vercelからプロジェクトを削除する</h3>
+      <ol class="instruction-list">
+        <li>Vercelのダッシュボードで該当プロジェクトを開く</li>
+        <li>「Settings」→ 一番下までスクロール → 「Delete Project」をクリック</li>
+        <li>プロジェクト名を入力して確認 → 削除完了（URLが無効になる）</li>
+      </ol>
+
+      <h3 style="margin-top:20px;">② GitHubのリポジトリを削除する</h3>
+      <ol class="instruction-list">
+        <li>GitHubで該当リポジトリを開く</li>
+        <li>「Settings」→ 一番下までスクロール → 「Delete this repository」をクリック</li>
+        <li>リポジトリ名を入力して確認 → 削除完了</li>
+      </ol>
+
+      <h3 style="margin-top:20px;">③ 本番公開への2ステップ（さらっと紹介）</h3>
+      <table class="info-table">
+        <thead>
+          <tr><th>STEP</th><th>内容</th><th>目安費用</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>① 独自ドメイン取得</strong></td>
+            <td>お名前.com などで <code>自店名.com</code> を取得してVercelに設定する</td>
+            <td>年間1,000〜3,000円</td>
+          </tr>
+          <tr>
+            <td><strong>② Google Search Console登録</strong></td>
+            <td>Googleに「このサイト存在します」と申請。サイトマップを送ると検索に出やすくなる</td>
+            <td>無料</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
+        <p>「本番公開は承認が取れてから。今日は『URLがある状態』まで作ることが目標です。独自ドメインとSearch Consoleは次のステップとして覚えておいてください。」</p>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-icon">✓</div>
+        <p>削除方法と本番公開への道が理解できたらOK！</p>
+      </div>
+    </div>
+
+    <!-- 講師メモ -->
+    <div class="step-content" id="s4-8">
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>STEP 1</td><td>HP vs Webアプリの違い</td><td>5分</td></tr>
+          <tr><td>STEP 2</td><td>5ステップフローの説明</td><td>5分</td></tr>
+          <tr><td>STEP 3</td><td>講師デモ（5ステップを実演）</td><td>10分</td></tr>
+          <tr><td>STEP 4</td><td>各自作業（HP作成）</td><td>20分</td></tr>
+          <tr><td>STEP 5</td><td>GitHubにアップロード</td><td>10分</td></tr>
+          <tr><td>STEP 6</td><td>Vercelで公開</td><td>5分</td></tr>
+          <tr><td>STEP 7</td><td>削除方法・本番公開の2ステップ</td><td>5分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約60分</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:28px;">つまずきやすいポイント</h3>
+      <ol class="instruction-list">
+        <li><strong>いきなりClaudeに投げてしまう</strong> → 「まず構成から決めよう」と5ステップフローに戻す</li>
+        <li><strong>フォルダごとGitHubにドロップしてしまう</strong> → フォルダを開いた中身を選択するよう伝える</li>
+        <li><strong>20分で完成しない</strong> → 「宿題で仕上げればOK」と伝えてプレッシャーを取る</li>
+        <li><strong>VercelでProを選んでしまう</strong> → Hobbyを選ぶよう強調（有料になる）</li>
+      </ol>
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「いきなり作ると50点。構成とデザインを先に決めるだけで100点に近づく」</div>
+        <div class="msg-card">「今日完成しなくていい。宿題で仕上げてください」</div>
+        <div class="msg-card">「URLができた時点で、あなたのお店はインターネットに存在します」</div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- 第5回 詳細パネル -->
   <div class="detail-panel" id="detail-5">
     <div class="detail-header">
@@ -963,7 +1551,7 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 
 <div class="instructor-badge" id="instructor-badge"></div>
 
-<footer>Claude講座 教材ダッシュボード　／　moatrock × Claude　／　2026年6月　／　ver.1.7（第1回・第2回・第5回公開）</footer>
+<footer>Claude講座 教材ダッシュボード　／　moatrock × Claude　／　2026年6月　／　ver.1.9（第1回〜第5回公開）</footer>
 
 <script>
 function toggleDetail(id) {
@@ -980,7 +1568,7 @@ function closeDetail(id) {
   document.getElementById(id).classList.remove('open');
 }
 function showStep(prefix, num) {
-  const panelMap = { 's1': '1', 's2': '2', 's5': '5' };
+  const panelMap = { 's1': '1', 's2': '2', 's3': '3', 's4': '4', 's5': '5' };
   const panel = document.getElementById('detail-' + panelMap[prefix]);
   panel.querySelectorAll('.step-content').forEach(e => e.classList.remove('active'));
   panel.querySelectorAll('.step-tab').forEach(e => e.classList.remove('active'));
