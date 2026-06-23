@@ -22,9 +22,17 @@
   --green: #1a7a4a;
   --green-light: #eafaf1;
   --green-border: #a8d5b8;
+  /* カテゴリー色 */
+  --cat-exp: #7c4dbd;     --cat-exp-bg: #f4eefb;   --cat-exp-bd: #d9c5ee;
+  --cat-learn: #2a5a9c;   --cat-learn-bg: #eaf1fa;  --cat-learn-bd: #b9d0ec;
+  --cat-prac: #b8860b;    --cat-prac-bg: #fdf3d8;   --cat-prac-bd: #e3c97a;
+  --cat-out: #1a7a4a;     --cat-out-bg: #eafaf1;    --cat-out-bd: #a8d5b8;
+  --cat-set: #5a6472;     --cat-set-bg: #eef0f3;    --cat-set-bd: #c9cfd8;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body { font-family:'Noto Sans JP',sans-serif; background:var(--white); color:var(--black); min-height:100vh; }
+@media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{animation:none!important; transition:none!important;} }
 
 header { background:var(--black); color:var(--white); padding:56px 40px 48px; position:relative; overflow:hidden; }
 header::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 48px,rgba(184,134,11,.05) 48px,rgba(184,134,11,.05) 49px); pointer-events:none; }
@@ -39,11 +47,26 @@ header h1 span { color:var(--gold); }
 .stat-num { font-family:'JetBrains Mono',monospace; font-size:26px; font-weight:600; color:var(--gold); line-height:1; }
 .stat-label { font-size:11px; color:rgba(255,255,255,.35); margin-top:4px; letter-spacing:.06em; }
 
+/* ===== 上部コントロールバー（読み上げ・授業進行用） ===== */
+.control-bar { position:sticky; top:0; z-index:60; background:rgba(255,255,255,.93); backdrop-filter:blur(10px); border-bottom:1px solid var(--gray-200); padding:9px 40px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.cb-inner { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+.cb-group { display:flex; align-items:center; gap:7px; }
+.cb-label { font-size:10px; font-weight:700; letter-spacing:.08em; color:var(--gray-500); text-transform:uppercase; }
+.cb-btn { font-family:'Noto Sans JP',sans-serif; font-size:12px; font-weight:700; color:var(--gray-700); background:var(--white); border:1.5px solid var(--gray-200); border-radius:7px; padding:5px 11px; cursor:pointer; transition:all .15s; line-height:1; }
+.cb-btn:hover { border-color:var(--gold); color:var(--gold-dark); }
+.cb-btn.active { background:var(--gold-light); border-color:var(--cat-prac-bd); color:var(--gold-dark); }
+.cb-size { width:30px; padding:5px 0; text-align:center; }
+.cb-spacer { flex:1; }
+.cb-mode { font-size:12px; font-weight:700; padding:5px 13px; border-radius:20px; border:1.5px solid var(--gray-200); background:var(--white); color:var(--gray-500); cursor:pointer; transition:all .15s; display:inline-flex; align-items:center; gap:6px; font-family:'Noto Sans JP',sans-serif; }
+.cb-mode:hover { border-color:var(--gold); }
+.cb-mode.on { background:var(--gold); border-color:var(--gold); color:var(--white); }
+.cb-mode .dot { width:6px; height:6px; border-radius:50%; background:currentColor; }
+
 .progress-bar-wrap { background:var(--gray-100); border-bottom:1px solid var(--gray-200); padding:24px 40px; }
 .progress-inner { max-width:1100px; margin:0 auto; }
 .progress-label { font-size:11px; letter-spacing:.14em; color:var(--gray-500); text-transform:uppercase; margin-bottom:10px; }
 .progress-track { height:4px; background:var(--gray-200); border-radius:2px; position:relative; }
-.progress-fill { height:100%; width:33.333%; background:linear-gradient(90deg,var(--gold-dark),var(--gold-mid)); border-radius:2px; position:relative; }
+.progress-fill { height:100%; width:83%; background:linear-gradient(90deg,var(--gold-dark),var(--gold-mid)); border-radius:2px; position:relative; }
 .progress-fill::after { content:''; position:absolute; right:-4px; top:-3px; width:10px; height:10px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 3px rgba(184,134,11,.2); }
 .progress-steps { display:flex; justify-content:space-between; margin-top:10px; }
 .ps-label { font-size:11px; color:var(--gray-300); font-weight:500; }
@@ -108,6 +131,9 @@ main { max-width:1100px; margin:0 auto; padding:48px 40px 80px; }
 .detail-panel { background:var(--white); border:1.5px solid rgba(184,134,11,.25); border-radius:18px; padding:40px; display:none; box-shadow:0 4px 32px rgba(184,134,11,.08); margin-bottom:32px; }
 .detail-panel.open { display:block; animation:slideDown .28s ease; }
 @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+/* 文字サイズ調整（授業中の投影用） */
+body.text-l .detail-panel { zoom:1.10; }
+body.text-xl .detail-panel { zoom:1.22; }
 
 .detail-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:12px; padding-bottom:20px; border-bottom:1.5px solid var(--gray-200); }
 .detail-title { font-family:'Shippori Mincho',serif; font-size:20px; font-weight:700; color:var(--black); }
@@ -122,6 +148,11 @@ main { max-width:1100px; margin:0 auto; padding:48px 40px 80px; }
 .step-tab.active { background:var(--gold-light); border-color:rgba(184,134,11,.4); color:var(--gold-dark); }
 .step-tab-num { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; background:var(--gray-200); font-size:10px; color:var(--gray-700); }
 .step-tab.active .step-tab-num { background:var(--gold); color:var(--white); }
+/* タブにカテゴリー色のドットを添える */
+.step-tab .tab-cat { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.tab-cat.c-exp{background:var(--cat-exp);} .tab-cat.c-learn{background:var(--cat-learn);}
+.tab-cat.c-prac{background:var(--cat-prac);} .tab-cat.c-out{background:var(--cat-out);}
+.tab-cat.c-set{background:var(--cat-set);}
 
 .step-content { display:none; }
 .step-content.active { display:block; animation:fadeIn .2s ease; }
@@ -129,6 +160,49 @@ main { max-width:1100px; margin:0 auto; padding:48px 40px 80px; }
 
 .step-content h3 { font-size:15px; font-weight:700; color:var(--black); margin-bottom:14px; display:flex; align-items:center; gap:9px; }
 .step-content h3::before { content:''; display:inline-block; width:3px; height:17px; background:var(--gold); border-radius:2px; flex-shrink:0; }
+
+/* ===== カテゴリーバッジ（体験/学ぶ/実践/アウトプット/準備） ===== */
+.step-head { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+.cat-badge { display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:700; letter-spacing:.04em; padding:6px 14px; border-radius:8px; border:1.5px solid; line-height:1; }
+.cat-badge .cat-ico { font-size:14px; }
+.cat-exp{ color:var(--cat-exp); background:var(--cat-exp-bg); border-color:var(--cat-exp-bd); }
+.cat-learn{ color:var(--cat-learn); background:var(--cat-learn-bg); border-color:var(--cat-learn-bd); }
+.cat-prac{ color:var(--cat-prac); background:var(--cat-prac-bg); border-color:var(--cat-prac-bd); }
+.cat-out{ color:var(--cat-out); background:var(--cat-out-bg); border-color:var(--cat-out-bd); }
+.cat-set{ color:var(--cat-set); background:var(--cat-set-bg); border-color:var(--cat-set-bd); }
+.step-goal { font-size:12px; color:var(--gray-500); }
+.step-goal strong { color:var(--gray-700); }
+
+/* ===== ナレーション（導入トーク／種明かし）＝常に表示・読み上げ用 ===== */
+.narration { position:relative; border-radius:0 10px 10px 0; padding:16px 20px 16px 22px; margin:0 0 18px; }
+.narration::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; border-radius:4px; }
+.narration-tag { display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px; }
+.narration p { font-size:14.5px; line-height:1.85; font-weight:500; }
+.narration.intro { background:#fffdf6; border:1px solid var(--cat-prac-bd); }
+.narration.intro::before { background:var(--gold); }
+.narration.intro .narration-tag { color:var(--gold-dark); }
+.narration.intro p { color:#4a3a08; }
+.narration.reveal { background:linear-gradient(180deg,#f3fbf6,#eafaf1); border:1px solid var(--green-border); }
+.narration.reveal::before { background:var(--green); }
+.narration.reveal .narration-tag { color:var(--green); }
+.narration.reveal p { color:#16553a; }
+
+/* ===== Before / After 比較トグル ===== */
+.compare { border:1.5px solid var(--gray-200); border-radius:12px; overflow:hidden; margin:18px 0; }
+.compare-tabs { display:flex; background:var(--gray-100); border-bottom:1.5px solid var(--gray-200); }
+.compare-tab { flex:1; font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:700; padding:11px 10px; border:none; background:transparent; color:var(--gray-500); cursor:pointer; transition:all .15s; border-bottom:3px solid transparent; }
+.compare-tab:hover { color:var(--gray-700); }
+.compare-tab.active[data-side="before"] { background:var(--white); color:#a14242; border-bottom-color:#c0392b; }
+.compare-tab.active[data-side="after"] { background:var(--white); color:var(--green); border-bottom-color:var(--green); }
+.compare-body { padding:18px 20px; background:var(--white); }
+.compare-panel { display:none; }
+.compare-panel.active { display:block; animation:fadeIn .18s ease; }
+.compare-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.compare-list li { font-size:13.5px; line-height:1.6; display:flex; align-items:flex-start; gap:10px; color:var(--gray-700); }
+.compare-list li .ci { flex-shrink:0; margin-top:1px; font-size:14px; }
+.compare-panel[data-side="before"] .ci { color:#c0392b; }
+.compare-panel[data-side="after"] .ci { color:var(--green); }
+.compare-tip { font-size:12px; color:var(--gray-500); padding:10px 20px; background:var(--gray-50); border-top:1px solid var(--gray-200); display:flex; align-items:center; gap:7px; }
 
 .instruction-list { list-style:none; counter-reset:inst; display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
 .instruction-list li { counter-increment:inst; display:flex; align-items:flex-start; gap:12px; padding:11px 15px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:8px; font-size:14px; color:var(--gray-700); line-height:1.6; }
@@ -176,7 +250,6 @@ code { font-family:'JetBrains Mono',monospace; background:#f0ede8; color:#c0392b
 .demo-box-title { font-size:11px; font-weight:700; letter-spacing:.1em; color:#2a6db5; text-transform:uppercase; margin-bottom:12px; }
 .demo-box p { font-size:14px; color:#1a3a5c; line-height:1.75; }
 
-/* 機能デモカード（新規） */
 .feature-demo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; margin:16px 0; }
 .feature-card { border:1.5px solid var(--gray-200); border-radius:10px; padding:16px 18px; background:var(--white); }
 .feature-card-icon { font-size:22px; margin-bottom:8px; }
@@ -187,11 +260,12 @@ code { font-family:'JetBrains Mono',monospace; background:#f0ede8; color:#c0392b
 footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-200); font-size:11px; color:var(--gray-300); letter-spacing:.08em; background:var(--gray-50); }
 
 @media(max-width:640px) {
-  header,.progress-bar-wrap,main { padding-left:20px; padding-right:20px; }
+  header,.progress-bar-wrap,main,.control-bar { padding-left:20px; padding-right:20px; }
   header { padding-top:40px; }
   .curriculum-grid { grid-template-columns:1fr; }
   .detail-panel { padding:24px; }
   .btn-legend { flex-direction:column; }
+  .cb-spacer { display:none; }
 }
 </style>
 </head>
@@ -214,10 +288,32 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
   </div>
 </header>
 
+<!-- 授業進行コントロールバー -->
+<div class="control-bar">
+  <div class="cb-inner">
+    <div class="cb-group">
+      <span class="cb-label">文字サイズ</span>
+      <button class="cb-btn cb-size active" onclick="setTextSize('m',this)">標準</button>
+      <button class="cb-btn cb-size" onclick="setTextSize('l',this)">大</button>
+      <button class="cb-btn cb-size" onclick="setTextSize('xl',this)">特大</button>
+    </div>
+    <div class="cb-group">
+      <span class="cb-label">カテゴリー</span>
+      <span style="font-size:11px;color:var(--cat-exp);font-weight:700;">🎬体験</span>
+      <span style="font-size:11px;color:var(--cat-learn);font-weight:700;">📖学ぶ</span>
+      <span style="font-size:11px;color:var(--cat-prac);font-weight:700;">✋実践</span>
+      <span style="font-size:11px;color:var(--cat-out);font-weight:700;">🎁公開</span>
+      <span style="font-size:11px;color:var(--cat-set);font-weight:700;">🛠準備</span>
+    </div>
+    <div class="cb-spacer"></div>
+    <button class="cb-mode" id="cb-mode" onclick="toggleInstructorBtn()"><span class="dot"></span>講師メモを表示</button>
+  </div>
+</div>
+
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="progress-label">カリキュラム進捗 — 第1回〜第5回 公開済み</div>
-    <div class="progress-track"><div class="progress-fill" style="width:83%;"></div></div>
+    <div class="progress-label">カリキュラム進捗 — 第1回〜第5回 公開済み（第3回 Cowork 追加）</div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
     <div class="progress-steps">
       <span class="ps-label active">第1回 ✓</span>
       <span class="ps-label active">第2回 ✓</span>
@@ -232,23 +328,19 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 <main>
 
   <div class="btn-legend">
-    <div class="legend-title">公開済み回のボタンについて</div>
+    <div class="legend-title">この教材の読み方</div>
     <div class="legend-item">
-      <div class="legend-btn-sample">
-        <a class="btn-app" href="#" onclick="return false;">🚀 アプリを開く</a>
-      </div>
+      <div class="legend-btn-sample"><a class="btn-app" href="#" onclick="return false;">🚀 アプリを開く</a></div>
       <div class="legend-desc">
         <strong>アプリを開く（緑）</strong>
-        <p>授業で実際に完成させた<br>業務アプリ本体を開きます。<br>受講者が日々使う「製品」です。</p>
+        <p>授業で実際に完成させた業務アプリ／HP本体を開きます。受講者が日々使う「製品」です。</p>
       </div>
     </div>
     <div class="legend-item">
-      <div class="legend-btn-sample">
-        <button class="btn-material" onclick="return false;">教材を見る →</button>
-      </div>
+      <div class="legend-btn-sample"><button class="btn-material" onclick="return false;">教材を見る →</button></div>
       <div class="legend-desc">
         <strong>教材を見る（ゴールド）</strong>
-        <p>アプリの作り方の手順書を<br>このページ内で開きます。<br>講師がディレクションに使う資料です。</p>
+        <p>各STEPに「🎬体験 → 📖学ぶ → ✋実践 → 🎁公開」のカテゴリーと、講師が読み上げる<strong>導入トーク・種明かし</strong>が付いています。上から読むだけで授業が進みます。</p>
       </div>
     </div>
   </div>
@@ -306,16 +398,16 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <span class="card-status status-ready"><span class="status-dot"></span>公開済み</span>
       </div>
       <div class="card-title">Cowork — ブラウザ・PC操作を自動化する</div>
-      <div class="card-subtitle">「判断はあなた、作業はClaude」3つの型を体験する</div>
+      <div class="card-subtitle">Claude in Chromeで繰り返し作業をゼロにする</div>
       <ul class="card-topics">
-        <li><span class="topic-dot"></span>つなぐ（コネクタ）：Gmail接続→領収書メールを一覧化</li>
-        <li><span class="topic-dot"></span>覚えさせる（スキル）：スキル化＋毎週自動実行</li>
-        <li><span class="topic-dot"></span>ブラウザ（Claude in Chrome）：クチコミ収集</li>
-        <li><span class="topic-dot"></span>応用：予約サイト収集・定期レポートも同じ型で</li>
+        <li><span class="topic-dot"></span>Coworkとは・Claude in Chromeの仕組み</li>
+        <li><span class="topic-dot"></span>予約サイトの情報収集を自動化</li>
+        <li><span class="topic-dot"></span>定期レポートの自動生成</li>
+        <li><span class="topic-dot"></span>MCP連携の入口紹介（Gmail・カレンダー活用）</li>
       </ul>
-      <div class="card-deliverable">📦 自動化ワークフロー（領収書ダイジェスト＋クチコミ収集）</div>
+      <div class="card-deliverable">📦 繰り返し作業を自動化したワークフロー1本</div>
       <div class="card-footer">
-        <span class="card-time">約1時間</span>
+        <span class="card-time">約2時間</span>
         <div class="card-btns">
           <button class="btn-material" onclick="toggleDetail('detail-3')">教材を見る <span class="arrow">→</span></button>
         </div>
@@ -350,20 +442,19 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <span class="card-num">第05回</span>
         <span class="card-status status-ready"><span class="status-dot"></span>公開済み</span>
       </div>
-      <div class="card-title">アプリ開発 — 自店舗の業務Webアプリを作る</div>
-      <div class="card-subtitle">売上ダッシュボードを0から完成・Vercel公開</div>
+      <div class="card-title">立ち止まる — 振り返りとペインの棚卸し</div>
+      <div class="card-subtitle">作って終わりにしない。本当のペインを掘り起こす回</div>
       <ul class="card-topics">
-        <li><span class="topic-dot"></span>WebアプリとHP/LPの違いを理解</li>
-        <li><span class="topic-dot"></span>VS Code・GitHub・Vercelの環境構築</li>
-        <li><span class="topic-dot"></span>HTML/CSS/JSで売上ダッシュボードを作成</li>
-        <li><span class="topic-dot"></span>グラフ・CSV出力・客単価自動計算</li>
-        <li><span class="topic-dot"></span>GitHub → Vercelでアプリを公開</li>
+        <li><span class="topic-dot"></span>これまでの成果物を提出・相互フィードバック</li>
+        <li><span class="topic-dot"></span>「本当に役立った？」を正直に振り返る</li>
+        <li><span class="topic-dot"></span>管理業務を全棚卸し（頻度×時間×手作業度）</li>
+        <li><span class="topic-dot"></span>属人度の高い"隠れペイン"を掘り起こす</li>
+        <li><span class="topic-dot"></span>「何ができたら嬉しいか」を全員が言語化</li>
       </ul>
-      <div class="card-deliverable">📦 実際に動く業務Webアプリ（公開済みURL）</div>
+      <div class="card-deliverable">📦 自分の"嬉しい状態"を言語化したペインリスト</div>
       <div class="card-footer">
-        <span class="card-time">約3時間</span>
+        <span class="card-time">約2時間</span>
         <div class="card-btns">
-          <a class="btn-app" href="https://goku-dashboard-woad.vercel.app" target="_blank">🚀 アプリを開く</a>
           <button class="btn-material" onclick="toggleDetail('detail-5')">教材を見る <span class="arrow">→</span></button>
         </div>
       </div>
@@ -391,7 +482,7 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 
   </div>
 
-  <!-- 第1回 詳細パネル -->
+  <!-- ============ 第1回 詳細パネル ============ -->
   <div class="detail-panel" id="detail-1">
     <div class="detail-header">
       <div class="detail-title">第01回｜<span>Claude Codeの全体像と環境構築</span> 教材</div>
@@ -399,71 +490,58 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     </div>
 
     <div class="steps-nav">
-      <div class="step-tab active" onclick="showStep('s1',1)"><span class="step-tab-num">1</span>できること全体像</div>
-      <div class="step-tab" onclick="showStep('s1',2)"><span class="step-tab-num">2</span>ダッシュボード</div>
-      <div class="step-tab" onclick="showStep('s1',3)"><span class="step-tab-num">3</span>初期設定</div>
-      <div class="step-tab" onclick="showStep('s1',4)"><span class="step-tab-num">4</span>Codeタブ</div>
-      <div class="step-tab" onclick="showStep('s1',5)"><span class="step-tab-num">5</span>モデル選択</div>
-      <div class="step-tab" onclick="showStep('s1',6)"><span class="step-tab-num">6</span>CLAUDE.mdとは</div>
-      <div class="step-tab" onclick="showStep('s1',7)"><span class="step-tab-num">7</span>CLAUDE.md作成</div>
+      <div class="step-tab active" onclick="showStep('s1',1)"><span class="step-tab-num">1</span><span class="tab-cat c-learn"></span>できること全体像</div>
+      <div class="step-tab" onclick="showStep('s1',2)"><span class="step-tab-num">2</span><span class="tab-cat c-exp"></span>デモ体験</div>
+      <div class="step-tab" onclick="showStep('s1',3)"><span class="step-tab-num">3</span><span class="tab-cat c-set"></span>初期設定</div>
+      <div class="step-tab" onclick="showStep('s1',4)"><span class="step-tab-num">4</span><span class="tab-cat c-set"></span>Codeタブ</div>
+      <div class="step-tab" onclick="showStep('s1',5)"><span class="step-tab-num">5</span><span class="tab-cat c-learn"></span>モデル選択</div>
+      <div class="step-tab" onclick="showStep('s1',6)"><span class="step-tab-num">6</span><span class="tab-cat c-learn"></span>CLAUDE.mdとは</div>
+      <div class="step-tab" onclick="showStep('s1',7)"><span class="step-tab-num">7</span><span class="tab-cat c-out"></span>CLAUDE.md作成</div>
       <div class="step-tab instructor-tab" onclick="showStep('s1',8)"><span class="step-tab-num">💡</span>講師メモ</div>
     </div>
 
-    <!-- STEP 1: できること全体像 -->
+    <!-- STEP 1 -->
     <div class="step-content active" id="s1-1">
-      <h3>Claudeで何ができるか（目安：10分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：全体像を先に見せる</div>
-        <p>「細かい説明は後でいい。まず『Claudeでこんなことができる』という全体像を掴んでもらう。4つの使い方をサクッと見せて、次のダッシュボードデモへの期待値を上げてください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claudeの4つの入口をざっくり把握する（目安10分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「まず、Claudeで何ができるのかを大づかみに見ていきましょう。細かい使い方は今日これから全部やります。今は『へえ、こんなことができるんだ』くらいの感覚で大丈夫です。入口は4つ。一緒に見ていきますね。」</p>
       </div>
 
       <table class="info-table">
-        <thead>
-          <tr><th>使い方</th><th>何ができる？</th><th>飲食店での例</th></tr>
-        </thead>
+        <thead><tr><th>使い方</th><th>何ができる？</th><th>飲食店での例</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>💬 チャット</strong></td>
-            <td>会話・文章作成・調査・相談</td>
-            <td>メール文・SNS投稿・競合リサーチ・メニュー説明文</td>
-          </tr>
-          <tr>
-            <td><strong>🔗 コネクタ</strong></td>
-            <td>Gmail・カレンダーなど外部サービスと連携</td>
-            <td>「今日のメールまとめて」「今週の予約整理して」</td>
-          </tr>
-          <tr>
-            <td><strong>🖥️ Cowork</strong></td>
-            <td>ブラウザ・PC操作の自動化</td>
-            <td>定期的なデータ収集・ファイル整理の自動化</td>
-          </tr>
-          <tr>
-            <td><strong>⚡ Claude Code</strong></td>
-            <td>ツール・HP・LP・Webアプリ開発</td>
-            <td>売上管理アプリ・原価計算ツール・店舗HP公開</td>
-          </tr>
+          <tr><td><strong>💬 チャット</strong></td><td>会話・文章作成・調査・相談</td><td>メール文・SNS投稿・競合リサーチ・メニュー説明文</td></tr>
+          <tr><td><strong>🔗 コネクタ</strong></td><td>Gmail・カレンダーなど外部サービスと連携</td><td>「今日のメールまとめて」「今週の予約整理して」</td></tr>
+          <tr><td><strong>🖥️ Cowork</strong></td><td>ブラウザ・PC操作の自動化</td><td>定期的なデータ収集・ファイル整理の自動化</td></tr>
+          <tr><td><strong>⚡ Claude Code</strong></td><td>ツール・HP・LP・Webアプリ開発</td><td>売上管理アプリ・原価計算ツール・店舗HP公開</td></tr>
         </tbody>
       </table>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
-        <p>「ClaudeはAnthropicというアメリカの会社が作ったAIです。大きく4つの使い方があります。チャット・コネクタ・Cowork・Claude Code。この講座でメインで使うのはClaude Codeですが、今日は初期設定も兼ねてコネクタも全員やります。では、Claude Codeで何が作れるか、まず実例を見てください。」</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ ここまでの要点</div>
+        <p>「この講座でメインに使うのは一番下の⚡Claude Codeです。今日はその準備として、コネクタも全員つなぎます。では実際にClaude Codeで何が作れるのか——次は私が作ったものを見てもらいます。」</p>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>「4つの使い方がある」と全員が把握できていればOK。すぐ次のデモへ。</p>
-      </div>
+      <div class="instructor-note"><div class="note-label">講師メモ：全体像を先に見せる</div><p>「細かい説明は後でいい。まず『Claudeでこんなことができる』という全体像を掴んでもらう。4つの使い方をサクッと見せて、次のダッシュボードデモへの期待値を上げてください。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「4つの使い方がある」と全員が把握できていればOK。すぐ次のデモへ。</p></div>
     </div>
 
-    <!-- STEP 2: ダッシュボードデモ -->
+    <!-- STEP 2 -->
     <div class="step-content" id="s1-2">
-      <h3>極のダッシュボードをデモする（目安：15分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：つかみの本命</div>
-        <p>「ここで受講者の目の色が変わるかどうか決まります。『コードを一行も書いていない』という事実を強調してください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>「自分にもできそう」と感じてもらう（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからが今日の本番です。まず、私が作ったアプリを実際に動かしてお見せします。皆さんはまだ何も操作しなくて大丈夫。ただ見ているだけでOKです。それでも『これ自分の店でも使えそう』と思ってもらえたら、今日のスタートとしては大成功です。」</p>
       </div>
 
+      <h3>極のダッシュボードをデモする</h3>
       <ol class="instruction-list">
         <li>ブラウザで <strong>https://goku-dashboard-woad.vercel.app</strong> を開いてスクリーン共有</li>
         <li>売上・客数を入力 → グラフが動くのをリアルタイムで見せる</li>
@@ -471,33 +549,61 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <li>スマホからも同じURLでアクセスできることを見せる</li>
       </ol>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
-        <p>「これ、コードを一行も書いていません。ClaudeというAIと会話しながら作りました。かかった時間は約3時間。皆さんも第5回の授業でこれと同じものを作って、自分のURLでスマホから見られるようになります。」</p>
+      <h3>これまで vs Claudeを使うと</h3>
+      <div class="compare" data-compare>
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまでの作り方</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ Claudeを使うと</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>制作会社に依頼して数十万円かかる</li>
+              <li><span class="ci">✕</span>完成まで2〜3週間待つ</li>
+              <li><span class="ci">✕</span>「ここ直して」のたびに追加費用と日数</li>
+              <li><span class="ci">✕</span>結局自分では何も変えられない</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>自分で作れる。コードは一行も書かない</li>
+              <li><span class="ci">✓</span>かかった時間は約3時間</li>
+              <li><span class="ci">✓</span>修正は「ここ直して」と会話するだけで即反映</li>
+              <li><span class="ci">✓</span>費用はAIの月額利用料だけ</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">👆 上のボタンを押すと、受講者の前で「Before / After」を切り替えて見せられます</div>
       </div>
 
-      <h3 style="margin-top:24px;">6回のロードマップを示す</h3>
+      <h3>6回のロードマップを示す</h3>
       <ol class="instruction-list">
         <li>この教材ダッシュボード自体をスクリーンに映す</li>
         <li>「6回終わると何ができるか」を各カードを指差しながら説明</li>
         <li>「今日は第1回。まずClaudeに自分のお店を覚えさせます」と宣言</li>
       </ol>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>「自分のお店でも使えそう」という反応が出ていればOK！</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「どうでしたか。今お見せしたアプリ、コードは一行も書いていません。ClaudeというAIと会話しながら作りました。本来こういうものは制作会社に何十万円も払って作るものでした。それを自分で、3時間で作れる。皆さんも第5回でこれと同じものを作って、自分のURLでスマホから見られるようになります。」</p>
       </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：つかみの本命</div><p>「ここで受講者の目の色が変わるかどうか決まります。『コードを一行も書いていない』という事実を強調してください。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「自分のお店でも使えそう」という反応が出ていればOK！</p></div>
     </div>
 
-    <!-- STEP 3: 初期設定 -->
+    <!-- STEP 3 -->
     <div class="step-content" id="s1-3">
-      <h3>初期設定を完了させる（目安：20分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：全員が完了するまで次に進まない</div>
-        <p>「アプリ導入・コネクタ・プロジェクトの3つを今日中に全員終わらせます。ここを飛ばすと次回以降が詰まります。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">🛠</span>準備する</span>
+        <span class="step-goal"><strong>ゴール：</strong>アプリ・コネクタ・プロジェクトを全員完了（目安20分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからは手を動かす準備です。3つだけやります——アプリを入れる、Gmailをつなぐ、プロジェクトの箱を作る。この3つは今日中に全員終わらせます。ここを飛ばすと次回から詰まるので、私が一緒に進めます。詰まったら遠慮なく手を挙げてください。」</p>
       </div>
 
-      <h3 style="margin-top:20px;">① デスクトップアプリをインストール・ログインする</h3>
+      <h3 style="margin-top:4px;">① デスクトップアプリをインストール・ログインする</h3>
       <ol class="instruction-list">
         <li>ブラウザで <strong>https://claude.ai/download</strong> を開く</li>
         <li>「Download for Mac」をクリックしてダウンロード</li>
@@ -505,27 +611,16 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <li>法人アカウントのメールアドレス・パスワードでログイン</li>
         <li>左上に「Chat」「Cowork」「Code」の3タブが表示されればOK</li>
       </ol>
-
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>「Code」タブが表示されていればOK！</p>
-      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「Code」タブが表示されていればOK！</p></div>
 
       <h3 style="margin-top:24px;">② コネクタを繋ぐ</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ</div>
-        <p>「法人プランなのでコネクタは全員使えます。ただし組織設定でコード実行がオフになっていると繋げません。事前に確認しておいてください。」</p>
-      </div>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「法人プランなのでコネクタは全員使えます。ただし組織設定でコード実行がオフになっていると繋げません。事前に確認しておいてください。」</p></div>
       <ol class="instruction-list">
         <li>チャット入力欄の「＋」→「コネクタ」→ GmailをON</li>
         <li>新しいチャットを開いて「今日のメールまとめて」と入力して送信</li>
         <li>メールの一覧が返ってきたらOK</li>
       </ol>
-
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>Gmailの内容がチャットに返ってきたらOK！</p>
-      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Gmailの内容がチャットに返ってきたらOK！</p></div>
 
       <h3 style="margin-top:24px;">③ プロジェクトを作る</h3>
       <ol class="instruction-list">
@@ -533,28 +628,25 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <li>「新しいプロジェクト」→ 名前を自分の店名にする</li>
         <li>箱だけ作ればOK（中身はCLAUDE.md完成後に入れる）</li>
       </ol>
-
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>プロジェクトが作れていればOK！</p>
-      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>プロジェクトが作れていればOK！</p></div>
     </div>
 
-    <!-- STEP 4: Codeタブ -->
+    <!-- STEP 4 -->
     <div class="step-content" id="s1-4">
-      <h3>Codeタブの使い方を理解する（目安：10分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ</div>
-        <p>「3つのタブの違いを表で見せてから、実際にCodeタブで『こんにちは』を送るところまでやらせてください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">🛠</span>準備する</span>
+        <span class="step-goal"><strong>ゴール：</strong>Codeタブで返事が返ってくる状態にする（目安10分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「3つのタブの違いを一度だけ整理します。この講座でずっと使うのは『Code』タブです。まず表で違いを見て、そのあと実際にCodeタブで『こんにちは』と打ってみましょう。返事が来れば、もうClaude Codeが使える状態です。」</p>
       </div>
 
       <table class="info-table">
-        <thead>
-          <tr><th>タブ</th><th>何ができる？</th><th>使いどころ</th></tr>
-        </thead>
+        <thead><tr><th>タブ</th><th>何ができる？</th><th>使いどころ</th></tr></thead>
         <tbody>
           <tr><td><strong>Chat</strong></td><td>会話・文章作成・質問</td><td>SNS文・メール・コネクタ経由の操作</td></tr>
-          <tr><td><strong>Cowork</strong></td><td>PC操作の自動化</td><td>ブラウザ操作・アプリ操作（第6回で紹介）</td></tr>
+          <tr><td><strong>Cowork</strong></td><td>PC操作の自動化</td><td>ブラウザ操作・アプリ操作（第3回で紹介）</td></tr>
           <tr><td><strong>Code</strong></td><td>ファイル作成・コード生成・フォルダ操作</td><td>ツール・HP・LP・アプリ作成（この講座のメイン）</td></tr>
         </tbody>
       </table>
@@ -566,25 +658,22 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <li>「New session」をクリック</li>
         <li>「こんにちは」と入力してEnter → 返答が来ればOK</li>
       </ol>
-
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>Codeタブで返答が来ればOK！Claude Codeが使える状態です。</p>
-      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Codeタブで返答が来ればOK！Claude Codeが使える状態です。</p></div>
     </div>
 
-    <!-- STEP 5: モデル選択 -->
+    <!-- STEP 5 -->
     <div class="step-content" id="s1-5">
-      <h3>モデル選択とコスト感覚を理解する（目安：15分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ</div>
-        <p>「料理で例えると：Haiku＝電子レンジ、Sonnet＝ガスコンロ、Opus＝フランス料理のシェフ。この講座ではSonnetを使います。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>3つのモデルの使い分けイメージを持つ（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「Claudeには3つのモデル——いわば『3段階の頭の良さ』があります。料理で例えると、Haikuは電子レンジ、Sonnetはガスコンロ、Opusはフランス料理のシェフ。普段使いはガスコンロ、つまりSonnetで十分です。この講座でもSonnetを使います。」</p>
       </div>
 
       <table class="info-table">
-        <thead>
-          <tr><th>モデル</th><th>特徴</th><th>飲食店での使いどころ</th><th>速度</th></tr>
-        </thead>
+        <thead><tr><th>モデル</th><th>特徴</th><th>飲食店での使いどころ</th><th>速度</th></tr></thead>
         <tbody>
           <tr><td><code>Haiku</code></td><td>軽量・高速・低コスト</td><td>定型文作成・簡単な計算・返信文生成</td><td>⚡⚡⚡</td></tr>
           <tr><td><code>Sonnet</code>（推奨）</td><td>バランス型・日常使いに最適</td><td>HP/LP作成・業務ツール開発・CLAUDE.md作成</td><td>⚡⚡</td></tr>
@@ -592,45 +681,38 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         </tbody>
       </table>
 
-      <div class="instructor-note">
-        <div class="note-label">講師メモ</div>
-        <p>「この講座ではSonnetを使います。日常業務の9割はSonnetで十分。Opusは特別なときだけ。法人プランは定額ですが使いすぎると上限に近づくので、迷ったらSonnetで始めるのが基本です。」</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「迷ったらSonnet、と覚えてください。日常業務の9割はSonnetで足ります。法人プランは定額ですが、使いすぎると上限に近づくので、最高性能のOpusは『ここぞ』というときだけ。これだけ覚えておけば、コストで悩むことはありません。」</p>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>3つのモデルの使い分けイメージが掴めていればOK！</p>
-      </div>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「料理の例えで腹落ちさせるのが早いです。Sonnet＝普段使い、を一言で押さえてください。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3つのモデルの使い分けイメージが掴めていればOK！</p></div>
     </div>
 
-    <!-- STEP 6: CLAUDE.mdとは -->
+    <!-- STEP 6 -->
     <div class="step-content" id="s1-6">
-      <h3>CLAUDE.mdとは何かを理解する（目安：15分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：ここが第1回の核心</div>
-        <p>「CLAUDE.mdはClaudeへの『店のトリセツ』。新しいアルバイトに渡すマニュアルと同じ感覚で作ってください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>CLAUDE.md＝「店のトリセツ」だと理解する（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のいちばん大事な話です。CLAUDE.mdというのは、Claudeに渡す『お店の取扱説明書』です。新しく入ったアルバイトに『うちの店はこういう店だよ』と渡すマニュアルと、まったく同じ感覚で作ります。これを一度作っておくと、Claudeは毎回それを読んでから仕事をしてくれます。」</p>
       </div>
 
       <table class="info-table">
-        <thead>
-          <tr><th>種類</th><th>場所</th><th>影響範囲</th><th>何を書く？</th></tr>
-        </thead>
+        <thead><tr><th>種類</th><th>場所</th><th>影響範囲</th><th>何を書く？</th></tr></thead>
         <tbody>
           <tr><td><strong>グローバル</strong></td><td><code>~/.claude/CLAUDE.md</code></td><td>全プロジェクト共通</td><td>自分のスタイル・会社情報・よく使うルール</td></tr>
           <tr><td><strong>プロジェクト</strong></td><td>各プロジェクトフォルダ内</td><td>そのプロジェクトのみ</td><td>店舗情報・このアプリ特有のルール</td></tr>
         </tbody>
       </table>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
-        <p>「グローバルは『会社全体のマニュアル』、プロジェクトは『この店舗専用マニュアル』のイメージです。今日はまずグローバルのCLAUDE.mdを作ります。ここに自分のお店の基本情報を全部入れておくと、Claude Codeが毎回それを読んでから作業してくれます。」</p>
-      </div>
+      <div class="demo-box"><div class="demo-box-title">💬 補足・読み上げ</div><p>「グローバルは『会社全体のマニュアル』、プロジェクトは『この店舗専用マニュアル』のイメージです。今日はまずグローバルのCLAUDE.mdを作ります。下に『極』の見本を出しておくので、これを真似しながら自分のお店版を作っていきましょう。」</p></div>
 
       <div class="code-wrap">
-        <div class="code-header">
-          <div class="code-filename"><div class="code-dot dot-md"></div>CLAUDE.md（極の見本）</div>
-          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-        </div>
+        <div class="code-header"><div class="code-filename"><div class="code-dot dot-md"></div>CLAUDE.md（極の見本）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
         <pre><span class="tok-head"># 店舗情報</span>
 <span class="tok-key">店名：</span><span class="tok-val">WAGYU SUKIYAKI 極〜GOKU〜 原宿店</span>
 <span class="tok-key">業態：</span><span class="tok-val">一人すき焼き専門店・カウンター10席</span>
@@ -659,28 +741,29 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 - ファイル名はすべて小文字・ハイフン区切りにする</pre>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>「自分の店版を作るイメージが湧いた」という反応が出ていればOK！</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「ここがポイントです。これを一度書いておくと、毎回『うちは一人すき焼きの店で、客単価は5,000円くらいで…』と説明しなくて済みます。Claudeが最初から自分の店を理解した状態で動いてくれる。次のSTEPで、いよいよ自分のお店版を作ります。」</p>
       </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：ここが第1回の核心</div><p>「CLAUDE.mdはClaudeへの『店のトリセツ』。新しいアルバイトに渡すマニュアルと同じ感覚で作ってください。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「自分の店版を作るイメージが湧いた」という反応が出ていればOK！</p></div>
     </div>
 
-    <!-- STEP 7: CLAUDE.md作成 -->
+    <!-- STEP 7 -->
     <div class="step-content" id="s1-7">
-      <h3>自店舗のCLAUDE.mdを作成する（目安：40分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：ここが成果物</div>
-        <p>「受講者が自分で手を動かす時間です。完璧を求めず、まず作ることが大事。書けない項目は空欄でOKと伝えてください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>アウトプット</span>
+        <span class="step-goal"><strong>成果物：</strong>自店舗のCLAUDE.md完成（目安40分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では実際に手を動かしましょう。今日の成果物は『自分のお店のCLAUDE.md』です。完璧を目指さなくて大丈夫。まず作ることがいちばん大事です。書けない項目は空欄でOK。下の文章をコピーして、カッコの中を自分のお店の情報に書き換えて送ってください。」</p>
       </div>
 
-      <ol class="instruction-list">
-        <li>Codeタブのテキストボックスに下記を貼り付けて送信する</li>
-      </ol>
+      <ol class="instruction-list"><li>Codeタブのテキストボックスに下記を貼り付けて送信する</li></ol>
       <div class="code-wrap">
-        <div class="code-header">
-          <div class="code-filename">Codeタブへの入力</div>
-          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-        </div>
+        <div class="code-header"><div class="code-filename">Codeタブへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
         <pre>グローバルのCLAUDE.mdを作成してください。
 場所は~/.claude/CLAUDE.mdです。
 以下の情報を入れてください：
@@ -719,28 +802,31 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
         <li>Claudeが正確に答えてくれることを確認</li>
       </ol>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>ClaudeがCLAUDE.mdの内容を正確に答えてくれればOK！自分のお店をClaudeが覚えた瞬間です。</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「今、Claudeがあなたのお店を覚えました。これが第1回のゴールです。本来なら毎回ゼロから説明していたところを、もう説明不要。次回からはこの『お店を理解したClaude』と一緒に、実際のツールを作っていきます。」</p>
       </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：ここが成果物</div><p>「受講者が自分で手を動かす時間です。完璧を求めず、まず作ることが大事。書けない項目は空欄でOKと伝えてください。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>ClaudeがCLAUDE.mdの内容を正確に答えてくれればOK！自分のお店をClaudeが覚えた瞬間です。</p></div>
     </div>
 
-    <!-- STEP 8: 講師メモ -->
+    <!-- STEP 8 講師メモ -->
     <div class="step-content" id="s1-8">
       <h3>時間配分の目安</h3>
       <table class="info-table">
-        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
         <tbody>
-          <tr><td>STEP 1</td><td>Claudeで何ができるか・全体像</td><td>10分</td></tr>
-          <tr><td>STEP 2</td><td>ダッシュボードデモ・ロードマップ説明</td><td>15分</td></tr>
-          <tr><td>STEP 3</td><td>初期設定（アプリ導入・コネクタ・プロジェクト）</td><td>20分</td></tr>
-          <tr><td>STEP 4</td><td>Codeタブの使い方・動作確認</td><td>10分</td></tr>
-          <tr><td>休憩</td><td>詰まった人のフォロー</td><td>10分</td></tr>
-          <tr><td>STEP 5</td><td>モデル選択・コスト感覚</td><td>15分</td></tr>
-          <tr><td>STEP 6</td><td>CLAUDE.mdの概念説明・見本提示</td><td>15分</td></tr>
-          <tr><td>STEP 7</td><td>自店舗CLAUDE.md作成・動作確認</td><td>40分</td></tr>
-          <tr><td>まとめ</td><td>発表・次回予告</td><td>15分</td></tr>
-          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間50分</td></tr>
+          <tr><td>STEP 1</td><td>📖学ぶ</td><td>Claudeで何ができるか・全体像</td><td>10分</td></tr>
+          <tr><td>STEP 2</td><td>🎬体験</td><td>ダッシュボードデモ・ロードマップ説明</td><td>15分</td></tr>
+          <tr><td>STEP 3</td><td>🛠準備</td><td>初期設定（アプリ・コネクタ・プロジェクト）</td><td>20分</td></tr>
+          <tr><td>STEP 4</td><td>🛠準備</td><td>Codeタブの使い方・動作確認</td><td>10分</td></tr>
+          <tr><td>休憩</td><td>—</td><td>詰まった人のフォロー</td><td>10分</td></tr>
+          <tr><td>STEP 5</td><td>📖学ぶ</td><td>モデル選択・コスト感覚</td><td>15分</td></tr>
+          <tr><td>STEP 6</td><td>📖学ぶ</td><td>CLAUDE.mdの概念説明・見本提示</td><td>15分</td></tr>
+          <tr><td>STEP 7</td><td>🎁アウトプット</td><td>自店舗CLAUDE.md作成・動作確認</td><td>40分</td></tr>
+          <tr><td>まとめ</td><td>—</td><td>発表・次回予告</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間50分</td></tr>
         </tbody>
       </table>
 
@@ -763,24 +849,31 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 
   </div>
 
-  <!-- 第2回 詳細パネル -->
+  <!-- ============ 第2回 詳細パネル ============ -->
   <div class="detail-panel" id="detail-2">
     <div class="detail-header">
-      <div class="detail-title">第02回｜<span>業務ツール作成</span> 教材</div>
+      <div class="detail-title">第02回｜<span>業務ツール作成 — 数字・文章を自動化する</span> 教材</div>
       <button class="btn-close" onclick="closeDetail('detail-2')">✕ 閉じる</button>
     </div>
 
     <div class="steps-nav">
-      <div class="step-tab active" onclick="showStep('s2',1)"><span class="step-tab-num">1</span>Vibe Coding</div>
-      <div class="step-tab" onclick="showStep('s2',2)"><span class="step-tab-num">2</span>見本を作る</div>
-      <div class="step-tab" onclick="showStep('s2',3)"><span class="step-tab-num">3</span>自分で作る</div>
+      <div class="step-tab active" onclick="showStep('s2',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>Vibe Coding体験</div>
+      <div class="step-tab" onclick="showStep('s2',2)"><span class="step-tab-num">2</span><span class="tab-cat c-prac"></span>見本を作る</div>
+      <div class="step-tab" onclick="showStep('s2',3)"><span class="step-tab-num">3</span><span class="tab-cat c-out"></span>自分で作る</div>
       <div class="step-tab instructor-tab" onclick="showStep('s2',4)"><span class="step-tab-num">💡</span>講師メモ</div>
     </div>
 
+    <!-- STEP 1 -->
     <div class="step-content active" id="s2-1">
-      <h3>Vibe Codingとは（目安：15分）</h3>
-      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「さらっと紹介するだけでOKです。概念の説明より体験を優先してください。」</p></div>
-      <div class="demo-box"><div class="demo-box-title">💬 講師からの一言アドバイス</div><p>「今日のポイントはVibe Codingです。何を作るか最初から決めなくていいです。Claudeに質問してもらいながら、アイデアを発散させて、最終的に何を作るか収束させる。この流れで進めます。」</p></div>
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>「何を作るか」をClaudeと決める感覚を掴む（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のキーワードは『Vibe Coding』です。難しく考えなくて大丈夫。ポイントは一つ——『何を作るか、最初から自分で決めなくていい』ということです。むしろClaudeに質問してもらいながら、一緒にアイデアを広げて、最後に『じゃあこれを作ろう』と決めていく。まずは体験してみましょう。」</p>
+      </div>
+
       <ol class="instruction-list">
         <li>Codeタブを開く</li>
         <li>以下をそのまま送信する</li>
@@ -790,12 +883,52 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
         <pre>飲食店で使えるツールを作りたいです。
 何を作ればいいか、いくつか質問してもらえますか？</pre>
       </div>
+
+      <h3>これまで vs Vibe Coding</h3>
+      <div class="compare" data-compare>
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまでの作り方</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ Vibe Codingなら</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>「何を作るか」を自分で完璧に決めてから依頼</li>
+              <li><span class="ci">✕</span>仕様書づくりだけで一苦労、しかも抜け漏れが出る</li>
+              <li><span class="ci">✕</span>専門用語が分からず、やりたいことを伝えきれない</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>ふわっとした希望を伝えればClaudeが質問してくれる</li>
+              <li><span class="ci">✓</span>会話しながらアイデアを発散 → 自然に収束する</li>
+              <li><span class="ci">✓</span>専門用語ゼロ。話し言葉のままで形になる</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">👆 ボタンで切り替えて「決め方そのものが変わる」ことを見せられます</div>
+      </div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「どうですか。Claudeのほうから『どんな業務に困っていますか？』と質問してきましたよね。これがVibe Codingです。本来は『要件を固めてから作る』のが当たり前でしたが、AIが相棒になることで『話しながら作る』ができるようになりました。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「さらっと紹介するだけでOKです。概念の説明より体験を優先してください。」</p></div>
       <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Claudeが提案を出してくれたらOK！</p></div>
     </div>
 
+    <!-- STEP 2 -->
     <div class="step-content" id="s2-2">
-      <h3>原価計算ツールを見本として作る（目安：30分）</h3>
-      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「一発で完成させず、Claudeとやりとりしながら作る過程を見せるのがポイントです。」</p></div>
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>見本として原価計算ツールを一緒に完成させる（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では見本を一つ、私が皆さんの前で作ります。題材は飲食店なら誰でも使う『原価計算ツール』です。注目してほしいのは、一発で完成させないこと。Claudeとやり取りしながら少しずつ形にしていく——この『直しながら作る』過程こそが大事なので、よく見ていてください。」</p>
+      </div>
+
       <div class="code-wrap">
         <div class="code-header"><div class="code-filename">Codeタブへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
         <pre>飲食店向けの原価計算ツールをHTMLで作ってください。
@@ -806,12 +939,27 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 - 売価を入力すると利益額も出る
 - デスクトップに「genka-calculator」フォルダを作って保存する</pre>
       </div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「動きましたね。電卓で一品ずつ叩いていた原価計算が、入力するだけで一瞬で出る。しかも『もっと項目を増やして』『色を変えて』と言えばその場で直せます。これと同じことを、次は皆さん自身のお店のテーマでやってもらいます。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「一発で完成させず、Claudeとやりとりしながら作る過程を見せるのがポイントです。」</p></div>
       <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>受講者から「自分のお店でも使えそう」という反応が出ていればOK！</p></div>
     </div>
 
+    <!-- STEP 3 -->
     <div class="step-content" id="s2-3">
-      <h3>各自で自分のお店のツールを作る（目安：60分）</h3>
-      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「完成した人には『もう一個作ってみよう』と促してください。」</p></div>
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>アウトプット</span>
+        <span class="step-goal"><strong>成果物：</strong>自分のお店で翌日から使えるツール1本（目安60分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからは皆さんの番です。原価計算でなくても構いません。自分のお店で『これ毎回めんどくさいな』と思っている作業を一つ思い浮かべて、それをツールにしましょう。下に例を出しておきます。迷ったら『何を作ればいい？』とClaudeに聞けばOKです。」</p>
+      </div>
+
       <table class="info-table">
         <thead><tr><th>種類</th><th>ツール例</th></tr></thead>
         <tbody>
@@ -819,23 +967,32 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
           <tr><td>文章系</td><td>SNS投稿文・メニュー説明文・求人文・クレーム返信文ひな形</td></tr>
         </tbody>
       </table>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「今、自分の手で作ったツールが目の前にありますよね。これは見本ではなく、明日から本当にお店で使えるものです。ぜひ明日、実際に使ってみてください。『使ってみて気になったところ』が、次に直す宿題になります。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「完成した人には『もう一個作ってみよう』と促してください。」</p></div>
       <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員がツールを1本完成させてブラウザで動作確認できていればOK！</p></div>
     </div>
 
+    <!-- STEP 4 講師メモ -->
     <div class="step-content" id="s2-4">
       <h3>時間配分の目安</h3>
       <table class="info-table">
-        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
         <tbody>
-          <tr><td>前回の振り返り</td><td>CLAUDE.mdの発表・共有</td><td>15分</td></tr>
-          <tr><td>STEP 1</td><td>Vibe Codingの概念説明・体験</td><td>15分</td></tr>
-          <tr><td>STEP 2</td><td>原価計算ツールの見本作成・実演</td><td>30分</td></tr>
-          <tr><td>STEP 3</td><td>各自でツール作成</td><td>60分</td></tr>
-          <tr><td>まとめ</td><td>発表・次回予告・宿題説明</td><td>20分</td></tr>
-          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間20分</td></tr>
+          <tr><td>振り返り</td><td>—</td><td>CLAUDE.mdの発表・共有</td><td>15分</td></tr>
+          <tr><td>STEP 1</td><td>🎬体験</td><td>Vibe Codingの体験</td><td>15分</td></tr>
+          <tr><td>STEP 2</td><td>✋実践</td><td>原価計算ツールの見本作成・実演</td><td>30分</td></tr>
+          <tr><td>STEP 3</td><td>🎁アウトプット</td><td>各自でツール作成</td><td>60分</td></tr>
+          <tr><td>まとめ</td><td>—</td><td>発表・次回予告・宿題説明</td><td>20分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間20分</td></tr>
         </tbody>
       </table>
-      <div style="margin-top:16px;">
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
         <div class="msg-card">「何を作るか最初から決めなくていい。Claudeに聞けばいい」</div>
         <div class="msg-card">「コードの意味は理解しなくていい。動けばOK」</div>
         <div class="msg-card">「今日作ったツールを明日から使ってみてください」</div>
@@ -843,7 +1000,7 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
     </div>
   </div>
 
-  <!-- 第3回 詳細パネル -->
+  <!-- ============ 第3回 詳細パネル ============ -->
   <div class="detail-panel" id="detail-3">
     <div class="detail-header">
       <div class="detail-title">第03回｜<span>Cowork — ブラウザ・PC操作を自動化する</span> 教材</div>
@@ -851,294 +1008,265 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
     </div>
 
     <div class="steps-nav">
-      <div class="step-tab active" onclick="showStep('s3',1)"><span class="step-tab-num">0</span>事前準備</div>
-      <div class="step-tab" onclick="showStep('s3',2)"><span class="step-tab-num">1</span>Coworkとは</div>
-      <div class="step-tab" onclick="showStep('s3',3)"><span class="step-tab-num">2</span>つなぐ（コネクタ）</div>
-      <div class="step-tab" onclick="showStep('s3',4)"><span class="step-tab-num">3</span>覚えさせる（スキル）</div>
-      <div class="step-tab" onclick="showStep('s3',5)"><span class="step-tab-num">4</span>ブラウザ（Chrome）</div>
-      <div class="step-tab" onclick="showStep('s3',6)"><span class="step-tab-num">5</span>まとめ</div>
+      <div class="step-tab active" onclick="showStep('s3',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>Coworkを見る</div>
+      <div class="step-tab" onclick="showStep('s3',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>仕組み</div>
+      <div class="step-tab" onclick="showStep('s3',3)"><span class="step-tab-num">3</span><span class="tab-cat c-prac"></span>巡回チェック</div>
+      <div class="step-tab" onclick="showStep('s3',4)"><span class="step-tab-num">4</span><span class="tab-cat c-prac"></span>定期レポート</div>
+      <div class="step-tab" onclick="showStep('s3',5)"><span class="step-tab-num">5</span><span class="tab-cat c-learn"></span>MCP連携</div>
+      <div class="step-tab" onclick="showStep('s3',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>自分で自動化</div>
       <div class="step-tab instructor-tab" onclick="showStep('s3',7)"><span class="step-tab-num">💡</span>講師メモ</div>
     </div>
 
-    <!-- STEP 0: 事前準備 -->
+    <!-- STEP 1 -->
     <div class="step-content active" id="s3-1">
-      <h3>授業前にすませておく準備</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：ここは事前課題</div>
-        <p>「このSTEP 0は授業前に各自やってきてもらう前提です。授業内でゼロからやると1時間では絶対終わりません。授業冒頭は『動作確認だけ』に留めてください。当日できていない人がいたら、隣でフォローしながら他の人はSTEP1の座学を進める運用が安全です。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claudeが自分でPCを操作する様子に驚いてもらう（目安10分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のテーマは『自動化』です。これまでは Claude に“作ってもらう”でした。今日は Claude に“代わりにやってもらう”です。まず私のパソコンで、Claudeが自分でブラウザを開いて操作する様子を見てください。皆さんはまだ何もしなくて大丈夫。ただ画面を見ていてください。」</p>
       </div>
 
-      <p style="margin:14px 0 6px;font-weight:700;">準備①：Coworkを有効にする</p>
+      <h3>講師デモ：毎朝の口コミチェックを任せる</h3>
       <ol class="instruction-list">
-        <li>デスクトップアプリを開き、左上のタブに「Chat」「Cowork」「Code」があるか確認</li>
-        <li>「Cowork」タブをクリック</li>
-        <li>初回は「Claudeのワークスペースを準備中」という表示とともに環境のダウンロード（約2GB）が走る。完了まで数分かかるので、時間に余裕をもって行う</li>
+        <li>Claudeアプリの「<strong>Cowork</strong>」タブを開いてスクリーン共有</li>
+        <li>「食べログの当店ページを開いて、新着の口コミを5件、星の数とコメント要約だけ一覧にして」と指示</li>
+        <li><strong>マウスカーソルが勝手に動いて</strong>ブラウザを操作する様子を見せる</li>
+        <li>要約された一覧が返ってきたら「これ、私は一度もマウスを触っていません」と伝える</li>
       </ol>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Coworkタブで「New task」が押せる状態になっていればOK！</p></div>
 
-      <p style="margin:18px 0 6px;font-weight:700;">準備②：Claude in Chrome（拡張機能）を入れる</p>
-      <table class="info-table">
-        <thead><tr><th>手順</th><th>やること</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Google Chromeを開く（※Safari・Edgeは非対応）</td></tr>
-          <tr><td>2</td><td>Chromeウェブストアで「Claude」を検索（または公式の案内リンクから開く）</td></tr>
-          <tr><td>3</td><td>「Chromeに追加」をクリックしてインストール</td></tr>
-          <tr><td>4</td><td>表示されたら自分のClaudeアカウントでサインイン</td></tr>
-        </tbody>
-      </table>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Chromeの拡張機能一覧に「Claude」が表示されていればOK！</p></div>
-
-      <p style="margin:18px 0 6px;font-weight:700;">準備③：デスクトップアプリ側で連携をオンにする</p>
-      <ol class="instruction-list">
-        <li>デスクトップアプリ左下の自分のアイコン →「設定」</li>
-        <li>「コネクター」を開く</li>
-        <li>一覧の「Claude in Chrome」で連携をオンにする</li>
-      </ol>
-      <div class="demo-box">
-        <div class="demo-box-title">💡 プランによって使えるモデルが違います</div>
-        <p>Proプランのブラウザ操作はHaiku（軽量モデル）に限定されます。法人・Max・Team・Enterpriseプランなら、より賢いSonnetやOpusも選べます。同じ指示でも結果の精度が変わる場合があります。</p>
+      <h3>手作業 vs Coworkに任せる</h3>
+      <div class="compare" data-compare>
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまでの毎朝</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ Coworkに任せると</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>食べログ・ホットペッパー・Googleマップを順番に開く</li>
+              <li><span class="ci">✕</span>口コミをコピペしてメモにまとめる</li>
+              <li><span class="ci">✕</span>競合店のページも見て回る</li>
+              <li><span class="ci">✕</span>開店前に毎朝30分が溶ける</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>指示は一行「各サイトを巡回して要約して」</li>
+              <li><span class="ci">✓</span>Claudeが自分で開いて・読んで・まとめる</li>
+              <li><span class="ci">✓</span>あなたは出てきた結果を確認するだけ</li>
+              <li><span class="ci">✓</span>朝の30分が3分になる</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">👆 切り替えて「自分でやる作業」が「任せる作業」に変わることを見せられます</div>
       </div>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3つの準備が終わっていれば、当日はすぐ自動化を作り始められます！</p></div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「今、私は一度もマウスを触っていません。Claudeが自分でブラウザを開いて、読んで、まとめてくれました。これがCoworkです。『作る』の次は『やってもらう』。毎朝の面倒な確認作業を、まるごと任せられるようになります。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：つかみ</div><p>「“カーソルが勝手に動く”瞬間を必ずライブで見せてください。録画より実機が理想。ここで『うちの毎朝の作業も任せられそう』と思わせれば勝ちです。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「自分の店の繰り返し作業も任せられそう」という反応が出ていればOK！</p></div>
     </div>
 
-    <!-- STEP 1: Coworkとは -->
+    <!-- STEP 2 -->
     <div class="step-content" id="s3-2">
-      <h3>Coworkとは何か（目安：8分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：今日の合言葉を最初に刷り込む</div>
-        <p>「『判断はあなた、作業はClaude』をこのSTEPで必ず言い切ってください。今日の全部がこの一言に集約されます。あと、権限の安心設計（読み取りは自動・書き込みは確認制）を先に説明しておくと、受講者が怖がらずに手を動かせます。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>Chat・Cowork・Claude in Chromeの関係を整理する（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「さっきの“魔法”の正体を整理します。難しくありません。Claudeには、会話する『Chat』と、パソコンを操作する『Cowork』があります。そしてCoworkがブラウザを動かすときの“手”が『Claude in Chrome』です。役割を表で見てみましょう。」</p>
       </div>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 今日の合言葉</div>
-        <p>「判断はあなた、作業はClaude。面倒な作業をClaudeに任せて、人にしかできない判断に時間を使う。これが今日のテーマです。」</p>
-      </div>
-
-      <p style="margin:14px 0 6px;font-weight:700;">ChatとCoworkの違い</p>
       <table class="info-table">
-        <thead><tr><th></th><th>Chat</th><th>Cowork</th></tr></thead>
+        <thead><tr><th>名前</th><th>役割</th><th>たとえると</th></tr></thead>
         <tbody>
-          <tr><td>できること</td><td>会話・文章作成・調べもの</td><td>実際に作業を代行（メール整理・ファイル作成・ブラウザ操作）</td></tr>
-          <tr><td>動き方</td><td>1回の質問に1回答える</td><td>複数の手順をまとめて自動で実行</td></tr>
-          <tr><td>自動実行</td><td>できない</td><td>毎週決まった時間に自動で動かせる</td></tr>
+          <tr><td><strong>Chat</strong></td><td>会話・相談・文章作成</td><td>相談に乗ってくれる相手</td></tr>
+          <tr><td><strong>Cowork</strong></td><td>ブラウザ・PC操作を代わりに実行</td><td>代わりに動いてくれるアシスタント</td></tr>
+          <tr><td><strong>Claude in Chrome</strong></td><td>Coworkがブラウザを操作するための機能</td><td>そのアシスタントの“手”</td></tr>
+          <tr><td><strong>コネクタ</strong></td><td>Gmail・カレンダーなどに接続する拡張</td><td>外部サービスへの“連絡通路”</td></tr>
         </tbody>
       </table>
 
-      <p style="margin:14px 0 6px;font-weight:700;">Coworkの2層構造</p>
-      <table class="info-table">
-        <thead><tr><th>レイヤー</th><th>役割</th><th>飲食店での例</th></tr></thead>
-        <tbody>
-          <tr><td>Cowork（デスクトップ）</td><td>手元のファイル操作・文書作成・整理</td><td>領収書をExcelにまとめる</td></tr>
-          <tr><td>Claude in Chrome（拡張）</td><td>ログイン済みサイトのブラウザ操作</td><td>Googleマップのクチコミを集める</td></tr>
-        </tbody>
-      </table>
+      <div class="demo-box"><div class="demo-box-title">💬 補足・読み上げ</div><p>「ざっくり言うと、第2回までは『Claudeに作ってもらう』、今日は『Claudeに動いてもらう』です。覚えるのはこれだけ——“自分でやると面倒な、ネット上の繰り返し作業”を任せられる。それがCoworkです。」</p></div>
 
-      <div class="demo-box">
-        <div class="demo-box-title">🔒 権限の安心設計（先に伝える）</div>
-        <p>「メールやファイルを『読む』操作は自動で進みます。でも『送る・消す・書き換える』操作は、必ず一度あなたに確認が入ります。勝手に送信されたり削除されたりはしません。だから安心して繋いでください。」</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ まとめ</div>
+        <p>「製品名を全部覚える必要はありません。『Coworkは代わりにネット作業をやってくれる』——これだけ頭に入れて、次から実際に任せてみましょう。」</p>
       </div>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「判断は自分、作業はClaude」というイメージが伝わっていればOK！</p></div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「製品名の細部より“何を任せられるか”に寄せて説明。CoworkとClaude in Chromeの正確なUI・ボタン名は授業前に実機で確認しておくこと。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「Coworkは代わりにネット作業をやってくれる」とざっくり言えればOK！</p></div>
     </div>
 
-    <!-- STEP 2: つなぐ（コネクタ） -->
+    <!-- STEP 3 -->
     <div class="step-content" id="s3-3">
-      <h3>つなぐ（コネクタ）— Gmailの領収書を一覧にする（目安：12分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：まず「話すだけで動く」を体験させる</div>
-        <p>「ここでの感動ポイントは『コードもブラウザ操作もなしに、日本語で頼むだけで動いた』こと。Claudeが逆に質問してくることがありますが、それはむしろ良いサイン。『精度を上げる相談をしてくれている』と前向きに伝えてください。お題は全員『領収書・請求書メール』で統一します。受講者に考えさせず、下のコピペをそのまま使わせてください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>毎朝の情報収集を1つ自動化してみる（目安25分）</span>
       </div>
-
-      <ol class="instruction-list">
-        <li>デスクトップアプリの「Cowork」タブを開く</li>
-        <li>事前にGmailコネクターがオンになっているかをCustomize→コネクタで確認（オフなら接続）</li>
-        <li>「New task」を押して、下の文をそのまま送信する</li>
-      </ol>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では手を動かしましょう。最初は“毎朝のチェック”の自動化です。食べログ、ホットペッパー、Googleマップ——毎朝見ているページを思い浮かべてください。それをCoworkに巡回させて、要点だけまとめてもらいます。指示は話し言葉でOKです。」</p>
+      </div>
 
       <div class="code-wrap">
-        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
-        <pre>今月届いた領収書・請求書のメールを探して
-件名・送信者・金額・日付の一覧にしてください。</pre>
+        <div class="code-header"><div class="code-filename">Coworkへの指示（例）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>食べログの当店のページを開いて、
+新着の口コミを5件取ってきてください。
+それぞれ「星の数」と「コメントの要約（1行）」だけ
+一覧にしてまとめてください。</pre>
       </div>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💡 もしClaudeが質問してきたら</div>
-        <p>「業者名やメールアドレスを教えてください」と聞かれることがあります。これは精度を上げるための確認です。よく使う業者名（例：Amazon・楽天・◯◯酒店）を答えると、より正確に絞り込めます。わからなければ「キーワードで候補を出して」と返せばOK。</p>
+      <div class="demo-box"><div class="demo-box-title">💬 注意点・読み上げ</div><p>「ログインが必要なサイトは、先にChromeでログインしておいた状態で実行してください。パスワードや個人情報をClaudeに入力させる必要はありません。途中でClaudeが『これで合っていますか？』と確認してきたら、『はい、続けて』と返すだけです。」</p></div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「毎朝15分かけて巡回していた作業が、指示一行になりましたね。しかも見落としがありません。これを“毎朝のルーティン”として持っておくだけで、開店前の時間がまるごと空きます。」</p>
       </div>
 
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>領収書メールが件名・送信者・金額・日付の表で返ってきたらOK！「話すだけで動いた」を体感できた瞬間です。</p></div>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「サイトによってはCoworkが途中で確認を求めたり止まったりします。詰まったら“続けて”と返すだけでOK。挙動はサイト構造で変わるので、授業前に実機で1サイト通しておくこと。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>1サイト分の要約が一覧で返ってくればOK！</p></div>
     </div>
 
-    <!-- STEP 3: 覚えさせる（スキル） -->
+    <!-- STEP 4 -->
     <div class="step-content" id="s3-4">
-      <h3>覚えさせる（スキル）— スキル化＋毎週自動実行（目安：20分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：ここが第3回のクライマックス・成果物1本目</div>
-        <p>「STEP2でやった作業を『毎週自動でやって』と頼むだけで、Claudeがスケジュール登録とスキルファイル（.plugin）作成を一気にやってくれます。画面右側に plugin.json / SKILL.md などのファイルが自動生成されるのを実際に見せてください。『一度設定すれば毎週勝手に動く』が腹落ちする瞬間です。スケジュールの初回承認だけ要注意（下記）。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>集めた情報を定型レポートの形にまとめる（目安20分）</span>
       </div>
-
-      <ol class="instruction-list">
-        <li>STEP2の会話を続けたまま、下の文を送信する</li>
-      </ol>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「次は“レポート作成”です。複数の情報を集めて、決まったフォーマットにまとめる作業もCoworkの得意分野です。週次の予約状況・口コミ・気づきを、本部提出用の形にまとめてみましょう。」</p>
+      </div>
 
       <div class="code-wrap">
-        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
-        <pre>この作業をスキルとして保存して、
-毎週月曜の朝9時に自動で実行してください。</pre>
+        <div class="code-header"><div class="code-filename">Coworkへの指示（例）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
+        <pre>今週の店舗レポートを作ってください。
+各予約サイトを巡回して、以下のフォーマットで埋めてください。
+
+①今週の予約状況（件数・傾向）
+②新着の口コミ（良い点・改善点）
+③競合店の動き（新メニュー・価格）
+④気づいたこと・来週の打ち手</pre>
       </div>
 
-      <ol class="instruction-list">
-        <li>Claudeが選択肢を出したら、内容を確認して進める</li>
-        <li>スケジュール内容（毎週月曜9:00・タスク名）が表示されたら「Schedule（スケジュール）」を押して確定</li>
-        <li>左サイドバーの「Scheduled」に登録されたことを確認する</li>
-      </ol>
+      <div class="demo-box"><div class="demo-box-title">💬 補足・読み上げ</div><p>「できあがったレポートは、このあと『本部宛のメール下書きにして』『カレンダーに来週の予定として入れて』まで繋げられます。その入口は次のSTEPで紹介します。」</p></div>
 
-      <div class="demo-box">
-        <div class="demo-box-title">⚠️ 自動実行を確実に動かすコツ（初回承認）</div>
-        <p>登録した直後に、Scheduledから一度「今すぐ実行（Run now）」を押して手動で動かしてください。初回はGmail接続などの承認が入ります。ここで一度承認しておけば、以降の自動実行が「承認待ち」で止まらなくなります。</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「“集める・まとめる・整える”を一気にやってくれました。あなたがやるのは中身を確認することだけ。毎週の報告書づくりが、ほぼゼロ作業になります。」</p>
       </div>
 
-      <p style="margin:14px 0 6px;font-weight:700;">スケジュール実行の仕組み（受講者に伝える）</p>
-      <table class="info-table">
-        <thead><tr><th>ポイント</th><th>内容</th></tr></thead>
-        <tbody>
-          <tr><td>動く条件</td><td>PCが起動していて、デスクトップアプリが開いている間だけ動く</td></tr>
-          <tr><td>PCが寝てたら？</td><td>その時刻は一度スキップ。次にPCを開いた時に自動で実行され、通知が来る</td></tr>
-          <tr><td>使い方イメージ</td><td>「朝、開店準備でPCを開いたら、その週のレポートができている」</td></tr>
-          <tr><td>注意</td><td>Coworkは通常チャットよりトークンを多く使う。自動実行は週次くらいが現実的</td></tr>
-        </tbody>
-      </table>
-
-      <p style="margin:18px 0 6px;font-weight:700;">作ったスキルを呼び出す（ここが「覚えさせる」価値）</p>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：スキルの本当の価値はここ</div>
-        <p>「スキルは『作って終わり』ではなく『あとから一言で呼び出せる』のが価値です。自動実行を待たなくても、思い立ったときにいつでも同じ作業を呼び出せる、と実演してください。」</p>
-      </div>
-      <p style="margin:8px 0 6px;">一度スキルにしておけば、次回からは作り直す必要がありません。呼び出し方は2通りです。</p>
-      <table class="info-table">
-        <thead><tr><th>方法</th><th>やり方</th></tr></thead>
-        <tbody>
-          <tr><td>① スラッシュで呼ぶ</td><td>Coworkの入力欄で <strong>/</strong> を入力するとスキル一覧が出る。作ったスキルを選べばすぐ実行</td></tr>
-          <tr><td>② 普通に話しかける</td><td>「領収書のメールを一覧にして」のように頼めば、登録したスキルが自動で使われる</td></tr>
-        </tbody>
-      </table>
-      <div class="code-wrap">
-        <div class="code-header"><div class="code-filename">Coworkへの入力（試しに呼び出してみる）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
-        <pre>さっき作ったスキルを使って、
-今月の領収書メールをもう一度一覧にして。</pre>
-      </div>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「Scheduled」に毎週月曜のタスクが登録され、Run nowで一度動けばOK！さらに / やひと言で同じ作業を呼び出せれば完璧です。これが成果物1本目です。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>指定したフォーマットでレポートが出力されればOK！</p></div>
     </div>
 
-    <!-- STEP 4: ブラウザ（Claude in Chrome） -->
+    <!-- STEP 5 -->
     <div class="step-content" id="s3-5">
-      <h3>ブラウザ（Claude in Chrome）— クチコミ収集（目安：12分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：一番インパクトが大きいので最後に</div>
-        <p>「Claudeが実際にChromeを開いてカチカチ操作する様子を、必ず画面共有で見せてください。『AIが自分の代わりにブラウザを触っている』のビジュアルが一番刺さります。事前準備でClaude in Chromeを入れていない人がいると、ここで止まります。STEP0の準備②③が終わっているか、授業冒頭で必ず確認を。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>結果を自分のメール・カレンダーに流せると知る（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここまでは“ネットを見て・まとめる”でした。最後に、その結果を“自分のツールに流し込む”入口を紹介します。それがコネクタ、いわゆるMCP連携です。第1回でGmailを繋ぎましたよね。あれの応用編です。」</p>
       </div>
 
-      <ol class="instruction-list">
-        <li>Coworkタブで「New task」を押す</li>
-        <li>店名は自分のお店（または練習用に有名店）に置き換えて、下の文を送信する</li>
-      </ol>
+      <table class="info-table">
+        <thead><tr><th>連携先</th><th>できること（例）</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gmail</strong></td><td>作ったレポートを本部宛のメール下書きにする／予約メールを読んで要約する</td></tr>
+          <tr><td><strong>カレンダー</strong></td><td>予約メールの内容をカレンダーに登録する／来週の打ち手を予定として入れる</td></tr>
+        </tbody>
+      </table>
 
-      <div class="code-wrap">
-        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
-        <pre>Googleマップで「（あなたのお店の名前）」を開いて、
-最新のクチコミ10件を
-・投稿者名 ・星評価 ・投稿日 ・本文の要約
-の形式で一覧にしてください。</pre>
+      <div class="demo-box"><div class="demo-box-title">💬 デモ・読み上げ</div><p>「例えばこう言えます。『今週のレポートを作って、本部宛の下書きメールにして』『この予約メールを読んでカレンダーに登録して』。見る→まとめる→送る・登録する、が全部つながります。」</p></div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ まとめ</div>
+        <p>「“見る→まとめる→送る・登録する”が一本につながると、毎週の事務作業がほぼ自動になります。今日はこの“入口”まで。本格的な仕組みづくりは第6回の運用設計で扱います。」</p>
       </div>
 
-      <ol class="instruction-list">
-        <li>ClaudeがChromeを開いて操作し始めるのを見守る（初回は操作の許可を求められる）</li>
-        <li>クチコミ一覧が返ってきたら、続けて下の文を送って自動実行に登録する</li>
-      </ol>
-
-      <div class="code-wrap">
-        <div class="code-header"><div class="code-filename">Coworkへの入力</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
-        <pre>このクチコミ収集も、毎週月曜の朝に
-自動で実行するようにスケジュール登録してください。</pre>
-      </div>
-
-      <div class="demo-box">
-        <div class="demo-box-title">💡 規約・マナーの注意（軽く触れる）</div>
-        <p>自分のお店の情報を集めるのは問題ありません。ただし他店の情報を大量に自動収集し続けるのは、サイトの利用規約に触れる場合があります。「手作業でやっていたことの代わり」の範囲で使うのが安全です。</p>
-      </div>
-
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Chromeが自動で動いてクチコミ一覧が返り、Scheduledに登録できればOK！成果物2本目の完成です。</p></div>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「ここは概念紹介とデモで十分。全員にその場で連携させると時間が溶けるので、デモ中心で“イメージを持たせる”ことを優先。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「結果を自分のメール・カレンダーに流せる」とイメージできればOK！</p></div>
     </div>
 
-    <!-- STEP 5: まとめ -->
+    <!-- STEP 6 -->
     <div class="step-content" id="s3-6">
-      <h3>まとめ — 3つの型と応用（目安：3分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：今日の本質を一言で締める</div>
-        <p>「今日やった3つ（つなぐ・覚えさせる・ブラウザ）は、たった3つの『型』です。当初カードにあった『予約サイト収集』『定期レポート』『MCP連携』も、全部この3つの応用でしかありません。新しい技を覚えるのではなく、この3つの型に指示を流し込むだけ、と締めてください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>アウトプット</span>
+        <span class="step-goal"><strong>成果物：</strong>自店の“繰り返し作業”を1つCoworkワークフロー化（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日の成果物です。自分のお店で『毎日・毎週やっている、ネット上の面倒な作業』を1つ選んで、Coworkに任せる形にしてみましょう。下に例を出します。迷ったら『うちの店で自動化できそうな作業を提案して』とClaudeに聞けばOKです。」</p>
       </div>
 
       <table class="info-table">
-        <thead><tr><th>型</th><th>やったこと</th><th>応用すると</th></tr></thead>
+        <thead><tr><th>種類</th><th>自動化できる作業の例</th></tr></thead>
         <tbody>
-          <tr><td>つなぐ（コネクタ）</td><td>Gmailで領収書を一覧化</td><td>予約通知・問い合わせメールの整理にも</td></tr>
-          <tr><td>覚えさせる（スキル）</td><td>スキル化＋毎週自動実行</td><td>定期レポート・売上まとめの自動生成にも</td></tr>
-          <tr><td>ブラウザ（Chrome）</td><td>クチコミを自動収集</td><td>予約サイト・競合の公開情報チェックにも</td></tr>
+          <tr><td>巡回系</td><td>競合店の新メニュー・価格チェック／予約サイトの口コミ収集／Googleマップの評価確認</td></tr>
+          <tr><td>まとめ系</td><td>週次の店舗レポート作成／SNS投稿ネタの収集／話題のトレンド調査</td></tr>
+          <tr><td>連携系</td><td>予約メールを読んでカレンダー登録／レポートを本部宛メール下書きに</td></tr>
         </tbody>
       </table>
 
-      <div class="demo-box">
-        <div class="demo-box-title">📝 宿題</div>
-        <p>自分の業務の中で「毎週・毎月くり返している面倒な作業」を1つ選び、今日の3つの型（つなぐ・覚えさせる・ブラウザ）のどれかで自動化してみる。次回、何を自動化したか共有してもらいます。</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「これで3つ揃いました。第2回で『作る』、第4回・第5回で『公開する』、そして今日『やってもらう』。空いた時間を、接客や仕込みといった“人にしかできない仕事”に回せます。これがClaude活用のいちばんの狙いです。」</p>
       </div>
 
-      <div style="margin-top:16px;">
-        <div class="msg-card">「判断はあなた、作業はClaude」</div>
-        <div class="msg-card">「新しい技を覚えるんじゃない。3つの型に指示を流すだけ」</div>
-        <div class="msg-card">「一度設定すれば、毎週Claudeが勝手に働いてくれる」</div>
-      </div>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3つの型（つなぐ・覚えさせる・ブラウザ）が振り返れて、自動化ワークフローが手元に残っていればOK！</p></div>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「完成したら“明日もう一度動かしてみる”を宿題に。1回作って終わりではなく、毎朝のルーティンに組み込めて初めて価値が出ます。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>自分のお店の作業が1つ、Coworkで動けばOK！</p></div>
     </div>
 
-    <!-- STEP 6: 講師メモ（時間配分） -->
+    <!-- STEP 7 講師メモ -->
     <div class="step-content" id="s3-7">
-      <h3>時間配分の目安（全体1時間）</h3>
+      <div class="instructor-note" style="border-left-color:#c0392b;background:#fdf0ee;">
+        <div class="note-label" style="color:#c0392b;">⚠️ 本番前の必須確認</div>
+        <p>この回はKOKIさん自身のCowork壁打ち（実体験）が未実施のまま教材化しています。授業前に必ず一度、STEP3〜4を実機で通して、実際のボタン名・確認ダイアログの文言・止まりやすい箇所を確認し、手順に反映してください。流れと台本はこのまま使えます。</p>
+      </div>
+
+      <h3>時間配分の目安</h3>
       <table class="info-table">
-        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
         <tbody>
-          <tr><td>STEP 0</td><td>事前準備の動作確認（※準備自体は事前課題）</td><td>5分</td></tr>
-          <tr><td>STEP 1</td><td>Coworkとは・2層構造・権限の安心設計</td><td>8分</td></tr>
-          <tr><td>STEP 2</td><td>つなぐ（コネクタ）：Gmail接続→領収書メール一覧</td><td>12分</td></tr>
-          <tr><td>STEP 3</td><td>覚えさせる（スキル）：スキル化＋スケジュール（成果物1本目）</td><td>20分</td></tr>
-          <tr><td>STEP 4</td><td>ブラウザ（Chrome）：クチコミ収集（成果物2本目）</td><td>12分</td></tr>
-          <tr><td>STEP 5</td><td>まとめ・応用の示唆・宿題</td><td>3分</td></tr>
-          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約1時間</td></tr>
+          <tr><td>STEP 1</td><td>🎬体験</td><td>Coworkのデモを見る</td><td>10分</td></tr>
+          <tr><td>STEP 2</td><td>📖学ぶ</td><td>Chat・Cowork・Claude in Chromeの仕組み</td><td>15分</td></tr>
+          <tr><td>休憩</td><td>—</td><td>詰まった人のフォロー</td><td>5分</td></tr>
+          <tr><td>STEP 3</td><td>✋実践</td><td>巡回チェックの自動化</td><td>25分</td></tr>
+          <tr><td>STEP 4</td><td>✋実践</td><td>定期レポートの自動生成</td><td>20分</td></tr>
+          <tr><td>STEP 5</td><td>📖学ぶ</td><td>MCP連携の入口（Gmail・カレンダー）</td><td>15分</td></tr>
+          <tr><td>STEP 6</td><td>🎁アウトプット</td><td>自分の作業を1つ自動化</td><td>25分</td></tr>
+          <tr><td>まとめ</td><td>—</td><td>発表・次回予告</td><td>10分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間5分</td></tr>
         </tbody>
       </table>
 
-      <h3 style="margin-top:22px;">つまずきやすいポイント</h3>
-      <table class="info-table">
-        <thead><tr><th>症状</th><th>対処</th></tr></thead>
-        <tbody>
-          <tr><td>Coworkが初回起動で重い・進まない</td><td>約2GBの環境DL中。事前課題で済ませておく。当日はWi-Fi環境を確認</td></tr>
-          <tr><td>「コネクタ」の意味がわからない</td><td>「外部アプリをClaudeに繋ぐこと」と説明。GmailやGoogleカレンダーが代表例</td></tr>
-          <tr><td>メールを見せるのが不安</td><td>読み取りは自動・書き込みは確認制、という権限設計を先に説明する</td></tr>
-          <tr><td>お題が抽象的で結果がブレる</td><td>「領収書・請求書メール」で全員統一。コピペ文をそのまま使わせる</td></tr>
-          <tr><td>Claude in Chromeが動かない</td><td>準備②③（拡張機能インストール＋連携オン）が未完了。Chrome以外のブラウザは非対応</td></tr>
-          <tr><td>自動実行が動かない／止まる</td><td>Scheduledから一度Run nowで初回承認しておく。PCとアプリが開いている必要あり</td></tr>
-          <tr><td>受講者間で結果の精度が違う</td><td>プランによるモデル差（ProはHaiku限定）。法人プランならSonnet/Opusが選べる</td></tr>
-        </tbody>
-      </table>
+      <h3 style="margin-top:28px;">つまずきやすいポイント</h3>
+      <ol class="instruction-list">
+        <li><strong>ログインが必要なサイトで止まる</strong> → 先にChromeでログイン済みの状態にしておく</li>
+        <li><strong>Coworkが途中で確認してくる</strong> → 「はい、続けて」と返すだけでOKと伝える</li>
+        <li><strong>個人情報・パスワードを入力させようとする</strong> → 入力は不要。任せるのは“見る・まとめる”作業だけ</li>
+        <li><strong>サイトの作りが変わって失敗する</strong> → 指示を具体的に（「〇〇のページの△△を」）言い直す</li>
+      </ol>
 
-      <h3 style="margin-top:22px;">授業で繰り返し伝える3つのメッセージ</h3>
-      <div style="margin-top:8px;">
-        <div class="msg-card">「判断はあなた、作業はClaude」</div>
-        <div class="msg-card">「3つの型（つなぐ・覚えさせる・ブラウザ）さえ覚えれば、あとは指示を変えるだけ」</div>
-        <div class="msg-card">「一度設定すれば、毎週Claudeが勝手に働いてくれる」</div>
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「第2回は“作る”、今日は“やってもらう”」</div>
+        <div class="msg-card">「指示は話し言葉でいい。Claudeが代わりにネットを動く」</div>
+        <div class="msg-card">「空いた時間を、人にしかできない仕事に回す」</div>
       </div>
     </div>
+
   </div>
 
-  <!-- 第4回 詳細パネル -->
+  <!-- ============ 第4回 詳細パネル ============ -->
   <div class="detail-panel" id="detail-4">
     <div class="detail-header">
       <div class="detail-title">第04回｜<span>HP作成 — 自店舗サイトを公開する</span> 教材</div>
@@ -1146,22 +1274,25 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
     </div>
 
     <div class="steps-nav">
-      <div class="step-tab active" onclick="showStep('s4',1)"><span class="step-tab-num">1</span>導入</div>
-      <div class="step-tab" onclick="showStep('s4',2)"><span class="step-tab-num">2</span>5ステップ</div>
-      <div class="step-tab" onclick="showStep('s4',3)"><span class="step-tab-num">3</span>講師デモ</div>
-      <div class="step-tab" onclick="showStep('s4',4)"><span class="step-tab-num">4</span>各自作業</div>
-      <div class="step-tab" onclick="showStep('s4',5)"><span class="step-tab-num">5</span>GitHub</div>
-      <div class="step-tab" onclick="showStep('s4',6)"><span class="step-tab-num">6</span>Vercel</div>
-      <div class="step-tab" onclick="showStep('s4',7)"><span class="step-tab-num">7</span>削除方法</div>
+      <div class="step-tab active" onclick="showStep('s4',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>完成形を見る</div>
+      <div class="step-tab" onclick="showStep('s4',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>5ステップの型</div>
+      <div class="step-tab" onclick="showStep('s4',3)"><span class="step-tab-num">3</span><span class="tab-cat c-exp"></span>講師デモ</div>
+      <div class="step-tab" onclick="showStep('s4',4)"><span class="step-tab-num">4</span><span class="tab-cat c-prac"></span>各自で作る</div>
+      <div class="step-tab" onclick="showStep('s4',5)"><span class="step-tab-num">5</span><span class="tab-cat c-set"></span>GitHub</div>
+      <div class="step-tab" onclick="showStep('s4',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>Vercel公開</div>
+      <div class="step-tab" onclick="showStep('s4',7)"><span class="step-tab-num">7</span><span class="tab-cat c-learn"></span>削除・本番</div>
       <div class="step-tab instructor-tab" onclick="showStep('s4',8)"><span class="step-tab-num">💡</span>講師メモ</div>
     </div>
 
-    <!-- STEP 1: 導入 -->
+    <!-- STEP 1 -->
     <div class="step-content active" id="s4-1">
-      <h3>今日作るものを確認する（目安：5分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ</div>
-        <p>「技術の説明は不要です。『なぜ作るのか』の動機づけだけしてください。moatrockのHPを実際に見せるのが一番効果的です。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>今日作るものの完成イメージを掴む（目安5分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日はお店のホームページを作って、インターネットに公開するところまでやります。所要時間はたった1時間。まずは完成形を見てもらいましょう。私が作ったmoatrockのHPを実際に開きます。これと同じレベルのものが、今日あなたのお店でも作れます。」</p>
       </div>
 
       <ol class="instruction-list">
@@ -1171,29 +1302,53 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
         <li>次のSTEPから実際に作っていく</li>
       </ol>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
-        <p>「HPがない飲食店は、地図に載っていない店と同じです。今日1時間で、あなたのお店をインターネットに存在させます。」</p>
+      <h3>HPがない店 vs HPがある店</h3>
+      <div class="compare" data-compare>
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 HPがない場合</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ HPを公開すると</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>食べログ等のページしかなく、世界観が伝わらない</li>
+              <li><span class="ci">✕</span>制作会社に頼むと20〜50万円＋月額保守</li>
+              <li><span class="ci">✕</span>更新するたびに依頼が必要</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>自分のURLでお店の世界観を発信できる</li>
+              <li><span class="ci">✓</span>自分で作れて、公開は無料（Vercel Hobby）</li>
+              <li><span class="ci">✓</span>「ここ変えて」と会話するだけで更新できる</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">👆 切り替えて「HPは持つもの→自分で育てるもの」を見せられます</div>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>完成イメージが掴めたらOK！すぐ次へ。</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「HPがない飲食店は、地図に載っていない店と同じです。今日1時間で、あなたのお店をインターネットに存在させます。本来は数十万円かけて外注するものを、自分の手で。では作り方の『型』から見ていきましょう。」</p>
       </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「技術の説明は不要です。『なぜ作るのか』の動機づけだけしてください。moatrockのHPを実際に見せるのが一番効果的です。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>完成イメージが掴めたらOK！すぐ次へ。</p></div>
     </div>
 
-    <!-- STEP 2: 5ステップフロー -->
+    <!-- STEP 2 -->
     <div class="step-content" id="s4-2">
-      <h3>5ステップフローを理解する（目安：5分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：ここが第4回の核心</div>
-        <p>「いきなりClaudeに投げると50点のものができます。なぜか？先に構成とデザインを言語化していないから。このフローを守るだけで手戻りがなくなります。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>手戻りをなくす「5ステップフロー」を知る（目安5分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここが今日いちばん大事な話です。いきなりClaudeに『HP作って』と投げると、50点のものができます。なぜか——先に『何を載せるか』『どんな雰囲気か』を言葉にしていないからです。この5ステップの順番を守るだけで、手戻りがなくなって100点に近づきます。」</p>
       </div>
 
       <table class="info-table">
-        <thead>
-          <tr><th>STEP</th><th>内容</th><th>やること</th></tr>
-        </thead>
+        <thead><tr><th>STEP</th><th>内容</th><th>やること</th></tr></thead>
         <tbody>
           <tr><td><strong>1️⃣</strong></td><td>HP構成の詳細決定</td><td>載せるセクションをClaudeと壁打ちして確定する</td></tr>
           <tr><td><strong>2️⃣</strong></td><td>デザイン設定の壁打ち</td><td>4パターンのサンプルを作って好みを決める</td></tr>
@@ -1203,26 +1358,25 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
         </tbody>
       </table>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
-        <p>「このフローはHPだけでなく、LPでも、アプリでも使えます。『何を作るかを先に決めてから手を動かす』というのがClaude Codeを使いこなすコツです。」</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「この『先に決めてから手を動かす』という型は、HPだけでなくLPでもアプリでも全部同じです。つまり今日覚える5ステップは、Claude Codeを使いこなす一生モノのコツになります。次は私が実際にこの順番でデモします。」</p>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>5ステップの流れが頭に入ったらOK！次は講師デモへ。</p>
-      </div>
+      <div class="instructor-note"><div class="note-label">講師メモ：ここが第4回の核心</div><p>「いきなりClaudeに投げると50点。先に構成とデザインを言語化していないから。このフローを守るだけで手戻りがなくなります。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>5ステップの流れが頭に入ったらOK！次は講師デモへ。</p></div>
     </div>
 
-    <!-- STEP 3: 講師デモ -->
+    <!-- STEP 3 -->
     <div class="step-content" id="s4-3">
-      <h3>デモを見る — 5ステップの流れを確認する（目安：10分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：スピード感が大事</div>
-        <p>「10分で5ステップを駆け足で実演します。完成度より『流れ』を見せることが目的。moatrockのHPを例に使ってください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>5ステップの流れを目で見て掴む（目安10分）</span>
       </div>
-
-      <p style="font-size:14px;color:var(--gray-700);margin-bottom:16px;">講師が実際に操作しながら5ステップの流れをデモします。次のSTEPで自分のお店のHPを作るので、流れを確認してください。</p>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では実際に、私が5ステップを駆け足でやってみせます。完成度より『流れ』に注目してください。この後すぐ皆さん自身のお店で同じことをやってもらうので、『なるほど、この順番でやるのか』というイメージだけ持ってくれればOKです。」</p>
+      </div>
 
       <table class="info-table">
         <thead><tr><th>STEP</th><th>講師がやること</th><th>ポイント</th></tr></thead>
@@ -1235,26 +1389,29 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
         </tbody>
       </table>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>流れが掴めたら次のSTEPへ！自分のお店のHPを作ります。</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「見ての通り、私がやったのは『質問に答える』と『好みを選ぶ』だけです。難しい操作は一つもありませんでしたよね。同じことを次のSTEPで、皆さん自身のお店でやってみましょう。」</p>
       </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：スピード感が大事</div><p>「10分で5ステップを駆け足で実演します。完成度より『流れ』を見せることが目的。moatrockのHPを例に使ってください。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>流れが掴めたら次のSTEPへ！自分のお店のHPを作ります。</p></div>
     </div>
 
-    <!-- STEP 4: 各自作業 -->
+    <!-- STEP 4 -->
     <div class="step-content" id="s4-4">
-      <h3>各自作業 — HPを作る（目安：20分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ</div>
-        <p>「20分では完成しなくて当然です。5ステップのSTEP1〜2（構成とデザイン決め）だけでも終わらせるよう促してください。残りは宿題です。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>構成→デザインまで決めて自店HPを生成（目安20分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからは皆さんの番です。20分で全部完成しなくて大丈夫。今日はSTEP1の構成決めと、STEP2のデザイン決めまで進めば上出来です。残りは宿題にしましょう。下のプロンプトを順番にコピーして送ってください。①構成 → ②デザイン → ③全ページ作成の順です。」</p>
       </div>
 
-      <h3 style="margin-top:20px;">① まず構成をClaudeと決める</h3>
+      <h3 style="margin-top:4px;">① まず構成をClaudeと決める</h3>
       <div class="code-wrap">
-        <div class="code-header">
-          <div class="code-filename">Codeタブへの入力（STEP1）</div>
-          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-        </div>
+        <div class="code-header"><div class="code-filename">Codeタブへの入力（STEP1）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
         <pre>私のお店のHPを作りたいです。
 まず載せるべきセクションを一緒に決めたいので、
 いくつか質問してもらえますか？</pre>
@@ -1262,10 +1419,7 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 
       <h3 style="margin-top:20px;">② デザインの方向性を決める</h3>
       <div class="code-wrap">
-        <div class="code-header">
-          <div class="code-filename">Codeタブへの入力（STEP2）</div>
-          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-        </div>
+        <div class="code-header"><div class="code-filename">Codeタブへの入力（STEP2）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
         <pre>デザインの方向性を4パターン提案してください。
 それぞれ：カラー・雰囲気・特徴を教えてください。
 実際にHTMLのサンプルも作ってもらえますか？</pre>
@@ -1273,10 +1427,7 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 
       <h3 style="margin-top:20px;">③ 採用したデザインで全ページ作成</h3>
       <div class="code-wrap">
-        <div class="code-header">
-          <div class="code-filename">Codeタブへの入力（STEP3〜5）</div>
-          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
-        </div>
+        <div class="code-header"><div class="code-filename">Codeタブへの入力（STEP3〜5）</div><button class="copy-btn" onclick="copyCode(this)">コピー</button></div>
         <pre>[採用したデザイン案]のデザインで、
 先ほど決めた構成でHPを作ってください。
 
@@ -1287,18 +1438,19 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 - デスクトップの「[店名]-hp」フォルダに保存する</pre>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>ブラウザでHPが開いて自分の店名が表示されていればOK！</p>
-      </div>
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「20分では完成しなくて当然です。STEP1〜2（構成とデザイン決め）だけでも終わらせるよう促してください。残りは宿題です。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>ブラウザでHPが開いて自分の店名が表示されていればOK！</p></div>
     </div>
 
-    <!-- STEP 5: GitHub -->
+    <!-- STEP 5 -->
     <div class="step-content" id="s4-5">
-      <h3>GitHubにアップロードする（目安：10分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ</div>
-        <p>「第5回で登録済みの受講者はログインだけでOKです。フォルダごとではなく中身のファイルをドロップするよう強調してください。」</p>
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">🛠</span>公開準備</span>
+        <span class="step-goal"><strong>ゴール：</strong>作ったファイルをGitHubに置く（目安10分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「できたHPを世界に公開するための準備です。まずGitHubという『ファイルの保管場所』に置きます。第5回で登録済みの方はログインするだけ。一つだけ注意——アップロードするのは『フォルダごと』ではなく、フォルダを開いた『中身のファイル』です。ここを一緒にやりましょう。」</p>
       </div>
 
       <ol class="instruction-list">
@@ -1309,19 +1461,18 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
         <li>中のファイルを全選択（<strong>Cmd+A</strong>）してドラッグ＆ドロップ ※フォルダごとではなく中身を選択</li>
         <li>「<strong>Commit changes</strong>」をクリック</li>
       </ol>
-
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>GitHubのリポジトリ画面にファイルが並んで表示されればOK！</p>
-      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>GitHubのリポジトリ画面にファイルが並んで表示されればOK！</p></div>
     </div>
 
-    <!-- STEP 6: Vercel -->
+    <!-- STEP 6 -->
     <div class="step-content" id="s4-6">
-      <h3>Vercelで公開する（目安：5分）</h3>
-      <div class="instructor-note">
-        <div class="note-label">講師メモ：重要</div>
-        <p>「第5回で登録済みの方はStep3から。プラン選択で必ず<strong>「Hobby（無料）」</strong>を選ぶよう強調してください。</p>
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>公開する</span>
+        <span class="step-goal"><strong>成果物：</strong>スマホから開けるHPのURL（目安5分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「いよいよ公開です。Vercelというサービスを使うと、GitHubに置いたファイルが数十秒でインターネット上のURLになります。一つだけ大事な注意——プランは必ず無料の『Hobby』を選んでください。間違えてProを選ぶと有料になります。では一緒に。」</p>
       </div>
 
       <ol class="instruction-list">
@@ -1332,22 +1483,27 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
         <li>発行されたURLをコピーしてスマホからアクセスしてみる</li>
       </ol>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
-        <p>「このURLを知っている人だけがアクセスできます。Googleで検索しても出てきません。堀さんへの承認確認や社内共有はこのURLで十分です。本番公開したいときは独自ドメイン取得が必要です（次のSTEPで説明します）。」</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「おめでとうございます。今、あなたのお店がインターネットに存在しました。このURLは知っている人だけがアクセスできる状態です。Google検索にはまだ出ません。社内共有や承認確認はこれで十分。本番公開したいときだけ、次のSTEPの独自ドメインが必要になります。」</p>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>発行されたURLでHPが開けばOK！</p>
-      </div>
+      <div class="instructor-note"><div class="note-label">講師メモ：重要</div><p>「第5回で登録済みの方はStep3から。プラン選択で必ず『Hobby（無料）』を選ぶよう強調してください。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>発行されたURLでHPが開けばOK！</p></div>
     </div>
 
-    <!-- STEP 7: 削除方法 -->
+    <!-- STEP 7 -->
     <div class="step-content" id="s4-7">
-      <h3>削除方法・本番公開への道（目安：5分）</h3>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>消し方と「本番公開への道」を知っておく（目安5分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「最後に、知っておくと安心な2つを押さえます。一つは『消し方』——練習で作ったものはきれいに削除できます。もう一つは『本番公開への道』。今日のURLから一歩進めて、お店の正式なサイトにするための2ステップを、さらっと紹介します。」</p>
+      </div>
 
-      <h3 style="margin-top:0;">① Vercelからプロジェクトを削除する</h3>
+      <h3 style="margin-top:4px;">① Vercelからプロジェクトを削除する</h3>
       <ol class="instruction-list">
         <li>Vercelのダッシュボードで該当プロジェクトを開く</li>
         <li>「Settings」→ 一番下までスクロール → 「Delete Project」をクリック</li>
@@ -1363,48 +1519,35 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 
       <h3 style="margin-top:20px;">③ 本番公開への2ステップ（さらっと紹介）</h3>
       <table class="info-table">
-        <thead>
-          <tr><th>STEP</th><th>内容</th><th>目安費用</th></tr>
-        </thead>
+        <thead><tr><th>STEP</th><th>内容</th><th>目安費用</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>① 独自ドメイン取得</strong></td>
-            <td>お名前.com などで <code>自店名.com</code> を取得してVercelに設定する</td>
-            <td>年間1,000〜3,000円</td>
-          </tr>
-          <tr>
-            <td><strong>② Google Search Console登録</strong></td>
-            <td>Googleに「このサイト存在します」と申請。サイトマップを送ると検索に出やすくなる</td>
-            <td>無料</td>
-          </tr>
+          <tr><td><strong>① 独自ドメイン取得</strong></td><td>お名前.com などで <code>自店名.com</code> を取得してVercelに設定する</td><td>年間1,000〜3,000円</td></tr>
+          <tr><td><strong>② Google Search Console登録</strong></td><td>Googleに「このサイト存在します」と申請。サイトマップを送ると検索に出やすくなる</td><td>無料</td></tr>
         </tbody>
       </table>
 
-      <div class="demo-box">
-        <div class="demo-box-title">💬 講師からの一言アドバイス</div>
-        <p>「本番公開は承認が取れてから。今日は『URLがある状態』まで作ることが目標です。独自ドメインとSearch Consoleは次のステップとして覚えておいてください。」</p>
+      <div class="narration reveal">
+        <div class="narration-tag">✨ まとめ</div>
+        <p>「本番公開は承認が取れてからで大丈夫。今日のゴールは『URLがある状態』までです。独自ドメインとSearch Consoleは、次のステップとして頭の片隅に置いておいてください。」</p>
       </div>
 
-      <div class="checkpoint">
-        <div class="checkpoint-icon">✓</div>
-        <p>削除方法と本番公開への道が理解できたらOK！</p>
-      </div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>削除方法と本番公開への道が理解できたらOK！</p></div>
     </div>
 
-    <!-- 講師メモ -->
+    <!-- STEP 8 講師メモ -->
     <div class="step-content" id="s4-8">
       <h3>時間配分の目安</h3>
       <table class="info-table">
-        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
         <tbody>
-          <tr><td>STEP 1</td><td>HP vs Webアプリの違い</td><td>5分</td></tr>
-          <tr><td>STEP 2</td><td>5ステップフローの説明</td><td>5分</td></tr>
-          <tr><td>STEP 3</td><td>講師デモ（5ステップを実演）</td><td>10分</td></tr>
-          <tr><td>STEP 4</td><td>各自作業（HP作成）</td><td>20分</td></tr>
-          <tr><td>STEP 5</td><td>GitHubにアップロード</td><td>10分</td></tr>
-          <tr><td>STEP 6</td><td>Vercelで公開</td><td>5分</td></tr>
-          <tr><td>STEP 7</td><td>削除方法・本番公開の2ステップ</td><td>5分</td></tr>
-          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約60分</td></tr>
+          <tr><td>STEP 1</td><td>🎬体験</td><td>完成形を見る・動機づけ</td><td>5分</td></tr>
+          <tr><td>STEP 2</td><td>📖学ぶ</td><td>5ステップフローの説明</td><td>5分</td></tr>
+          <tr><td>STEP 3</td><td>🎬体験</td><td>講師デモ（5ステップを実演）</td><td>10分</td></tr>
+          <tr><td>STEP 4</td><td>✋実践</td><td>各自作業（HP作成）</td><td>20分</td></tr>
+          <tr><td>STEP 5</td><td>🛠準備</td><td>GitHubにアップロード</td><td>10分</td></tr>
+          <tr><td>STEP 6</td><td>🎁公開</td><td>Vercelで公開</td><td>5分</td></tr>
+          <tr><td>STEP 7</td><td>📖学ぶ</td><td>削除方法・本番公開の2ステップ</td><td>5分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約60分</td></tr>
         </tbody>
       </table>
 
@@ -1426,123 +1569,293 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 
   </div>
 
-  <!-- 第5回 詳細パネル -->
+  <!-- ============ 第5回 詳細パネル ============ -->
   <div class="detail-panel" id="detail-5">
     <div class="detail-header">
-      <div class="detail-title">第05回｜<span>業務Webアプリ開発</span> 教材</div>
+      <div class="detail-title">第05回｜<span>立ち止まる — 振り返りとペインの棚卸し</span> 教材</div>
       <button class="btn-close" onclick="closeDetail('detail-5')">✕ 閉じる</button>
     </div>
 
     <div class="steps-nav">
-      <div class="step-tab active" onclick="showStep('s5',1)"><span class="step-tab-num">1</span>VS Code</div>
-      <div class="step-tab" onclick="showStep('s5',2)"><span class="step-tab-num">2</span>フォルダ</div>
-      <div class="step-tab" onclick="showStep('s5',3)"><span class="step-tab-num">3</span>ファイル</div>
-      <div class="step-tab" onclick="showStep('s5',4)"><span class="step-tab-num">4</span>コード</div>
-      <div class="step-tab" onclick="showStep('s5',5)"><span class="step-tab-num">5</span>動作確認</div>
-      <div class="step-tab" onclick="showStep('s5',6)"><span class="step-tab-num">6</span>GitHub</div>
-      <div class="step-tab" onclick="showStep('s5',7)"><span class="step-tab-num">7</span>Vercel</div>
-      <div class="step-tab instructor-tab" onclick="showStep('s5',8)"><span class="step-tab-num">💡</span>講師メモ</div>
+      <div class="step-tab active" onclick="showStep('s5',1)"><span class="step-tab-num">1</span><span class="tab-cat c-learn"></span>今日の趣旨</div>
+      <div class="step-tab" onclick="showStep('s5',2)"><span class="step-tab-num">2</span><span class="tab-cat c-out"></span>成果物の共有・FB</div>
+      <div class="step-tab" onclick="showStep('s5',3)"><span class="step-tab-num">3</span><span class="tab-cat c-exp"></span>正直な振り返り</div>
+      <div class="step-tab" onclick="showStep('s5',4)"><span class="step-tab-num">4</span><span class="tab-cat c-prac"></span>業務の棚卸し</div>
+      <div class="step-tab" onclick="showStep('s5',5)"><span class="step-tab-num">5</span><span class="tab-cat c-prac"></span>ペインの発掘</div>
+      <div class="step-tab" onclick="showStep('s5',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>嬉しい状態を言語化</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s5',7)"><span class="step-tab-num">💡</span>講師メモ</div>
     </div>
 
+    <!-- STEP 1 -->
     <div class="step-content active" id="s5-1">
-      <h3>VS Codeのインストール（目安：10分）</h3>
-      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「コードを書く専用のメモ帳です。VS Codeは色分けや自動補完があって格段に書きやすいです。」</p></div>
-      <ol class="instruction-list">
-        <li><strong>https://code.visualstudio.com</strong> をブラウザで開く</li>
-        <li>「Download for Mac / Windows」をクリックしてダウンロード</li>
-        <li>ダウンロードしたファイルを開いてインストール・起動</li>
-        <li>サインイン画面 → 右下「<strong>Continue without Signing In</strong>」をクリック</li>
-        <li>カラーテーマ選択 → 好みを選んで「<strong>Continue</strong>」</li>
-        <li>AI Agents紹介画面 → 「<strong>Get Started</strong>」をクリック</li>
-      </ol>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>VS Codeが起動していればOK！</p></div>
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>趣旨を伝える</span>
+        <span class="step-goal"><strong>ゴール：</strong>今日が「作る回」ではなく「立ち止まる回」だと腹落ちさせる（目安10分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日はいつもと毛色が違います。新しい何かを作る回ではありません。一回、立ち止まる回です。ここまで4回、HPやツールやコワークと、いろんなものを作ってきました。でも——本当に役に立っていますか？　作って、おお！ってなって、嬉しくて、それで終わっていませんか？　今日はそれを正直に振り返って、皆さんの本当の困りごとを一緒に掘り起こします。」</p>
+      </div>
+
+      <h3>今日の流れ</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>やること</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 成果物の共有・FB</strong></td><td>作ったもの（LP・コワーク自動化）を見せ合う</td></tr>
+          <tr><td><strong>② 正直な振り返り</strong></td><td>ぶっちゃけ役立った？を本音で話す</td></tr>
+          <tr><td><strong>③ 業務の棚卸し</strong></td><td>毎日の管理業務を全部書き出す</td></tr>
+          <tr><td><strong>④ ペインの発掘</strong></td><td>「それ、実はペインですよ」を一緒に発見</td></tr>
+          <tr><td><strong>⑤ 嬉しい状態を言語化</strong></td><td>「本当はどうなってたら最高？」を言葉にする</td></tr>
+        </tbody>
+      </table>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし（今日いちばん持って帰ってほしいこと）</div>
+        <p>「今日やるこの流れ——振り返って、困りごとを洗い出して、どう解くか考える——これ自体が、皆さんが自分のお店で定期的に回すべき習慣です。意識してこの時間を作らないと、AIを学んでも宝の持ち腐れになる。今日はその"振り返りのやり方"を、自分の業務で体験してもらいます。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：この回の位置づけ</div><p>「教える回ではなく"立ち止まって現在地を測る回"。④Claudeでどう解くかは授業内では薄く、授業後/次回に回す。今日のゴールは各自が『何ができたら嬉しいか』を自分の言葉で持ち帰ること。最後は必ず"この振り返りの時間こそ大事"という組織化メッセージで締める（第6回への助走）。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「今日は立ち止まる回なんだ」と全員が理解していればOK！</p></div>
     </div>
 
+    <!-- STEP 2 -->
     <div class="step-content" id="s5-2">
-      <h3>プロジェクトフォルダの作成（目安：5分）</h3>
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>共有する</span>
+        <span class="step-goal"><strong>ゴール：</strong>宿題の成果物を見せ合い、「使えているか」を問う（目安35分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「まずは宿題の答え合わせから。前回お願いした2つ——①作りかけのLPを完成させてくる、②コワークの自動化を考えてくる——を、一人ずつ画面で見せてください。完成度を評価する場ではありません。大事なのは"それ、実際に使ってる？"です。」</p>
+      </div>
+
+      <h3>① 一人ずつ成果物を共有（目安15分）</h3>
       <ol class="instruction-list">
-        <li>デスクトップで右クリック → 「新規フォルダ」を選択</li>
-        <li>フォルダ名を <code>goku-dashboard</code> にする</li>
-        <li>VS Code「ファイル」→「フォルダーを開く...」→ 作ったフォルダを選択</li>
-        <li>「このフォルダーの作成者を信頼しますか？」→「<strong>はい、作成者を信頼します</strong>」</li>
+        <li>画面共有で、完成させたLPを見せる</li>
+        <li>考えてきたコワークの自動化アイデアを共有する</li>
+        <li>「どこで詰まったか」「どう乗り越えたか」も一言添える</li>
       </ol>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>左サイドバーに「GOKU-DASHBOARD」と表示されていればOK！</p></div>
+
+      <h3>② フィードバック（目安20分）</h3>
+      <div class="compare" data-compare>
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 作って終わり</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ 業務で回っている</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>作った瞬間は感動したが、その後開いていない</li>
+              <li><span class="ci">✕</span>URLはあるが、まだ誰にも共有していない</li>
+              <li><span class="ci">✕</span>「いつか使う」と思ったまま止まっている</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>実際にInstagramや名刺にURLを貼った</li>
+              <li><span class="ci">✓</span>作った自動化を、毎週実際に動かしている</li>
+              <li><span class="ci">✓</span>業務のどこかに、ちゃんと組み込まれている</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">👆 切り替えて「作っただけ」と「使えている」の差を可視化できます</div>
+      </div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「いいものができていますね。でも問いはここからです。それ、今日から実際に使いますか？　作ったものは、業務に組み込んで初めて価値が出ます。作って終わりが、一番もったいない。この"使えているか"の感覚を持ったまま、次に進みましょう。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：温度設定</div><p>「褒めて自信をつけるより、組織化の観点で'使えてる？'を正直に問う。ただし詰めすぎて萎縮させない。'作って終わりが一番もったいない'を軸に、本人が自分で気づくよう促す。これが③④のペイン発掘への助走になる。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員が成果物を共有し、「使えているか」を自分で振り返れていればOK！</p></div>
     </div>
 
+    <!-- STEP 3 -->
     <div class="step-content" id="s5-3">
-      <h3>ファイルを3つ作る（目安：3分）</h3>
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>振り返る</span>
+        <span class="step-goal"><strong>ゴール：</strong>「本当に役立ったか」を本音で振り返る（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここで一回、正直になりましょう。ここまで4回、お金も時間も使ってこの講座を受けてきました。ぶっちゃけ、役に立っていますか？　仕事が楽になった実感、ありますか？　遠慮はいりません。むしろ"まだピンときていない"という人がいたら、それが今日の一番大事な出発点になります。」</p>
+      </div>
+
+      <h3>本音で振り返る3つの問い</h3>
       <table class="info-table">
-        <thead><tr><th>ファイル名</th><th>役割</th><th>飲食店で例えると</th></tr></thead>
+        <thead><tr><th>問い</th><th>狙い</th></tr></thead>
         <tbody>
-          <tr><td><code>index.html</code></td><td>画面の骨格</td><td>店の内装・レイアウト</td></tr>
-          <tr><td><code>style.css</code></td><td>デザイン</td><td>内装の色・雰囲気・看板</td></tr>
-          <tr><td><code>app.js</code></td><td>機能・動き</td><td>スタッフの業務フロー</td></tr>
+          <tr><td>この4回で、実際に楽になった作業はある？</td><td>具体的な成功体験を言語化させる</td></tr>
+          <tr><td>作ったけど、結局使っていないものはある？</td><td>「アハ体験で終わった」自覚を促す</td></tr>
+          <tr><td>正直、まだ自分の仕事にハマっていない感覚はある？</td><td>本当のペインが別にあるサインを拾う</td></tr>
         </tbody>
       </table>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>左サイドバーに3つのファイルが表示されていればOK！</p></div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「"まだハマっていない"——それは失敗ではありません。むしろ正しい。なぜなら、皆さんの本当の困りごとは、まだ手をつけていないところに眠っているからです。次のパートで、それを一緒に掘り起こします。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「ここで'役に立ってない'という本音が出たら歓迎する。それを否定せず'だよね、本当のペインは別にあるかも'と③④へ繋ぐ。感想会で終わらせないよう、必ず次の棚卸しへブリッジする。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>各自が「役立った点・まだハマっていない点」を正直に言葉にできていればOK！</p></div>
     </div>
 
+    <!-- STEP 4 -->
     <div class="step-content" id="s5-4">
-      <h3>コードを貼り付ける（目安：15分）</h3>
-      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「全部理解しなくていい。<strong>Cmd+S（Mac）/ Ctrl+S（Win）</strong>で保存。タブに●が出たら未保存のサインです。」</p></div>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3ファイル全てのタブに●がない（保存済み）状態であればOK！</p></div>
-    </div>
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>棚卸しする</span>
+        <span class="step-goal"><strong>ゴール：</strong>管理業務を漏れなく書き出し、3軸の数字を付ける（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからが今日の本番です。一つだけお願いがあります——"困っていること"を考えないでください。人は、何が大変か聞かれても意外と出てきません。むしろ"当たり前"だと思って麻痺している作業にこそ、本当の困りごとが隠れています。だから今は感情を抜きで、ただ"やっている作業を全部"出してください。」</p>
+      </div>
 
-    <div class="step-content" id="s5-5">
-      <h3>ブラウザで動作確認（目安：10分）</h3>
-      <ol class="instruction-list">
-        <li>Finderでデスクトップの <code>goku-dashboard</code> フォルダを開く</li>
-        <li><code>index.html</code> をダブルクリック → ブラウザが開く</li>
-        <li>売上48000・客数10・メモ「満席」を入力して「保存する」をクリック</li>
-      </ol>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>グラフに棒が表示され、客単価が自動計算されていればOK！</p></div>
-    </div>
+      <h3 style="margin-top:4px;">① まず全部書き出す（感情を抜きで）</h3>
+      <div class="demo-box"><div class="demo-box-title">💬 受講者への声かけ</div><p>「朝起きてから夜寝るまで、管理者として店舗運営でやっている作業を、実況中継するように全部出してください。"これは小さいことだから"と省かないこと。数字をスプシに転記する、各店の報告をまとめる、承認する、確認の連絡をする——全部です。」</p></div>
 
-    <div class="step-content" id="s5-6">
-      <h3>GitHubにアップロード（目安：15分）</h3>
-      <div class="instructor-note"><div class="note-label">講師メモ</div><p>「GitHubはコードをクラウドに保存する場所。Dropboxのコード版と思ってください。」</p></div>
-      <ol class="instruction-list">
-        <li><strong>https://github.com</strong> を開く → 「Sign up」→ メール・パスワード・ユーザー名を登録</li>
-        <li>左上「<strong>New</strong>」→ Repository name に <code>goku-dashboard</code> → 「Create repository」</li>
-        <li>「<strong>uploading an existing file</strong>」をクリック</li>
-        <li>3ファイルを <strong>Cmd+A</strong> で全選択してドラッグ＆ドロップ</li>
-        <li>「<strong>Commit changes</strong>」をクリック</li>
-      </ol>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3ファイルがGitHub上に表示されていればOK！</p></div>
-    </div>
-
-    <div class="step-content" id="s5-7">
-      <h3>Vercelで公開（目安：15分）</h3>
-      <div class="instructor-note"><div class="note-label">講師メモ：重要</div><p>プラン選択で必ず <strong>「Hobby（無料）」</strong> を選ぶよう強調してください。</p></div>
-      <ol class="instruction-list">
-        <li><strong>https://vercel.com</strong> → 「Sign Up」→「<strong>Continue with GitHub</strong>」</li>
-        <li>プラン：「<strong>I'm working on personal projects（Hobby）</strong>」→ Continue</li>
-        <li>「Continue with GitHub」→「Add GitHub Account」→「<strong>Install</strong>」</li>
-        <li><code>goku-dashboard</code> の「<strong>Import</strong>」→ 設定そのまま → 「<strong>Deploy</strong>」</li>
-        <li>「<strong>Congratulations!</strong>」が表示されたら成功</li>
-      </ol>
-      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>URLでアプリが開けばOK！</p></div>
-    </div>
-
-    <div class="step-content" id="s5-8">
-      <h3>時間配分の目安</h3>
+      <h3 style="margin-top:20px;">② 各作業に「事実」と「自分の感覚」を付ける</h3>
       <table class="info-table">
-        <thead><tr><th>パート</th><th>内容</th><th>時間</th></tr></thead>
+        <thead><tr><th>項目</th><th>付け方</th><th>なぜ書くか</th></tr></thead>
         <tbody>
-          <tr><td>導入</td><td>ゴール説明・HTML/CSS/JSの概念</td><td>15分</td></tr>
-          <tr><td>STEP 1–2</td><td>VS Code・フォルダ準備</td><td>20分</td></tr>
-          <tr><td>STEP 3–4</td><td>ファイル作成・コード貼り付け</td><td>30分</td></tr>
-          <tr><td>STEP 5</td><td>動作確認・機能説明</td><td>20分</td></tr>
-          <tr><td>振り返り</td><td>できたこと・仕組みの整理</td><td>20分</td></tr>
-          <tr><td>STEP 6–7</td><td>GitHub・Vercel公開</td><td>45分</td></tr>
-          <tr><td>まとめ</td><td>次のステップ・拡張アイデア</td><td>15分</td></tr>
-          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td style="font-weight:700;color:var(--gold-dark);">約3時間</td></tr>
+          <tr><td><strong>事業</strong></td><td>muse／極／GTJ／マーケ から選ぶ</td><td>どの事業の業務かを切り分ける</td></tr>
+          <tr><td><strong>頻度</strong></td><td>毎日／週数回／月数回…（選択）</td><td>どれくらい繰り返しているか</td></tr>
+          <tr><td><strong>時間</strong></td><td>1回あたり何分（選択）</td><td>どれだけ時間が溶けているか</td></tr>
+          <tr><td><strong>手作業度</strong></td><td>全部手作業／半分／ほぼ自動</td><td>自動化の余地がどれだけあるか</td></tr>
+          <tr><td><strong>属人度</strong></td><td>高（自分にしかできない）／中／低</td><td>自分への一極集中を自覚する</td></tr>
+          <tr><td><strong>優先度</strong></td><td>1〜10から選ぶ（10が最優先）</td><td>どれを早く解決したいかを数値化</td></tr>
         </tbody>
       </table>
-      <div style="margin-top:16px;">
-        <div class="msg-card">「コードの意味を全部理解しなくていいです」</div>
-        <div class="msg-card">「わからないことはAIに聞けばすぐ直せます」</div>
-        <div class="msg-card">「今日だけで自分のアプリのURLができました」</div>
+
+      <div class="demo-box" style="background:#fdf3d8;border-color:var(--cat-prac-bd);">
+        <div class="demo-box-title" style="color:var(--gold-dark);">📝 ここで棚卸しシートに記入</div>
+        <p style="color:#4a3a08;">配布した「業務棚卸しシート」を開いて記入します。カテゴリ（売上・シフト・発注・採用…）が並んでいるので、<strong>各カテゴリを見ながら「自分はこれやってる」を1行ずつ</strong>書き出してください。カテゴリがガイドになるので、取りこぼしを防げます。事業・頻度・時間・手作業度・属人度はプルダウンで選択、優先度（解決したい順）も1〜10から選択してください（10が最優先）。<br><br>
+        <a href="[ここに棚卸しシートのURLを貼る]" target="_blank" style="display:inline-block;margin-top:6px;font-weight:700;color:var(--gold-dark);background:#fff;border:1.5px solid var(--cat-prac-bd);border-radius:8px;padding:8px 16px;text-decoration:none;">📋 業務棚卸しシートを開く →</a><br>
+        <span style="font-size:12px;color:var(--gray-500);">※ 授業前に、配布したテンプレートをGoogleドライブにアップ→各受講者用にコピーし、そのURLをここに差し込んでください</span></p>
+      </div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「数字を付けると、見えてきます。"毎日・30分・全部手作業・属人度高・優先度9"——こういう行が、その人の一番のペインです。本人は当たり前だと思っていた作業が、数字にすると重さが一目で分かる。これが"隠れたペイン"の正体です。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：取りこぼし防止が最優先</div><p>「'困ってること'と聞かず'やってる作業を全部'と聞くのが肝。感情で選ばせると一番大きいペイン（本人が麻痺している作業）を取りこぼす。記入は15分で一気に。完璧でなくていい、量を出させる。属人度・優先度も本人に付けさせ、それをSTEP5の深掘りの入口にする。棚卸しシートのURLは授業前に必ず差し込んでおくこと。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>各自が業務を10個以上書き出し、各項目を埋めていればOK！</p></div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-content" id="s5-5">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>発掘する</span>
+        <span class="step-goal"><strong>ゴール：</strong>属人度の観点で"隠れペイン"を一人ずつ掘り起こす（目安20分・会話ベース）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では一人ずつ、書き出してもらったシートを一緒に見ていきます。ここは入力せず、会話でいきましょう。見るポイントはシンプルです——皆さんが付けた『属人度・高』で『優先度の点数が高い』業務。ここがその人の一番のペインです。それを一緒に深掘りします。」</p>
+      </div>
+
+      <h3>掘る入口：本人が付けた「属人度 × 優先度」</h3>
+      <div class="demo-box"><div class="demo-box-title">💬 シートのここを見る</div><p>受講者が自分で付けた数字が、そのまま地図になります。<br><br><strong>属人度「高」× 優先度の点数が高い行</strong>＝「自分にしかできない × 早く解決したい」＝最優先で掘るべきペイン。シートをソートすれば一目で浮かびます。まずはここから会話を始めてください。</p></div>
+
+      <h3 style="margin-top:20px;">KOKIが会話で深掘りする問い</h3>
+      <div class="demo-box"><div class="demo-box-title">💬 こう問いかける</div><p>「・"これ属人度『高』って付けてますね。あなたが倒れたら本当に誰もできない？"<br>・"その承認、本当にあなたが毎回見ないとダメ？"<br>・"各店の数字を集めるの、あなたが手で集計してるんですか？"<br><br>本人が『高』と書いた時点で自覚はある。そこを"じゃあ仕組みにすれば自分が抜けられますよね"と一歩進めるのがKOKIの役割。」</p></div>
+
+      <table class="info-table">
+        <thead><tr><th>属人度が高いサイン</th><th>管理者によくある例</th></tr></thead>
+        <tbody>
+          <tr><td>自分を経由しないと進まない</td><td>全店の報告の集約・承認・最終確認</td></tr>
+          <tr><td>自分の頭の中にしかない</td><td>判断基準・取引先とのやり取りの経緯</td></tr>
+          <tr><td>休むと止まる</td><td>自分が見ないと回らない数字チェック</td></tr>
+        </tbody>
+      </table>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「属人度が高い作業は、裏を返せば"仕組みにすれば自分が抜けられる"作業。つまり、一番楽になれるポイントです。自分で『高』と付けた業務こそ、最初に手放すべきもの。それが見えただけで、今日の半分は成功です。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：本人の自己申告を入口にする</div><p>「属人度・優先度は本人がシートに記入済み。だからKOKIはゼロから探さず、'属人度高×優先度高'の行をソートして上から掘ればいい。一人約6〜7分、会話ベース（入力させない）。受講者は店舗管理者で現場作業はしていない前提なので、現場のミス影響度等ではなく"属人度＝自分への一極集中"に絞る。会話で出た理想と方向性は、KOKIが授業後にシートの緑列（嬉しい状態・講師メモ）へ追記する。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>各自が「属人度が高く・優先度も高い業務」を1つ特定できていればOK！</p></div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step-content" id="s5-6">
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>言語化する</span>
+        <span class="step-goal"><strong>成果物：</strong>「何ができたら嬉しいか」を全員が自分の言葉で持ち帰る（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「最後に、一番大事なことをやります。掘り起こしたペインを、"理想"に裏返します。"何が大変か"ではなく、"本当はどうなってたら最高か"。これを自分の言葉にできた瞬間、それはもう、Claudeに作ってもらうものの設計図になっています。」</p>
+      </div>
+
+      <h3>苦痛 → 理想に裏返す</h3>
+      <table class="info-table">
+        <thead><tr><th>今の苦痛（属人度が高い作業）</th><th>裏返した「嬉しい状態」</th></tr></thead>
+        <tbody>
+          <tr><td>各店の売上を毎晩スプシに手で集計している</td><td>朝、全店の数字が自動でまとまって表示されている</td></tr>
+          <tr><td>承認依頼が自分に集中して止まる</td><td>定型のものは自動で処理され、判断が要るものだけ届く</td></tr>
+          <tr><td>同じ報告連絡を毎回手で書いている</td><td>ボタン一つ、または自動で報告が飛ぶ</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo-box"><div class="demo-box-title">💬 受講者への問い</div><p>「STEP5で見つけた"自分に集中している作業"を、一つ選んでください。それが"本当はどうなってたら最高ですか？"　その理想を、一文でいいので言葉にしてみてください。それが今日の持ち帰りです。」</p></div>
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 締めのメッセージ（組織化への助走）</div>
+        <p>「今日やったこと——立ち止まって、振り返って、困りごとを洗い出して、理想を言葉にする——これを、ぜひ自分のお店でも定期的にやってください。これをやらずに走り続けると、AIを学んでも宝の持ち腐れになります。皆さんが今日言語化した"嬉しい状態"、これを次、実際にClaudeで形にしていきます。」</p>
+      </div>
+
+      <div class="instructor-note"><div class="note-label">講師メモ：今日のゴールはここ</div><p>「全員が『嬉しい状態』を一文で言語化できれば成功。実際にClaudeで解くのは授業後/次回。最後は必ず"この振り返りの時間こそ大事"という組織化メッセージで締め、第6回（運用設計）へ繋ぐ。会話で出た理想は授業後にスプシへ追記し、KOKIのデータ資産にする。」</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員が「何ができたら嬉しいか」を自分の言葉で1文にできていればOK！これが今日の成果物です。</p></div>
+    </div>
+
+    <!-- STEP 7 講師メモ -->
+    <div class="step-content" id="s5-7">
+      <h3>この回の設計思想</h3>
+      <div class="demo-box"><div class="demo-box-title">🎯 隠れた主題</div><p>第5回は「作る回」ではなく「<strong>立ち止まって現在地を測る回</strong>」。表のゴールは各自が「何ができたら嬉しいか」を言語化することだが、裏のゴールは「<strong>振り返る→ペインを洗い出す→どう解くか考える、というサイクルを意識的に回す習慣</strong>」を持ち帰らせること。これが第6回（運用設計・組織化）への助走になる。対象は店舗管理者の業務に限定（現場のペインは次フェーズ）。前提：Google WS導入済みのため情報管理の土台は解消済み。</p></div>
+
+      <h3 style="margin-top:24px;">時間配分の目安（その場のノリで調整可）</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>導入</td><td>📖趣旨</td><td>「立ち止まる回」だと宣言</td><td>10分</td></tr>
+          <tr><td>STEP 2</td><td>🎁共有</td><td>成果物の共有（15分）＋FB（20分）</td><td>35分</td></tr>
+          <tr><td>STEP 3</td><td>🎬振り返り</td><td>本音の振り返り</td><td>15分</td></tr>
+          <tr><td>休憩</td><td>—</td><td>振り返りモード→棚卸しモードへ切替</td><td>10分</td></tr>
+          <tr><td>STEP 4</td><td>✋棚卸し</td><td>業務の全棚卸し＋3軸記入（フォーム入力）</td><td>15分</td></tr>
+          <tr><td>STEP 5</td><td>✋発掘</td><td>本人の「属人度×優先度」を入口に一人ずつ深掘り（会話・約6〜7分×3）</td><td>20分</td></tr>
+          <tr><td>STEP 6</td><td>🎁言語化</td><td>嬉しい状態を言語化・組織化メッセージで締め</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2時間</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--gray-500);margin-top:8px;">※ STEP5の一人ずつ深掘りは受講者3人だから成立する配分。人数が増えると破綻するので次期は要再設計。</p>
+
+      <h3 style="margin-top:28px;">データが残る仕組み</h3>
+      <table class="info-table">
+        <thead><tr><th>いつ</th><th>誰</th><th>何で</th><th>何を</th></tr></thead>
+        <tbody>
+          <tr><td>授業中 STEP4</td><td>受講者</td><td><strong>棚卸しシート（スプシ）</strong></td><td>カテゴリを見ながら業務名・頻度・時間・手作業度を一覧で記入（事実）</td></tr>
+          <tr><td>授業中 STEP5</td><td>KOKI×受講者</td><td><strong>会話</strong>（入力なし）</td><td>属人度の指摘・理想の言語化</td></tr>
+          <tr><td>授業後</td><td>KOKI</td><td><strong>同じスプシ</strong>（緑の列）</td><td>属人度・嬉しい状態・優先度を追記</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--gray-500);margin-top:8px;">棚卸しシートは「カテゴリを事前提示・一覧で埋める」テンプレート。受講者が埋める列（ゴールド）とKOKIが追記する列（グリーン）が分かれている。受講者ごとにシートをコピーして配布し、回収すれば全社分のペインデータが構造化されて溜まる。業種別・業務別に分析できるKOKIのデータ資産になる。</p>
+
+      <h3 style="margin-top:28px;">つまずきやすいポイント</h3>
+      <ol class="instruction-list">
+        <li><strong>「困ってること」を聞くと出てこない</strong> → 感情を抜きで「やってる作業を全部」と聞く（取りこぼし防止）</li>
+        <li><strong>本人がペインを自覚していない</strong> → 頻度×時間×手作業度の数字＋本人が付けた属人度・優先度で炙り出す</li>
+        <li><strong>振り返りが感想会で終わる</strong> → 必ず棚卸し（STEP4）へブリッジする</li>
+        <li><strong>STEP5で受講者が入力に下を向く</strong> → ここは入力させず会話に集中させる</li>
+        <li><strong>棚卸しシートURL未差し込み</strong> → 授業前にテンプレートを受講者ごとにコピーし、STEP4にURLを差し込む</li>
+      </ol>
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「作って終わりが、一番もったいない」</div>
+        <div class="msg-card">「当たり前だと思ってる作業にこそ、本当のペインが隠れている」</div>
+        <div class="msg-card">「振り返る時間を意識的に作る。これをやらないと宝の持ち腐れ」</div>
       </div>
     </div>
   </div>
@@ -1551,7 +1864,7 @@ Claude Codeへの指示スタイル：出力は日本語で統一・コメント
 
 <div class="instructor-badge" id="instructor-badge"></div>
 
-<footer>Claude講座 教材ダッシュボード　／　moatrock × Claude　／　2026年6月　／　ver.1.9（第1回〜第5回公開）</footer>
+<footer>Claude講座 教材ダッシュボード　／　moatrock × Claude　／　2026年6月　／　ver.2.2（第5回を「立ち止まる・振り返り回」に刷新）</footer>
 
 <script>
 function toggleDetail(id) {
@@ -1574,17 +1887,51 @@ function showStep(prefix, num) {
   panel.querySelectorAll('.step-tab').forEach(e => e.classList.remove('active'));
   document.getElementById(prefix + '-' + num).classList.add('active');
   panel.querySelectorAll('.step-tab')[num - 1].classList.add('active');
+  panel.scrollIntoView({ behavior:'smooth', block:'start' });
 }
+/* Before/After 比較トグル */
+function setCompare(btn) {
+  const box = btn.closest('.compare');
+  const side = btn.dataset.side;
+  box.querySelectorAll('.compare-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  box.querySelectorAll('.compare-panel').forEach(p => {
+    p.classList.toggle('active', p.dataset.side === side);
+  });
+}
+/* 文字サイズ調整（投影用） */
+function setTextSize(size, btn) {
+  document.body.classList.remove('text-l','text-xl');
+  if (size === 'l') document.body.classList.add('text-l');
+  if (size === 'xl') document.body.classList.add('text-xl');
+  document.querySelectorAll('.cb-size').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+/* 講師メモ表示トグル（ボタン版） */
+function toggleInstructorBtn() {
+  const on = document.body.classList.toggle('instructor-mode');
+  const b = document.getElementById('cb-mode');
+  b.classList.toggle('on', on);
+  b.innerHTML = '<span class="dot"></span>' + (on ? '講師メモを隠す' : '講師メモを表示');
+  flashBadge(on);
+}
+function flashBadge(on) {
+  const badge = document.getElementById('instructor-badge');
+  badge.textContent = on ? '👨‍🏫 講師モード ON' : '講師モード OFF';
+  badge.classList.add('show');
+  setTimeout(() => badge.classList.remove('show'), 2000);
+}
+/* Shift2回でも講師モード（従来の操作も維持） */
 let lastShift = 0;
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Shift') {
     const now = Date.now();
     if (now - lastShift < 500) {
-      document.body.classList.toggle('instructor-mode');
-      const badge = document.getElementById('instructor-badge');
-      badge.textContent = document.body.classList.contains('instructor-mode') ? '👨‍🏫 講師モード ON' : '講師モード OFF';
-      badge.classList.add('show');
-      setTimeout(() => badge.classList.remove('show'), 2000);
+      const on = document.body.classList.toggle('instructor-mode');
+      const b = document.getElementById('cb-mode');
+      b.classList.toggle('on', on);
+      b.innerHTML = '<span class="dot"></span>' + (on ? '講師メモを隠す' : '講師メモを表示');
+      flashBadge(on);
     }
     lastShift = now;
   }
