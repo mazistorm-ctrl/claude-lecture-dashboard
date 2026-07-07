@@ -318,7 +318,7 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     <p class="header-desc">業種を問わず、Claudeを「仕事の相棒」にする。チャットでの文章作成から、Excel・PowerPointの自動化、ブラウザ・PC操作の自動化、Agent Skills・Claude Code まで。7回で体系的に身につけます。</p>
     <div class="header-stats">
       <div class="stat"><div class="stat-num">7</div><div class="stat-label">回の授業</div></div>
-      <div class="stat"><div class="stat-num">4</div><div class="stat-label">回公開中</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">回公開中</div></div>
       <div class="stat"><div class="stat-num">2h</div><div class="stat-label">／回の目安</div></div>
     </div>
   </div>
@@ -350,14 +350,14 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜4回 公開）</div>
-    <div class="progress-track"><div class="progress-fill" style="width:57%;"></div></div>
+    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜5回 公開）</div>
+    <div class="progress-track"><div class="progress-fill" style="width:71%;"></div></div>
     <div class="progress-steps">
       <span class="ps-label active">第1回 ✓</span>
       <span class="ps-label active">第2回 ✓</span>
       <span class="ps-label active">第3回 ✓</span>
       <span class="ps-label active">第4回 ✓</span>
-      <span class="ps-label">第5回</span>
+      <span class="ps-label active">第5回 ✓</span>
       <span class="ps-label">第6回</span>
       <span class="ps-label">第7回</span>
     </div>
@@ -486,10 +486,10 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     </div>
 
 
-    <div class="card coming" data-num="05">
+    <div class="card ready" data-num="05">
       <div class="card-header">
         <span class="card-num">第05回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開中</span>
       </div>
       <div class="card-title">ブラウザとPCを自動化する</div>
       <div class="card-subtitle">Claude in Chrome ＋ Cowork</div>
@@ -503,7 +503,9 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
       <div class="card-deliverable">📦 繰り返し作業を自動化したワークフロー</div>
       <div class="card-footer">
         <span class="card-time">約3時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">第1回承認後に作成</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-5')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
@@ -1728,6 +1730,299 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <div class="msg-card">「Excelが苦手な人ほど、今日は得をします」</div>
         <div class="msg-card">「いつものファイルの中に、相棒が入っただけです」</div>
         <div class="msg-card">「月次の報告仕事は、今日から半分になります」</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============ 第5回 詳細パネル ============ -->
+  <div class="detail-panel" id="detail-5">
+    <div class="detail-header">
+      <div class="detail-title">第05回｜<span>ブラウザとPCを自動化する</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-5')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s5',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>ブラウザで動くAI</div>
+      <div class="step-tab" onclick="showStep('s5',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>Chromeでできること</div>
+      <div class="step-tab" onclick="showStep('s5',3)"><span class="step-tab-num">3</span><span class="tab-cat c-prac"></span>リサーチ実践</div>
+      <div class="step-tab" onclick="showStep('s5',4)"><span class="step-tab-num">4</span><span class="tab-cat c-learn"></span>Cowork入門</div>
+      <div class="step-tab" onclick="showStep('s5',5)"><span class="step-tab-num">5</span><span class="tab-cat c-prac"></span>PC作業の自動化</div>
+      <div class="step-tab" onclick="showStep('s5',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>まとめ</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s5',7)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+
+    <!-- STEP 1 -->
+    <div class="step-content active" id="s5-1">
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>開いているページをそのままClaudeに読ませる（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここまでのClaudeは、こちらが資料を渡すのを待っていました。今日からは違います。Claudeが皆さんのブラウザに入って、いま見ているページを一緒に見ながら働きます。まずはインストールして、1ページ読ませてみましょう。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>Chrome ウェブストアで「Claude in Chrome」を検索し、拡張機能を追加する</li>
+        <li>Claudeアカウントでログインし、ブラウザ右上のアイコンから開く</li>
+        <li>仕事に関係するWebページ（業界ニュース・行政の案内・製品ページなど）を開く</li>
+        <li>「このページを3行で要約して」と頼む</li>
+        <li>続けて「このページの内容で、うちの業務に関係しそうな点は？」と聞いてみる</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「コピペなしで、ページの内容がそのまま通じましたね。これが『Claude in Chrome』です。ページの要約・翻訳・質問はもちろん、この後やるように、複数のタブをまたいだ調べものまでこなします。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：導入でつまずかせない</div><p>拡張機能の追加権限がない会社PCの受講者には、隣の人とペアで進めてもらうか講師画面で追体験してもらう。英語ページの翻訳デモは反応が良いので1回入れると場が温まる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>ページを1枚読ませて要約が返ってくればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="step-content" id="s5-2">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claude in Chrome の守備範囲を整理する（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「Claude in Chrome にできることを整理します。『読む』だけではなく『書く』『比べる』までできるのがポイントです。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>できること</th><th>頼み方の例</th><th>効く場面</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 要約・翻訳・Q&A</strong></td><td>「要約して」「日本語にして」「この規約で注意すべき点は？」</td><td>長いページ・英語ページ・規約の読み込み</td></tr>
+          <tr><td><strong>② フォーム入力の下書き</strong></td><td>「この問い合わせフォームに、〇〇の内容で下書きを入れて」</td><td>申請・問い合わせ・アンケート回答</td></tr>
+          <tr><td><strong>③ メールの下書き</strong></td><td>「このスレッドへの返信案を、丁寧なトーンで」</td><td>Webメールでの日々の返信</td></tr>
+          <tr><td><strong>④ タブ横断リサーチ</strong></td><td>「開いている3つのタブの内容を比較表にして」</td><td>比較検討・相見積り・市場調査</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 安全に使うためのルール</div>
+        <p>ブラウザで動くAIには必ず確認の習慣を。<strong>送信ボタンは自分で押す</strong>（下書きまで任せて、送るのは人間）、<strong>ログイン情報やカード番号は任せない</strong>、<strong>会社の機密ページでは使う前に社内ルールを確認</strong>。この3つを守れば安心して使えます。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「②と③が『代行』の入り口です。ここで大事な考え方——Claudeは下書きまで、最後の送信は自分。この線引きさえ守れば、ブラウザ仕事の面倒な部分だけを安全に手放せます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：安全ルールは先に釘を刺す</div><p>「勝手にメールを送っちゃうのでは」という不安と「全部任せたい」という過信、両方が出るパート。デモボックスの3ルールを声に出して読み上げ、以降の実践でも都度リマインドする。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>4つのできることと安全ルール3つが言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="step-content" id="s5-3">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>タブ横断リサーチ→ドキュメント化を一気通貫でやる（目安35分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では実践です。お題は『比較して、まとめて、報告できる形にする』。仕入先の比較でも、ツール選定でも、競合調査でも、自分の業務の調べものに置き換えてやってみましょう。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>比較したい対象のページを3つ、別々のタブで開く（製品・サービス・料金ページなど）</li>
+        <li>Claude in Chrome に「開いているタブの内容を、料金・特徴・注意点の比較表にして」と頼む</li>
+        <li>「この比較から、うちの条件（予算〇〇・重視するのは〇〇）に合うのはどれか、理由つきで」と判断材料をもらう</li>
+        <li>「この内容を、上司に共有する検討メモの形にまとめて」とドキュメント化する</li>
+        <li>できたメモをコピーして、Docs や Word に貼って仕上げる</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「タブを行き来してメモ帳に貼り付けて…という調べものの手間が、まるごと消えました。これが『リサーチ → ドキュメントのワンフロー』です。ただし覚えておいてください——Claudeが読んだのは"開いているページ"だけ。載っていないことは分かりませんし、ページの情報が古いこともあります。最後の裏取りは人間の仕事です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：お題の統一も可</div><p>受講者が題材に迷う場合は「ノートPC3機種の比較」など全員共通のお題を出すと進行が揃う。④の検討メモまで到達させることを優先し、⑤の清書は時間次第で省略可。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>比較表→検討メモまで作れていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="step-content" id="s5-4">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>Cowork＝自律的に動くClaudeの仕組みを理解する（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「後半は、ブラウザを飛び出してPC全体の話です。Claude Desktopアプリには『Cowork』というタブがあります。普通のチャットと何が違うのか。一言でいうと——チャットは"質問に答える人"、Coworkは"仕事を最後までやる人"です。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th></th><th>Chat（チャット）</th><th>Cowork</th></tr></thead>
+        <tbody>
+          <tr><td><strong>動き方</strong></td><td>1回聞かれて1回答える</td><td>計画を立て、実行し、結果を報告するまで自分で回す</td></tr>
+          <tr><td><strong>触れる範囲</strong></td><td>会話と渡された資料</td><td>許可したフォルダの中のファイルを直接読み書き</td></tr>
+          <tr><td><strong>向いている仕事</strong></td><td>相談・文章づくり・分析</td><td>ファイル整理・資料の組み立て・繰り返し作業</td></tr>
+        </tbody>
+      </table>
+
+
+      <ol class="instruction-list">
+        <li>Claude Desktop をインストールし、起動して「Cowork」タブに切り替える</li>
+        <li>作業させたいフォルダへのアクセスを許可する（まずは練習用フォルダを1つ作るのがおすすめ）</li>
+        <li>「このフォルダに何があるか、一覧にして教えて」と最初の仕事を頼んでみる</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 セキュリティの考え方</div>
+        <p>Coworkが触れるのは<strong>自分が許可したフォルダだけ</strong>です。最初はデスクトップ全体ではなく、練習用フォルダから始めましょう。削除など取り返しのつかない操作は、実行前に必ず内容を確認する習慣を。「任せる範囲を自分で決められる」のがCoworkの安全設計です。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「Coworkが自律的に動けるのは、<strong>計画 → 実行 → 報告</strong>のループを自分で回しているからです。頼まれた仕事をステップに分解し、1つずつ実行して、途中で問題があれば方針を変え、終わったら何をしたか報告する。新人に仕事を任せるときの流れと同じですね。だから頼み方も『作業の指示』ではなく『仕事のゴール』を伝えるのがコツです。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：擬人化で通す</div><p>「チャット＝電話相談、Cowork＝席が隣の同僚」のたとえが通りやすい。フォルダ許可の画面で不安がる人には「許可した引き出ししか開けられない」と言い換える。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>ChatとCoworkの違いを一言で言え、フォルダ許可まで済んでいればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 5 -->
+    <div class="step-content" id="s5-5">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>ファイル整理と資料の初稿づくりを任せる（目安45分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「Coworkに実際の仕事を2つ任せます。1つ目は誰もが見て見ぬふりをしている『フォルダの整理』。2つ目は『散らばったメモから資料の初稿を作る』です。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li><strong>実践①：</strong>練習用フォルダに、雑多なファイルを10個ほどコピーして入れる</li>
+        <li>「このフォルダのファイルを種類ごとにサブフォルダへ整理して、ファイル名も『日付_内容』の形に統一して。実行前に計画を見せて」と頼む</li>
+        <li>提示された計画を確認してから実行してもらい、結果の報告を読む</li>
+        <li><strong>実践②：</strong>会議メモ・箇条書き・参考資料など、バラバラの素材を同じフォルダに入れる</li>
+        <li>「この素材をもとに、〇〇の企画書の初稿をWordで作って。構成は背景・提案・スケジュール・費用」と頼み、初稿を受け取る</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 さらに横着する3つの機能（紹介）</div>
+        <p><strong>スケジュール実行：</strong>「/schedule」で「毎週金曜に週報の下書きを作る」のような定期タスクを設定できます。<strong>グローバル指示・フォルダ指示：</strong>「報告書はいつもこの形式で」のようなマイルールを覚えさせれば、毎回言わなくて済みます。<strong>Chrome連携：</strong>「Webで調べて、その結果をフォルダの資料に反映」のようなブラウザ込みの複合タスクも頼めます。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「『実行前に計画を見せて』と言いましたよね。あれがCoworkと安全に付き合う合言葉です。計画を人間が確認してからGOを出す。この1クッションを挟むだけで、任せる怖さはほぼ消えます。今日の2つの実践は、皆さんの職場の"誰の仕事でもないけど誰かがやっている作業"を確実に減らします。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：練習用フォルダを配る</div><p>実践①用に、雑多なダミーファイル一式（zip）を事前配布しておくと全員同じ条件で進む。実データでやりたい人には必ずコピーを作らせてから。/scheduleとグローバル指示はデモだけ見せて「持ち帰りの宿題」にしてよい。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>整理タスクと初稿づくりの両方でCoworkの報告まで確認できたらOK。</p></div>
+    </div>
+
+
+    <!-- STEP 6 -->
+    <div class="step-content" id="s5-6">
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>まとめ</span>
+        <span class="step-goal"><strong>ゴール：</strong>今日の到達点を確認し、次回へつなぐ（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のまとめです。"頼む"から"任せる"へ。この変化をビフォー・アフターで振り返りましょう。」</p>
+      </div>
+
+
+      <div class="compare">
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまで</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ 今日から</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>調べものはタブを行き来して、コピペで継ぎはぎ</li>
+              <li><span class="ci">✕</span>フォルダ整理は永遠の後回し</li>
+              <li><span class="ci">✕</span>AIには1問1答で聞くものだと思っていた</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>タブ横断の比較表→検討メモまでワンフロー</li>
+              <li><span class="ci">✓</span>ファイル整理も初稿づくりもCoworkに任せられる</li>
+              <li><span class="ci">✓</span>「計画を見せて→GO」で安全に仕事を任せる型ができた</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">💡 上のタブで「これまで／今日から」を切り替えて振り返れます</div>
+      </div>
+
+
+      <div style="margin-top:20px;">
+        <div class="msg-card">「下書きまでAI、送信ボタンは自分」</div>
+        <div class="msg-card">「作業の指示ではなく、仕事のゴールを伝える」</div>
+        <div class="msg-card">「実行前に計画を見せて——が安全の合言葉」</div>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 次回予告</div>
+        <p>「次回は『Agent Skillsで拡張する』。Claudeに"道具"を持たせて、皆さんの業務手順そのものを覚えさせます。自分専用のスキルを1本作って持ち帰る、ものづくりの回です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：宿題（任意）</div><p>「自宅・職場のフォルダを1つ、Coworkに整理させる」を宿題に。次回冒頭に「何分の作業が消えたか」を共有してもらうと、自動化の効果が実感として積み上がる。</p></div>
+    </div>
+
+
+    <!-- STEP 7 : 講師メモ -->
+    <div class="step-content" id="s5-7">
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">💡</span>講師用</span>
+        <span class="step-goal"><strong>この回の運営メモ</strong>（受講者には非表示）</span>
+      </div>
+
+
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>ブラウザで動くAI</td><td>🎬体験</td><td>Claude in Chrome 導入・ページ要約</td><td>25分</td></tr>
+          <tr><td>Chromeでできること</td><td>📖学ぶ</td><td>要約/翻訳/Q&A・フォーム・メール・タブ横断＋安全ルール</td><td>30分</td></tr>
+          <tr><td>リサーチ実践</td><td>✋実践</td><td>タブ横断比較→検討メモのワンフロー</td><td>35分</td></tr>
+          <tr><td>Cowork入門</td><td>📖学ぶ</td><td>Chatとの違い・導入・フォルダ許可・計画→実行→報告</td><td>30分</td></tr>
+          <tr><td>PC作業の自動化</td><td>✋実践</td><td>ファイル整理＋初稿づくり（+スケジュール実行紹介）</td><td>45分</td></tr>
+          <tr><td>まとめ</td><td>🎁公開</td><td>Before/After・次回予告</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約3時間</td></tr>
+        </tbody>
+      </table>
+
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「今日から、Claudeは"答える人"から"働く人"になります」</div>
+        <div class="msg-card">「任せる範囲は自分で決める。だから怖くない」</div>
+        <div class="msg-card">「毎週やっている作業ほど、自動化の効果は大きい」</div>
       </div>
     </div>
   </div>
