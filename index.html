@@ -318,7 +318,7 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     <p class="header-desc">業種を問わず、Claudeを「仕事の相棒」にする。チャットでの文章作成から、Excel・PowerPointの自動化、ブラウザ・PC操作の自動化、Agent Skills・Claude Code まで。7回で体系的に身につけます。</p>
     <div class="header-stats">
       <div class="stat"><div class="stat-num">7</div><div class="stat-label">回の授業</div></div>
-      <div class="stat"><div class="stat-num">1</div><div class="stat-label">回サンプル公開</div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">回公開中</div></div>
       <div class="stat"><div class="stat-num">2h</div><div class="stat-label">／回の目安</div></div>
     </div>
   </div>
@@ -350,11 +350,11 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1回 サンプル公開）</div>
-    <div class="progress-track"><div class="progress-fill" style="width:14%;"></div></div>
+    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜2回 公開）</div>
+    <div class="progress-track"><div class="progress-fill" style="width:29%;"></div></div>
     <div class="progress-steps">
       <span class="ps-label active">第1回 ✓</span>
-      <span class="ps-label">第2回</span>
+      <span class="ps-label active">第2回 ✓</span>
       <span class="ps-label">第3回</span>
       <span class="ps-label">第4回</span>
       <span class="ps-label">第5回</span>
@@ -414,10 +414,10 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     </div>
 
 
-    <div class="card coming" data-num="02">
+    <div class="card ready" data-num="02">
       <div class="card-header">
         <span class="card-num">第02回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開中</span>
       </div>
       <div class="card-title">基本操作と成果物づくり</div>
       <div class="card-subtitle">プロンプト設計から Excel・Word・PPT を一発生成</div>
@@ -431,7 +431,9 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
       <div class="card-deliverable">📦 実務で使える成果物テンプレ一式</div>
       <div class="card-footer">
         <span class="card-time">約2.5時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">第1回承認後に作成</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-2')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
@@ -844,6 +846,305 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <div class="msg-card">「専門知識は要りません。同僚に頼む感覚でいいです」</div>
         <div class="msg-card">「迷ったらSonnet。それだけ覚えれば大丈夫」</div>
         <div class="msg-card">「今日、自分の仕事が1つ楽になりました」</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============ 第2回 詳細パネル ============ -->
+  <div class="detail-panel" id="detail-2">
+    <div class="detail-header">
+      <div class="detail-title">第02回｜<span>基本操作と成果物づくり</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-2')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s2',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>まず作ってみる</div>
+      <div class="step-tab" onclick="showStep('s2',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>プロンプトの型</div>
+      <div class="step-tab" onclick="showStep('s2',3)"><span class="step-tab-num">3</span><span class="tab-cat c-learn"></span>資料の渡し方</div>
+      <div class="step-tab" onclick="showStep('s2',4)"><span class="step-tab-num">4</span><span class="tab-cat c-prac"></span>Excel・Word</div>
+      <div class="step-tab" onclick="showStep('s2',5)"><span class="step-tab-num">5</span><span class="tab-cat c-prac"></span>スライド＋拡張思考</div>
+      <div class="step-tab" onclick="showStep('s2',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>まとめ</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s2',7)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+
+    <!-- STEP 1 -->
+    <div class="step-content active" id="s2-1">
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>プロンプト一発でExcelファイルができる驚きを体験する（目安20分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「前回はチャットで文章を作りました。今日はその先に進みます——Excelやスライドといった『ファイルそのもの』をClaudeに作らせます。理屈はあとで説明するので、まず1つ作ってみましょう。下のプロンプトをそのまま貼り付けるだけでOKです。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>claude.ai を開いて「新しいチャット」を開く</li>
+        <li>下の入力例をそのままコピーして送信する</li>
+        <li>画面の横に、表が組み上がっていく様子を観察する</li>
+        <li>できあがったファイルをダウンロードして、Excelで開いてみる</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">やってみる：入力例（コピペOK）</div>
+        <p>「月別の経費管理表をExcelで作ってください。項目は日付・カテゴリ・金額・メモ。カテゴリ別の合計を自動計算する数式と、月別推移の棒グラフも入れてください。」</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「今、会話とは別のウィンドウでファイルが組み上がっていくのが見えましたね。これは『アーティファクト』という機能です。Claudeが作った成果物を、会話と分けて管理してくれる——今日の主役です。数式もグラフも、中身ごと作ってくれたことに注目してください。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：最初の5分で驚きを作る</div><p>説明より先に「ファイルができた」という体験を全員に作る。プロンプトはコピペで構わない。ダウンロードして実際にExcelで開くところまでやると「本当に使える」実感が出る。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員がExcelファイルを1つ生成・ダウンロードできていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="step-content" id="s2-2">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>伝わるプロンプトの「型」を身につける（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「なぜさっきのプロンプトは一発でうまくいったのか。実は、伝わる頼み方には『型』があります。難しいテクニックではありません。新しく入った同僚に仕事を頼むとき、皆さんが自然にやっていることと同じです。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>要素</th><th>何を伝えるか</th><th>例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 役割</strong></td><td>誰として答えてほしいか</td><td>「あなたは経理の実務に詳しいアシスタントです」</td></tr>
+          <tr><td><strong>② 背景・目的</strong></td><td>なぜ必要か・誰が使うか</td><td>「新入社員向けの説明資料に使います」</td></tr>
+          <tr><td><strong>③ 条件</strong></td><td>内容・分量・トーン</td><td>「箇条書き中心・A4一枚・硬すぎない言葉で」</td></tr>
+          <tr><td><strong>④ 形式</strong></td><td>どんな形で出すか</td><td>「Excelで」「Wordで」「表形式で」</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 Before → After で見る違い</div>
+        <p><strong>Before：</strong>「請求書のテンプレ作って」<br>→ 悪くはないが、想定と違うものが出がち。<br><strong>After：</strong>「小さな会社の営業事務として使う請求書テンプレをExcelで作ってください。品目・単価・数量・小計・消費税・合計を自動計算。取引先に送っても恥ずかしくないシンプルなデザインで。」<br>→ ほぼそのまま使えるものが一発で出る。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「この『役割・背景・条件・形式』の4点セットが、いわゆる<strong>指示の構造化</strong>です。全部を毎回書く必要はありません。迷ったら『誰が・何のために・どんな形で』の3つだけでも、結果が大きく変わります。今日はこの型を全部の成果物づくりで使い回します。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：受講者の実業務で1回変換</div><p>1〜2名に「最近AIに頼んで微妙だった指示」を挙げてもらい、その場で4要素の型に直してみせる。自分の業務に引きつけた瞬間に定着する。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「役割・背景・条件・形式」の4要素が言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="step-content" id="s2-3">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>手持ちの資料をClaudeに渡して読ませる（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここまでは『作らせる』話でした。次は逆方向——こちらから資料を『渡す』方法です。PDF・画像・Excel、日々の仕事で扱うファイルは、そのままClaudeに読ませることができます。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>渡せるもの</th><th>例</th><th>頼めること</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PDF</strong></td><td>契約書・マニュアル・報告書</td><td>要約・重要ポイント抽出・Q&A</td></tr>
+          <tr><td><strong>画像</strong></td><td>スクリーンショット・ホワイトボードの写真</td><td>文字起こし・内容の説明・表への変換</td></tr>
+          <tr><td><strong>Excel・CSV</strong></td><td>売上データ・名簿・アンケート結果</td><td>集計・傾向分析・グラフの提案</td></tr>
+        </tbody>
+      </table>
+
+
+      <ol class="instruction-list">
+        <li>チャット入力欄の「＋」（クリップ）アイコンをクリックする</li>
+        <li>手元のPDFか画像を1つ選んでアップロードする</li>
+        <li>「この資料の要点を3つにまとめてください」と送信する</li>
+        <li>続けて「この内容について、新人に説明する想定で質問に答えて」と深掘りしてみる</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「『読ませてから頼む』——これが業務活用の基本形です。資料を渡す → 型に沿って条件を付ける → 成果物に変換する。この往復ができると、会議メモから議事録、データから報告書、と仕事が一気につながります。ちなみに、この成果物が並ぶ場所がさっきのアーティファクト。修正を頼むと同じ場所で更新されていくので、完成まで何度でも直せます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：機密情報の扱いに一言</div><p>アップロード体験の前に「社外秘・個人情報は各社のルールに従う」と必ず一言添える。練習用には手元の公開資料や、このダッシュボードのスクリーンショットでも代用できる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>各自がファイルを1つ読み込ませ、要約が返ってくればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="step-content" id="s2-4">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>自分の業務で使うExcel・Word文書を実際に作る（目安35分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからが今日の本番です。皆さんの実際の業務で使うファイルを作ります。コツはさっきの型に『数式やグラフも入れて』と一言添えること。Claudeは見た目だけでなく、中身のロジックごと作ってくれます。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>自分の業務から「表で管理しているもの」を1つ選ぶ（案件リスト・勤怠・在庫・経費・顧客名簿 など）</li>
+        <li>型（役割・背景・条件・形式）に沿ってプロンプトを書き、Excelで生成する</li>
+        <li>「〇〇の列を足して」「集計を月別にして」と2〜3回修正を重ねて仕上げる</li>
+        <li>続けて、文書もの（案内文・手順書・お知らせ）を1つWordで生成する</li>
+        <li>「これをPDFでもください」と頼んで、配布用PDFまで作る</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">プロンプト例（業種問わず使えます）</div>
+        <p><strong>Excel：</strong>「営業チームの案件管理表をExcelで作ってください。列は案件名・担当者・状況・金額・期日。状況別の件数を自動集計するエリアと、期日が近い順に見られる並びにしてください。」<br><strong>Word：</strong>「経費精算ルール変更の社内案内をWordで作ってください。読み手は全社員、A4一枚、変更点は箇条書きで先頭に、質問窓口の案内を最後に。」</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「一度作ったファイルは、それ自体が『テンプレート』になります。来月も使うものなら『この形式で来月分を』と頼むだけ。ゼロから作る仕事が、今日から"直すだけ"の仕事に変わります。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：進度差への対応</div><p>ここで進度差が一番出る。早い人には「もう1ファイル」か隣のサポート役を頼む。遅れている人はデモボックスのコピペからでOK。完成の質より「修正を重ねて仕上げた」体験を優先する。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員がExcelまたはWordの成果物を1つ完成させていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 5 -->
+    <div class="step-content" id="s2-5">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>スライドを一発生成し、拡張思考で質を上げる（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「最後の成果物はスライドです。そしてもうひとつ、Claudeに『じっくり考えてから答えてもらう』モードも体験します。まずはスライドから。説明したいテーマを1つ思い浮かべてください。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>説明したいテーマを1つ選ぶ（新ルールの説明・サービス紹介・月次報告 など）</li>
+        <li>「PowerPointで・5枚構成・読み手は〇〇」と型に沿って生成する</li>
+        <li>できた構成を確認し、「3枚目をもっと具体的に」など修正する</li>
+        <li>入力欄の設定から<strong>拡張思考（Extended Thinking）</strong>をONにする</li>
+        <li>「このスライド構成を、読み手がもっと納得しやすい流れに再構成して。理由も添えて」と頼む</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">プロンプト例</div>
+        <p>「自社サービスの紹介スライドをPowerPointで作ってください。読み手は初めて話を聞く見込み客。構成は、表紙 → 相手の課題 → 解決策 → 実績 → 次のステップの5枚。1枚につき伝えることは1つに絞ってください。」</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「後半で使ったのが<strong>拡張思考（Extended Thinking）</strong>です。Claudeが答える前に、時間をかけて深く考えるモード。単純な作業には不要ですが、構成の練り直し・複雑な比較・計画づくりのような『考える仕事』ほど効きます。普段はOFF、ここぞという時にON、と覚えてください。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：待ち時間を活用</div><p>拡張思考は回答までに時間がかかる。待っている間に「皆さんの業務で"ここぞ"はどんな場面か」を問いかけて、使いどころのイメージを持たせる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>スライドを1本生成し、拡張思考を1回試せていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 6 -->
+    <div class="step-content" id="s2-6">
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>まとめ</span>
+        <span class="step-goal"><strong>ゴール：</strong>今日の到達点を確認し、次回へつなぐ（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のまとめです。ビフォー・アフターで、資料づくりの仕事がどう変わったかを振り返りましょう。」</p>
+      </div>
+
+
+      <div class="compare">
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまで</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ 今日から</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>Excelやスライドは全部手作業で、数時間かかっていた</li>
+              <li><span class="ci">✕</span>AIは「文章を書くだけ」だと思っていた</li>
+              <li><span class="ci">✕</span>頼み方が曖昧で、思ったものが返ってこなかった</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>Excel・Word・PDF・スライドをプロンプト一発で作れる</li>
+              <li><span class="ci">✓</span>「役割・背景・条件・形式」の型で狙い通りに頼める</li>
+              <li><span class="ci">✓</span>資料を読ませてから頼む・拡張思考で深く考えさせる、が使える</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">💡 上のタブで「これまで／今日から」を切り替えて振り返れます</div>
+      </div>
+
+
+      <div style="margin-top:20px;">
+        <div class="msg-card">「成果物は、プロンプト一発で作れる」</div>
+        <div class="msg-card">「型で頼めば、狙い通りに返ってくる」</div>
+        <div class="msg-card">「今日作ったものは、テンプレという資産になる」</div>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 次回予告</div>
+        <p>「次回は『自分仕様にする・長文を扱う』。プロジェクト・コネクタ・メモリという機能で、Claudeを自分専用の環境に育てます。そして長い資料・複数の資料を自在にさばく方法まで。今日の"型"がそのまま土台になりますよ。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：宿題（任意）</div><p>「今日作ったテンプレを、次の1週間で1回は実務投入する」を宿題に。次回冒頭で「使ってみてどうだったか」を1〜2名に聞くと連続性が出る。</p></div>
+    </div>
+
+
+    <!-- STEP 7 : 講師メモ -->
+    <div class="step-content" id="s2-7">
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">💡</span>講師用</span>
+        <span class="step-goal"><strong>この回の運営メモ</strong>（受講者には非表示）</span>
+      </div>
+
+
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>まず作ってみる</td><td>🎬体験</td><td>プロンプト一発でExcel生成・アーティファクト体験</td><td>20分</td></tr>
+          <tr><td>プロンプトの型</td><td>📖学ぶ</td><td>役割・背景・条件・形式の4要素</td><td>25分</td></tr>
+          <tr><td>資料の渡し方</td><td>📖学ぶ</td><td>PDF・画像・Excelのアップロードと読み込み</td><td>25分</td></tr>
+          <tr><td>Excel・Word実践</td><td>✋実践</td><td>自分の業務ファイルを生成・修正・PDF化</td><td>35分</td></tr>
+          <tr><td>スライド＋拡張思考</td><td>✋実践</td><td>PowerPoint生成・Extended Thinking体験</td><td>30分</td></tr>
+          <tr><td>まとめ</td><td>🎁公開</td><td>Before/After・次回予告</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2.5時間</td></tr>
+        </tbody>
+      </table>
+
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「ファイルづくりは"頼み方の型"が9割です」</div>
+        <div class="msg-card">「まず作らせて、直しながら仕上げればいい」</div>
+        <div class="msg-card">「今日の成果物は、そのまま職場で使えます」</div>
       </div>
     </div>
   </div>
