@@ -318,7 +318,7 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     <p class="header-desc">業種を問わず、Claudeを「仕事の相棒」にする。チャットでの文章作成から、Excel・PowerPointの自動化、ブラウザ・PC操作の自動化、Agent Skills・Claude Code まで。7回で体系的に身につけます。</p>
     <div class="header-stats">
       <div class="stat"><div class="stat-num">7</div><div class="stat-label">回の授業</div></div>
-      <div class="stat"><div class="stat-num">2</div><div class="stat-label">回公開中</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">回公開中</div></div>
       <div class="stat"><div class="stat-num">2h</div><div class="stat-label">／回の目安</div></div>
     </div>
   </div>
@@ -350,12 +350,12 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜2回 公開）</div>
-    <div class="progress-track"><div class="progress-fill" style="width:29%;"></div></div>
+    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜3回 公開）</div>
+    <div class="progress-track"><div class="progress-fill" style="width:43%;"></div></div>
     <div class="progress-steps">
       <span class="ps-label active">第1回 ✓</span>
       <span class="ps-label active">第2回 ✓</span>
-      <span class="ps-label">第3回</span>
+      <span class="ps-label active">第3回 ✓</span>
       <span class="ps-label">第4回</span>
       <span class="ps-label">第5回</span>
       <span class="ps-label">第6回</span>
@@ -438,10 +438,10 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     </div>
 
 
-    <div class="card coming" data-num="03">
+    <div class="card ready" data-num="03">
       <div class="card-header">
         <span class="card-num">第03回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開中</span>
       </div>
       <div class="card-title">自分仕様にする・長文を扱う</div>
       <div class="card-subtitle">プロジェクト・コネクタ・メモリ＋長文処理</div>
@@ -455,7 +455,9 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
       <div class="card-deliverable">📦 自分専用に育てたClaude環境</div>
       <div class="card-footer">
         <span class="card-time">約2.5時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">第1回承認後に作成</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-3')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
@@ -1145,6 +1147,299 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <div class="msg-card">「ファイルづくりは"頼み方の型"が9割です」</div>
         <div class="msg-card">「まず作らせて、直しながら仕上げればいい」</div>
         <div class="msg-card">「今日の成果物は、そのまま職場で使えます」</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============ 第3回 詳細パネル ============ -->
+  <div class="detail-panel" id="detail-3">
+    <div class="detail-header">
+      <div class="detail-title">第03回｜<span>自分仕様にする・長文を扱う</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-3')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s3',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>専用Claude体験</div>
+      <div class="step-tab" onclick="showStep('s3',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>プロジェクト</div>
+      <div class="step-tab" onclick="showStep('s3',3)"><span class="step-tab-num">3</span><span class="tab-cat c-learn"></span>つなぐ・覚える</div>
+      <div class="step-tab" onclick="showStep('s3',4)"><span class="step-tab-num">4</span><span class="tab-cat c-learn"></span>長文の仕組み</div>
+      <div class="step-tab" onclick="showStep('s3',5)"><span class="step-tab-num">5</span><span class="tab-cat c-prac"></span>横断整理の実践</div>
+      <div class="step-tab" onclick="showStep('s3',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>まとめ</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s3',7)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+
+    <!-- STEP 1 -->
+    <div class="step-content active" id="s3-1">
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>「自分の文脈で答えるClaude」を体験する（目安20分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「前回まで、Claudeに頼むたびに背景を説明していましたよね。『私は総務担当で…』『読み手は全社員で…』と。毎回同じ説明をするのは、正直めんどうです。今日はそれを卒業します。まず、皆さんの仕事を最初から分かっている"専用Claude"を体験してみましょう。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>claude.ai の左メニューから「プロジェクト」を開き、「新規プロジェクト」を作る</li>
+        <li>名前を自分の業務にする（例：「経理業務」「営業資料づくり」「採用まわり」）</li>
+        <li>手元の資料を1つ添付する（業務マニュアル・商品説明・過去の案内文など）</li>
+        <li>そのプロジェクト内で新しいチャットを開き、「この資料をふまえて、私の業務を要約して」と聞く</li>
+        <li>続けて、資料の中身に関する質問をしてみる——説明なしで話が通じることを確かめる</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「説明ゼロで話が通じましたね。これが『プロジェクト機能』です。目的別にチャットを束ねて、資料を"知識ベース"として持たせられる。ここに指示や資料を足していくほど、Claudeはあなたの仕事に詳しくなっていきます。今日の前半はこの"育て方"を学びます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：資料は何でもいい</div><p>「ちゃんとした資料がない」と止まる人が出る。メール1本・箇条書きメモでも成立すると伝える。体験の狙いは「説明なしで通じる」の一点なので、資料の質は問わない。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員がプロジェクトを1つ作り、資料込みで1往復できていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="step-content" id="s3-2">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>プロジェクトの「育て方」を身につける（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「プロジェクトには、資料のほかに『いつもの指示』を仕込めます。ここを設定しておくと、毎回のプロンプトが短くなり、出てくるものの品質が安定します。プロジェクトに入れられるものを整理しましょう。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>入れるもの</th><th>役割</th><th>例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>指示（システムプロンプト）</strong></td><td>このプロジェクト内で常に効く前提・ルール</td><td>「読み手は全社員。専門用語は避け、A4一枚に収める」</td></tr>
+          <tr><td><strong>資料（ナレッジ）</strong></td><td>毎回参照してほしい知識</td><td>業務マニュアル・商品一覧・過去の成果物・用語集</td></tr>
+          <tr><td><strong>チャット履歴</strong></td><td>テーマごとの作業記録が自動で貯まる</td><td>「4月の案内文」「5月の案内文」…と並んでいく</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 システムプロンプトの例（コピーして書き換えてOK）</div>
+        <p>「あなたは当社の総務アシスタントです。社内文書を作るときは、①結論を先に、②箇条書き中心、③丁寧だが硬すぎない言葉で。宛先が社外の場合だけ敬語を強めてください。会社の基本情報は添付の資料を参照してください。」</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「これで『前提を毎回説明する仕事』が消えました。前回学んだプロンプトの型のうち、役割と背景はプロジェクトに預けて、皆さんは条件と形式だけ言えばいい。プロジェクトは"チームの新人に渡す引き継ぎ書"だと思って、少しずつ育ててください。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：業務別に2〜3個が目安</div><p>「プロジェクトはいくつ作ればいいか」と必ず聞かれる。「よくやる業務の単位で2〜3個から」と答える。何でも入れる巨大プロジェクトより、目的別に分けた方が精度が出る。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>自分のプロジェクトにシステムプロンプトを1つ設定できていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="step-content" id="s3-3">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>コネクタ・スタイル・メモリの3つを知る（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「プロジェクトに資料を"手で"入れる方法は覚えました。次は、もっと横着する方法です。普段使っているツールとつなぐ・文体を覚えさせる・自分のことを覚えさせる。この3つで、Claudeがぐっと自分仕様になります。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>機能</th><th>何ができるか</th><th>効く場面</th></tr></thead>
+        <tbody>
+          <tr><td><strong>コネクタ</strong></td><td>Google Drive・Slack・Notion などと接続し、中の資料を直接参照できる</td><td>「Driveの企画書を読んで要約して」がアップロードなしで通る</td></tr>
+          <tr><td><strong>スタイル</strong></td><td>出力の文体・トーンを登録して使い分けられる</td><td>「社内向けカジュアル」「顧客向け丁寧」をワンタッチで切替</td></tr>
+          <tr><td><strong>メモリ</strong></td><td>あなたの役職・好み・仕事の進め方をClaudeが覚えている</td><td>チャットをまたいで「いつもの形式で」が通じる</td></tr>
+        </tbody>
+      </table>
+
+
+      <ol class="instruction-list">
+        <li>設定画面から「コネクタ」を開き、使っているツール（Google Driveなど）を1つ接続してみる</li>
+        <li>「スタイル」で、自分がよく書く文章を1本貼り付けて文体を登録する</li>
+        <li>チャットで「私の役割と、資料づくりの好みを覚えておいて」と伝え、メモリに残ることを確認する</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「整理するとこうです。<strong>プロジェクト＝仕事の文脈</strong>、<strong>コネクタ＝資料への通り道</strong>、<strong>スタイル＝あなたの文体</strong>、<strong>メモリ＝あなた自身</strong>。この4点セットが揃うと、Claudeは"どこかのAI"から"うちの担当者"に変わります。接続時は会社のセキュリティルールの確認だけ忘れずに。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：接続はデモでも可</div><p>コネクタは会社アカウントの権限で接続できない受講者もいる。その場合は講師のデモを見せて「帰社後にIT担当へ確認」を宿題にすればよい。スタイルとメモリは全員その場で試せる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>3機能の違いを自分の言葉で言えて、最低1つ実際に設定できていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="step-content" id="s3-4">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>長文を破綻なく扱える理由と、渡し方のコツを知る（目安20分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからは今日の後半戦、『長い文章』の話です。Claudeの一番の得意技は、分厚い資料を丸ごと読んで考えられること。なぜそんなことができるのか、そして、どう渡せば実力を引き出せるのかを押さえます。」</p>
+      </div>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 コンテキストウィンドウ＝Claudeの「作業机の広さ」</div>
+        <p>Claudeが一度に頭に置いておける情報量を「コンテキストウィンドウ」と呼びます。Claudeはこの机がとても広く、書籍1冊分クラスの文章を置いたまま考えられます。だから、長い契約書も、会議録も、複数の報告書も、"全体を見ながら"答えられるのです。</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>渡し方のコツ</th><th>やること</th><th>ダメな例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 目的を先に言う</strong></td><td>「何のために読むか」を資料より先に伝える</td><td>資料だけ渡して「よろしく」</td></tr>
+          <tr><td><strong>② まとめて渡す</strong></td><td>関連資料は小出しにせず一度に渡す</td><td>5回に分けて少しずつ貼る</td></tr>
+          <tr><td><strong>③ 構造を教える</strong></td><td>「資料Aは議事録、Bは企画書」とラベルを付ける</td><td>区切りなしで全部連結</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「机が広いと言っても、置き方が雑なら仕事は遅くなります。『目的が先・まとめて・ラベル付き』——たったこれだけで、長文の答えの精度が目に見えて変わります。次のSTEPで、実際に複数資料をさばいてみましょう。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：机のたとえで通す</div><p>トークン等の専門用語は出さない。「作業机の広さ」のたとえだけで十分伝わる。「会話が長くなりすぎると机が散らかる」という話は第7回（コンテキスト圧縮）で回収すると予告しておくとつながる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>渡し方のコツ3つが言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 5 -->
+    <div class="step-content" id="s3-5">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>複数資料の横断整理〜読み手別要約までを一気通貫でやる（目安45分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日の本番です。実務で一番多い『資料が複数あって、読み比べて、まとめて、誰かに伝える』という仕事を、Claudeと一緒に最後までやり切ります。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>関連する資料を2〜3本用意する（例：会議メモ＋前回の企画書、複数社の見積り、アンケート結果＋前年分）</li>
+        <li>ラベルを付けてまとめて渡し、「共通点と相違点を表で整理して」と頼む</li>
+        <li>「論点・矛盾・抜けている情報を挙げて」と深掘りする</li>
+        <li>読み手を変えて要約を3種類作る——「上司向けに1文で」「チーム向けに箇条書き5点で」「関係者向けにメール文で」</li>
+        <li>最後に「このメール文を、当社のいつものトーンに揃えて」とスタイルを使ってリライトする</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">プロンプト例（手元に資料がない人向け）</div>
+        <p>「【資料A：会議メモ】【資料B：先月の報告書】として以下を読み込んでください。そのうえで、①AとBで言っていることが食い違う箇所、②結論を出すために足りない情報、③次の会議で決めるべきことを、それぞれ箇条書きで挙げてください。」</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「いまやった流れ——<strong>横断整理 → 論点・矛盾の抽出 → 読み手別の要約 → トーン統一</strong>——は、報告・提案・引き継ぎ、ほとんどの知的作業に共通する型です。要約は『1文・箇条書き・読み手別』の3段構えで頼み分ける。これを覚えるだけで、伝える仕事の速度が変わります。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：資料がない人への備え</div><p>実資料を持ってこない受講者用に、練習用のダミー資料（架空の会議メモと報告書）を事前に配布リンクで用意しておくとスムーズ。発表は「矛盾を見つけた例」を1〜2名に共有してもらうと盛り上がる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員が横断整理→読み手別要約まで完走できていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 6 -->
+    <div class="step-content" id="s3-6">
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>まとめ</span>
+        <span class="step-goal"><strong>ゴール：</strong>今日の到達点を確認し、次回へつなぐ（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のまとめです。Claudeとの付き合い方が、今日でどう変わったかを振り返りましょう。」</p>
+      </div>
+
+
+      <div class="compare">
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまで</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ 今日から</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>毎回、自分の仕事や前提をゼロから説明していた</li>
+              <li><span class="ci">✕</span>長い資料は要点だけ拾い読みして、見落としが不安だった</li>
+              <li><span class="ci">✕</span>複数の資料の突き合わせは、時間がかかる割に漏れが出た</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>プロジェクト＋メモリで、説明なしで話が通じる環境ができた</li>
+              <li><span class="ci">✓</span>長文は「目的が先・まとめて・ラベル付き」で丸ごと任せられる</li>
+              <li><span class="ci">✓</span>横断整理→論点抽出→読み手別要約の型が手に入った</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">💡 上のタブで「これまで／今日から」を切り替えて振り返れます</div>
+      </div>
+
+
+      <div style="margin-top:20px;">
+        <div class="msg-card">「前提はプロジェクトに預けて、自分は条件だけ言う」</div>
+        <div class="msg-card">「長文は要約してから渡すのではなく、丸ごと渡す」</div>
+        <div class="msg-card">「Claudeは育てるほど、うちの担当者になっていく」</div>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 次回予告</div>
+        <p>「次回は『Officeと連携する』。皆さんが毎日使っているExcelとPowerPointの中に、Claudeを直接入れて働かせます。データ分析からピボット、グラフ、そして分析結果をそのままスライドにするワンフローまで。実務直結の回です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：宿題（任意）</div><p>「自分の主業務のプロジェクトを1つ育てる（指示＋資料3点）」を宿題に。次回冒頭で「プロジェクトに何を入れたか」を1〜2名に聞くと、他の受講者の参考になり連続性も出る。</p></div>
+    </div>
+
+
+    <!-- STEP 7 : 講師メモ -->
+    <div class="step-content" id="s3-7">
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">💡</span>講師用</span>
+        <span class="step-goal"><strong>この回の運営メモ</strong>（受講者には非表示）</span>
+      </div>
+
+
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>専用Claude体験</td><td>🎬体験</td><td>プロジェクト作成・資料込みで1往復</td><td>20分</td></tr>
+          <tr><td>プロジェクト</td><td>📖学ぶ</td><td>システムプロンプト・ナレッジの育て方</td><td>25分</td></tr>
+          <tr><td>つなぐ・覚える</td><td>📖学ぶ</td><td>コネクタ・スタイル・メモリ</td><td>25分</td></tr>
+          <tr><td>長文の仕組み</td><td>📖学ぶ</td><td>コンテキストウィンドウ・渡し方のコツ3つ</td><td>20分</td></tr>
+          <tr><td>横断整理の実践</td><td>✋実践</td><td>複数資料→論点抽出→読み手別要約→トーン統一</td><td>45分</td></tr>
+          <tr><td>まとめ</td><td>🎁公開</td><td>Before/After・次回予告</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2.5時間</td></tr>
+        </tbody>
+      </table>
+
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「毎回説明するのをやめる。それが今日のゴールです」</div>
+        <div class="msg-card">「長い資料こそClaudeの主戦場です」</div>
+        <div class="msg-card">「プロジェクトは引き継ぎ書。育てた分だけ返ってきます」</div>
       </div>
     </div>
   </div>
