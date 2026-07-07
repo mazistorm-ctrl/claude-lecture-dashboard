@@ -318,8 +318,8 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     <p class="header-desc">業種を問わず、Claudeを「仕事の相棒」にする。チャットでの文章作成から、Excel・PowerPointの自動化、ブラウザ・PC操作の自動化、Agent Skills・Claude Code まで。7回で体系的に身につけます。</p>
     <div class="header-stats">
       <div class="stat"><div class="stat-num">7</div><div class="stat-label">回の授業</div></div>
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">回公開中</div></div>
-      <div class="stat"><div class="stat-num">2h</div><div class="stat-label">／回の目安</div></div>
+      <div class="stat"><div class="stat-num">7</div><div class="stat-label">回公開中</div></div>
+      <div class="stat"><div class="stat-num">2〜3h</div><div class="stat-label">／回の目安</div></div>
     </div>
   </div>
 </header>
@@ -350,16 +350,16 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜5回 公開）</div>
-    <div class="progress-track"><div class="progress-fill" style="width:71%;"></div></div>
+    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（全回公開）</div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>
     <div class="progress-steps">
       <span class="ps-label active">第1回 ✓</span>
       <span class="ps-label active">第2回 ✓</span>
       <span class="ps-label active">第3回 ✓</span>
       <span class="ps-label active">第4回 ✓</span>
       <span class="ps-label active">第5回 ✓</span>
-      <span class="ps-label">第6回</span>
-      <span class="ps-label">第7回</span>
+      <span class="ps-label active">第6回 ✓</span>
+      <span class="ps-label active">第7回 ✓</span>
     </div>
   </div>
 </div>
@@ -510,10 +510,10 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     </div>
 
 
-    <div class="card coming" data-num="06">
+    <div class="card ready" data-num="06">
       <div class="card-header">
         <span class="card-num">第06回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開中</span>
       </div>
       <div class="card-title">Agent Skillsで拡張する</div>
       <div class="card-subtitle">Claudeに「道具」を持たせて仕事を任せる</div>
@@ -527,15 +527,17 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
       <div class="card-deliverable">📦 自分専用のAgent Skill 1本</div>
       <div class="card-footer">
         <span class="card-time">約3時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">第1回承認後に作成</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-6')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
 
-    <div class="card coming" data-num="07">
+    <div class="card ready" data-num="07">
       <div class="card-header">
         <span class="card-num">第07回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開中</span>
       </div>
       <div class="card-title">Claude Codeと使いこなし</div>
       <div class="card-subtitle">非エンジニアのClaude Code＋限界を知る</div>
@@ -549,7 +551,9 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
       <div class="card-deliverable">📦 AI活用の定着プラン＋総まとめ</div>
       <div class="card-footer">
         <span class="card-time">約3時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">第1回承認後に作成</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-7')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
@@ -2023,6 +2027,609 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <div class="msg-card">「今日から、Claudeは"答える人"から"働く人"になります」</div>
         <div class="msg-card">「任せる範囲は自分で決める。だから怖くない」</div>
         <div class="msg-card">「毎週やっている作業ほど、自動化の効果は大きい」</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============ 第6回 詳細パネル ============ -->
+  <div class="detail-panel" id="detail-6">
+    <div class="detail-header">
+      <div class="detail-title">第06回｜<span>Agent Skillsで拡張する</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-6')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s6',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>スキルが動く瞬間</div>
+      <div class="step-tab" onclick="showStep('s6',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>スキルの仕組み</div>
+      <div class="step-tab" onclick="showStep('s6',3)"><span class="step-tab-num">3</span><span class="tab-cat c-learn"></span>安全な使い方</div>
+      <div class="step-tab" onclick="showStep('s6',4)"><span class="step-tab-num">4</span><span class="tab-cat c-learn"></span>SKILL.mdの中身</div>
+      <div class="step-tab" onclick="showStep('s6',5)"><span class="step-tab-num">5</span><span class="tab-cat c-prac"></span>スキルを作る</div>
+      <div class="step-tab" onclick="showStep('s6',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>まとめ</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s6',7)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+
+    <!-- STEP 1 -->
+    <div class="step-content active" id="s6-1">
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claudeが「道具」を持ち替える瞬間を目撃する（目安20分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日は少し不思議な話から始めます。これまでの授業で、ClaudeはExcelを作ったり、Webを検索したり、ファイルを整理したりしましたよね。実は、あのときClaudeは場面ごとに"道具"を持ち替えていたんです。その道具の正体を、今日は見に行きます。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>claude.ai で新しいチャットを開く</li>
+        <li>「最近の〇〇業界のニュースを調べて、要点を3つ教えて」と頼む（Web検索の道具が動く）</li>
+        <li>画面に出る「検索中…」「ファイルを作成中…」のような表示に注目する</li>
+        <li>続けて「その内容を1枚のスライドにして」と頼む（ファイル生成の道具に持ち替わる）</li>
+        <li>Claudeがどの場面でどの道具を選んだか、みんなで言い合ってみる</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「この道具の正体が『Agent Skills（エージェントスキル）』です。Web検索・コード実行・ファイル操作……Claudeは頼まれた仕事に合わせて、自分でスキルを選んで使っています。そして今日の一番のお知らせはこれです——このスキル、自分で作れます。今日の最後には、皆さん専用のスキルが1本できあがります。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：「道具箱」の比喩で通す</div><p>「Claude＝職人、スキル＝道具箱の中の道具」で最後まで通すと迷子が出ない。体験では処理中の表示（どのスキルが動いているか）を指差しで実況すると「持ち替え」が見える。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「Claudeは道具を持ち替えて働いている」が腹落ちしていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="step-content" id="s6-2">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>標準スキルの種類と「いつ・なぜ」動くかを知る（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「まず、最初から入っている『標準スキル』を整理します。どこで確認できて、どういうときに動くのか。ここが分かると、Claudeの動きが読めるようになります。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>標準スキルの例</th><th>何をする道具か</th><th>動く場面の例</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Web検索</strong></td><td>最新情報をインターネットから取ってくる</td><td>「最近の」「今の」など鮮度が要る質問</td></tr>
+          <tr><td><strong>コード実行</strong></td><td>計算・データ処理をプログラムで正確に行う</td><td>集計・グラフ・複雑な計算</td></tr>
+          <tr><td><strong>ファイル操作</strong></td><td>Excel・Word・PDF・スライドを読み書きする</td><td>第2回でやった成果物づくり全般</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 スキルはどこで確認できる？　いつ動く？</div>
+        <p><strong>確認場所：</strong>claude.ai の設定（機能・ケイパビリティの画面）に、使えるスキルの一覧とオン/オフがあります。<strong>いつ動くか：</strong>皆さんが指定するのではなく、Claudeが依頼文を読んで「この仕事にはこの道具が要る」と自分で判断して使います。だから、頼み方に「最新の情報で」「正確に計算して」のような手がかりを入れると、適切なスキルが選ばれやすくなります。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「ポイントは『スキルは自動で選ばれる』ということ。皆さんがボタンを押すのではなく、依頼の書き方が道具選びのヒントになる。第2回で学んだ"型"に『最新情報で』『計算はコード実行で正確に』と一言足すだけで、Claudeの道具選びが上手になります。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：設定画面を全員で開く</div><p>スキル一覧の画面を全員で実際に開いて眺める時間を取る。「こんなに道具を持っていたのか」という発見が、後半のカスタムスキルづくりへの期待につながる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>標準スキル3種と「自動で選ばれる」ことが言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="step-content" id="s6-3">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>第三者スキルのリスクと見極め方を身につける（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「スキルは自分で作れるだけでなく、他の人が作ったものを追加することもできます。便利です。ただ、ここで一度立ち止まってください。スキルとは『Claudeへの指示書』です。誰かの指示書を自分のClaudeに読ませる——その意味を考えてから使いましょう。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>チェック項目</th><th>確認すること</th><th>危険なサイン</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 出どころ</strong></td><td>公式・実名・信頼できる組織が配布しているか</td><td>出所不明の共有リンク・匿名の配布</td></tr>
+          <tr><td><strong>② 中身</strong></td><td>SKILL.mdを開いて指示を読んだか（読める形か）</td><td>中身が読めない・難読化されている</td></tr>
+          <tr><td><strong>③ 求める権限</strong></td><td>仕事に必要な範囲のアクセスだけか</td><td>目的に不要なファイル・外部送信を求める</td></tr>
+          <tr><td><strong>④ 挙動</strong></td><td>「データをどこかへ送る」指示が入っていないか</td><td>外部URLへの送信・情報収集の指示</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「見極めの合言葉は『読んでから入れる』。スキルはただのテキストファイルなので、必ず中身を読めます。読んで意味が分からなければ、Claude本人に『このスキルは何をするもの？リスクは？』と読ませて説明させればいい。会社で使う場合は、勝手に追加せずIT担当への確認を挟むこと。ここを守れば、スキルは安全に拡張できます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：怖がらせすぎない</div><p>安全パートは重要だが、恐怖で締めると後半の「作る」意欲が下がる。「包丁と同じで、出どころと使い方さえ確かなら便利な道具」というトーンでまとめ、「自作スキルなら中身は全部自分が書いたもの＝一番安全」と次のSTEPへ橋を架ける。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>チェック4項目と「読んでから入れる」が言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="step-content" id="s6-4">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>SKILL.mdの構造を読めるようになる（目安35分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「いよいよスキルの中身です。カスタムスキルの本体は『SKILL.md』という1枚のテキストファイル。プログラミングではありません。日本語で書く"新人向けの業務マニュアル"だと思ってください。実物を見てみましょう。」</p>
+      </div>
+
+
+      <div class="code-wrap">
+        <div class="code-header">
+          <span class="code-filename"><span class="code-dot dot-md"></span>SKILL.md（例：口コミ返信スキル）</span>
+          <button class="copy-btn" onclick="copyCode(this)">コピー</button>
+        </div>
+        <pre><span class="tok-comment">---（ここからフロントマター＝スキルの名札）</span>
+<span class="tok-key">name:</span> <span class="tok-val">kuchikomi-reply</span>
+<span class="tok-key">description:</span> <span class="tok-val">お客様の口コミ・レビューへの返信文を作る。
+  「口コミに返信」「レビュー返信」と言われたら使う。</span>
+<span class="tok-comment">---（ここまで名札。以下が本文＝手順書）</span>
+
+<span class="tok-head"># 口コミ返信スキル</span>
+
+<span class="tok-head">## 手順</span>
+1. 口コミの内容を読み、良い点への言及と改善要望を分ける
+2. 感謝 → 具体的な言及 → 今後の対応 → 再来のお誘い の順で返信を作る
+3. 3パターン（丁寧・親しみ・簡潔）を提示して選んでもらう
+
+<span class="tok-head">## ルール</span>
+- 返信は200字以内。言い訳をしない。個人情報を書かない
+- ネガティブな口コミほど、反論せずまず受け止める
+
+<span class="tok-head">## 参考</span>
+- 過去の良い返信例は references/henshin-rei.md を参照</pre>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>構成要素</th><th>役割</th><th>書くこと</th></tr></thead>
+        <tbody>
+          <tr><td><strong>フロントマター</strong></td><td>スキルの名札。Claudeが「いつ使うか」を判断する材料</td><td>名前と、発動のきっかけになる言葉（トリガー）</td></tr>
+          <tr><td><strong>本文</strong></td><td>仕事の手順書</td><td>手順・ルール・良い例と悪い例</td></tr>
+          <tr><td><strong>scripts / references</strong></td><td>添付の道具箱と資料集（必要なときだけ）</td><td>定型処理のスクリプト、参考資料・テンプレート</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「注目してほしいのは description（説明文）です。Claudeはここを読んで『今この道具を使うべきか』を判断します。つまり<strong>トリガーになる言葉を具体的に書くほど、狙った場面でスキルが動く</strong>。本文は皆さんが新人に渡す手順書と同じ書き方でOK。プログラミング不要、というのが実感できたと思います。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：コード画面への抵抗を下げる</div><p>黒い画面が出た瞬間に身構える人がいる。「これはただのメモ帳の中身。色が付いているだけ」と先に言う。コピーボタンで手元に持ち帰れることも伝えると安心する。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「名札（いつ使うか）＋手順書（どうやるか）」の2階建てが言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 5 -->
+    <div class="step-content" id="s6-5">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>自分の業務スキルを1本作って動かす（目安50分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日の本番です。自分の繰り返し業務を1つ選んで、スキルにします。ゼロから書く必要はありません。『skill-creator』という、スキルを作るためのスキルがあって、Claudeと会話しながら組み立ててくれます。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>スキルにしたい業務を1つ選ぶ（毎回同じ手順でやっている仕事：週報づくり・議事録整形・問い合わせ一次回答・チェックリスト確認 など）</li>
+        <li>Claudeに「skill-creatorを使って、〇〇のスキルを作りたい」と話しかける</li>
+        <li>質問に答えながら、手順・ルール・トリガーの言葉を伝えていく（新人に口頭で教えるつもりで）</li>
+        <li>できあがったSKILL.mdを読んで、「ここは違う」を2〜3箇所直してもらう</li>
+        <li>スキルを登録し、新しいチャットでトリガーの言葉を使って呼び出しテストをする</li>
+        <li>狙い通りに動かなければ、descriptionのトリガー語を具体的にして再テスト</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 うまく動かないときのチェックポイント／MCPコネクタとの違い</div>
+        <p><strong>動かないときは上から順に：</strong>①descriptionに発動のきっかけ語が入っているか → ②手順が曖昧な日本語になっていないか → ③1つのスキルに仕事を詰め込みすぎていないか（1スキル1業務が基本）。<br><strong>コネクタとの違い：</strong>第3回のコネクタは「外部ツールへの<strong>通り道</strong>」、スキルは「仕事の<strong>やり方</strong>」。Driveの資料を読むのはコネクタ、読んだ後にどう整理するかがスキル、と覚えてください。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「いま皆さんがやったのは、<strong>自分のノウハウの道具化</strong>です。頭の中にしかなかった手順が、ファイルになり、いつでも同じ品質で再現される。大量の情報整理・文章レビュー・FAQづくり・比較検討——どんな業務も、手順が言葉にできればスキルにできます。1本作れた人は、もう何本でも作れます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：題材選びが5割</div><p>「手順が3〜5ステップで言える仕事」を選ばせると成功率が高い。大きすぎる題材（営業全部など）は「その中の1工程だけ」に絞らせる。完成者から順に呼び出しテストのデモをしてもらい、発動の瞬間の歓声を全体で共有する。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>全員が自作スキルを登録し、呼び出しテストに成功していればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 6 -->
+    <div class="step-content" id="s6-6">
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>まとめ</span>
+        <span class="step-goal"><strong>ゴール：</strong>今日の到達点を確認し、次回（最終回）へつなぐ（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のまとめです。Claudeとの関係が今日でまた一段変わりました。振り返りましょう。」</p>
+      </div>
+
+
+      <div class="compare">
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまで</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ 今日から</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>同じ頼みごとを、毎回ゼロから説明していた</li>
+              <li><span class="ci">✕</span>仕事のノウハウは自分の頭の中だけにあった</li>
+              <li><span class="ci">✕</span>拡張機能は「よく分からないから怖い」だった</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>繰り返し業務が、呼べば動く「自分の道具」になった</li>
+              <li><span class="ci">✓</span>ノウハウがSKILL.mdという形で残り、共有もできる</li>
+              <li><span class="ci">✓</span>「読んでから入れる」で第三者スキルも見極められる</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">💡 上のタブで「これまで／今日から」を切り替えて振り返れます</div>
+      </div>
+
+
+      <div style="margin-top:20px;">
+        <div class="msg-card">「スキル＝新人に渡す手順書。日本語で書けばいい」</div>
+        <div class="msg-card">「1スキル1業務。小さく作って育てる」</div>
+        <div class="msg-card">「あなたのノウハウが、道具になって残る」</div>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 次回予告</div>
+        <p>「次回はいよいよ最終回、『Claude Codeと使いこなし』。非エンジニアのためのClaude Code入門と、AIの限界——ハルシネーションの見抜き方・軌道修正のしかたを学びます。7回の総仕上げとして、皆さんの"AIとの付き合い方"を完成させましょう。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：宿題（任意）</div><p>「今日のスキルを1週間実務で使い、直したくなった箇所を3つメモしてくる」を宿題に。スキルは使って直すことで完成する、というメッセージとセットで。</p></div>
+    </div>
+
+
+    <!-- STEP 7 : 講師メモ -->
+    <div class="step-content" id="s6-7">
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">💡</span>講師用</span>
+        <span class="step-goal"><strong>この回の運営メモ</strong>（受講者には非表示）</span>
+      </div>
+
+
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>スキルが動く瞬間</td><td>🎬体験</td><td>標準スキルの持ち替えを目撃する</td><td>20分</td></tr>
+          <tr><td>スキルの仕組み</td><td>📖学ぶ</td><td>標準スキル一覧・確認場所・いつなぜ動くか</td><td>30分</td></tr>
+          <tr><td>安全な使い方</td><td>📖学ぶ</td><td>第三者スキルのリスク・チェック4項目</td><td>25分</td></tr>
+          <tr><td>SKILL.mdの中身</td><td>📖学ぶ</td><td>フロントマター・本文・scripts/references</td><td>35分</td></tr>
+          <tr><td>スキルを作る</td><td>✋実践</td><td>skill-creatorで自作→登録→呼び出しテスト</td><td>50分</td></tr>
+          <tr><td>まとめ</td><td>🎁公開</td><td>Before/After・次回予告</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約3時間</td></tr>
+        </tbody>
+      </table>
+
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「プログラミングではありません。手順書づくりです」</div>
+        <div class="msg-card">「スキルは読んでから入れる。自作が一番安全」</div>
+        <div class="msg-card">「今日の1本が、あなたの道具箱の始まりです」</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============ 第7回 詳細パネル ============ -->
+  <div class="detail-panel" id="detail-7">
+    <div class="detail-header">
+      <div class="detail-title">第07回｜<span>Claude Codeと使いこなし</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-7')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s7',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>Codeに任せてみる</div>
+      <div class="step-tab" onclick="showStep('s7',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>Codeとの使い分け</div>
+      <div class="step-tab" onclick="showStep('s7',3)"><span class="step-tab-num">3</span><span class="tab-cat c-prac"></span>三種の神器 実践</div>
+      <div class="step-tab" onclick="showStep('s7',4)"><span class="step-tab-num">4</span><span class="tab-cat c-learn"></span>意図とズレる理由</div>
+      <div class="step-tab" onclick="showStep('s7',5)"><span class="step-tab-num">5</span><span class="tab-cat c-learn"></span>ウソを見抜く</div>
+      <div class="step-tab" onclick="showStep('s7',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>講座のまとめ</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s7',7)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+
+    <!-- STEP 1 -->
+    <div class="step-content active" id="s7-1">
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claude Codeに最初の仕事を任せてみる（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「最終回です。今日の主役は『Claude Code』——名前に"Code"と付いていますが、エンジニア専用ではありません。前回までのCoworkの兄弟分で、より本格的な作業を任せられる働き手です。まず、難しい説明の前に1つ仕事を頼んでみましょう。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>Claude Desktop（またはターミナル）で Claude Code の画面（コードタブ）を開く</li>
+        <li>画面の見方を確認する：下の入力欄に日本語で頼む → 上に作業の経過が流れる、それだけ</li>
+        <li>練習用フォルダを対象に「このフォルダのファイル一覧を、種類と更新日つきの表にして」と頼む</li>
+        <li>経過表示を眺める——Claudeが自分でコマンドを選び、実行し、結果をまとめる様子を観察する</li>
+        <li>続けて「その表をCSVファイルとして保存して」と頼み、ファイルが実際にできたことを確認する</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「プログラムを書いたのはClaudeで、皆さんは日本語で頼んだだけ。これがClaude Codeです。『コードを書けるAI』ではなく『コードという道具を使って、あなたの作業を片付けるAI』と捉えてください。今日の前半はこの道具でどこまでできるか、後半は7回の総仕上げとして"AIの限界との付き合い方"を学びます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：黒い画面アレルギー対策</div><p>ターミナル画面に身構える人が必ずいる。「入力欄とチャットの位置が違うだけで、やることは今までと同じ」と最初に言い切る。デスクトップアプリのコードタブから入ると心理的ハードルが低い。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>日本語の依頼でファイル一覧→CSV保存までできればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="step-content" id="s7-2">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>CoworkとClaude Codeの使い分けを掴む（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「前回のCoworkと今日のClaude Code、何が違うのか。結論から言うと、<strong>迷ったらCoworkで十分</strong>です。そのうえで、Codeが力を発揮する場面を知っておきましょう。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th></th><th>Cowork</th><th>Claude Code</th></tr></thead>
+        <tbody>
+          <tr><td><strong>イメージ</strong></td><td>気の利く同僚</td><td>本格的な作業員（道具一式持ち）</td></tr>
+          <tr><td><strong>得意な仕事</strong></td><td>ファイル整理・資料づくり・日常の自動化</td><td>大量データの加工・分析・繰り返し処理・精密な変換</td></tr>
+          <tr><td><strong>規模感</strong></td><td>数十ファイル・日常業務サイズ</td><td>数千行のデータ・数百ファイルでも安定</td></tr>
+          <tr><td><strong>向く人</strong></td><td>全員（まずはここから）</td><td>定型の大量処理を持っている人</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 非エンジニアがCode に頼めること（今日の三種の神器）</div>
+        <p><strong>① ファイル仕事：</strong>整理・一括リネーム・CSV加工・PDF変換。<strong>② データ分析：</strong>数千行の売上データの集計・傾向分析・グラフ自動生成。<strong>③ 文章生成：</strong>データにもとづくレポート・定型文書の量産。——どれも「Excelが固まる」「手作業では日が暮れる」規模で真価が出ます。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「使い分けの目安は<strong>『量』</strong>です。手作業でギリギリできる量ならCowork、『これは人間がやる量じゃない』と感じたらClaude Code。皆さんの職場の"月末の地獄の作業"を思い浮かべてください。あれが候補です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：無理に使わせない</div><p>「全員がCodeを使いこなす」をゴールにしない。「Coworkで足りる人はそれでいい。ただし大量処理の選択肢があると知っていることが財産」というスタンスで。受講者の実務から"地獄の作業"を聞き出して次STEPの題材にする。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>「迷ったらCowork、量が多いならCode」が言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="step-content" id="s7-3">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>大量データの分析→グラフ→レポートを一気通貫でやる（目安45分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では三種の神器を通しで使います。お題は『1年分の売上データから、月次レポートを自動で作る』。配布した練習用CSV（またはご自身のデータのコピー）でやってみましょう。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>練習用フォルダにCSVデータを置き、「このCSVの中身をまず要約して」と全体像を掴ませる</li>
+        <li>「月別・カテゴリ別に集計して、傾向と気になる点を教えて」と分析を頼む</li>
+        <li>「月別推移とカテゴリ構成比のグラフを画像で作って」と可視化する</li>
+        <li>「ここまでの分析とグラフを使って、上司向けの月次レポートをWordで作って。構成はサマリー・好調点・懸念点・来月のアクション」と仕上げる</li>
+        <li>時間が余ったら：「毎月同じ形式のCSVを置いたら、同じレポートを作れるように手順をメモして」と再利用の仕込みまで</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「データ読み込み→集計→グラフ→レポート。人がやれば丸1日の仕事です。そして⑤に注目してください——手順をメモさせれば、来月は『いつもの月次レポートを』の一言で済む。第6回のスキルの考え方と同じです。<strong>1回できた仕事は、仕組みにして繰り返す</strong>。これがAI活用の複利です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：練習用CSVを必ず用意</div><p>1年分×数百行の架空売上CSVを事前配布する（実データ持ち込みはコピーで）。途中でエラーが出ても「エラー文ごとClaudeに見せれば直る」を実演すると、トラブル対応力ごと持ち帰ってもらえる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>分析→グラフ→レポートまで完走できていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="step-content" id="s7-4">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claudeが意図とズレる仕組みを理解する（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「ここからは総仕上げ、『AIの限界を知る』パートです。7回使ってきて、皆さんも経験したはずです——『なんか話が通じてないな』という瞬間。あれには理由があります。理由が分かれば、直せます。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>ズレる原因</th><th>何が起きているか</th><th>直し方</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 指示の曖昧さ</strong></td><td>「いい感じに」をClaudeが別の意味で解釈</td><td>第2回の型（役割・背景・条件・形式）に戻る</td></tr>
+          <tr><td><strong>② 前提の欠落</strong></td><td>あなたの常識をClaudeは知らない</td><td>プロジェクト・メモリに前提を預ける（第3回）</td></tr>
+          <tr><td><strong>③ 会話が長すぎる</strong></td><td>下で説明する「コンテキスト圧縮」</td><td>話題が変わったら新しいチャットを開く</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 コンテキスト圧縮——会話が長くなると何が起きるか</div>
+        <p>第3回で「Claudeの作業机は広い」と学びました。それでも会話が延々と続くと机はいっぱいになり、Claudeは古いやり取りを<strong>要約して畳む</strong>ことで場所を空けます。これが「コンテキスト圧縮」。畳まれた部分の細部は失われるので、「さっき言ったのに忘れてる」が起きるのです。故障ではなく、机の整理の副作用です。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「対策はシンプルです。<strong>1チャット1話題</strong>。仕事が変わったら新しいチャットを開く。長い作業では、途中で『ここまでの決定事項をまとめて』と自分で棚卸しさせて、大事なことを畳まれる前に固定する。この2つで、ズレの大半は防げます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：受講者の失敗談を集める</div><p>冒頭で「Claudeと話が通じなかった経験」を挙手で集め、原因①②③のどれだったかをその場で仕分けすると、表が自分ごとになる。「故障ではなく仕組み」というフレーミングで安心させる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>ズレの3原因と「1チャット1話題」が言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 5 -->
+    <div class="step-content" id="s7-5">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>ハルシネーションを見抜き、防ぎ、軌道修正できるようになる（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「最後の関門、『ハルシネーション』です。AIが、事実でないことをもっともらしく言う現象。Claudeは他のAIより誠実に設計されていますが、ゼロではありません。見抜き方と防ぎ方を身につけて、この講座を締めましょう。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th></th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td><strong>起きやすい場面</strong></td><td>固有名詞の詳細（人名・製品仕様・法律の条文番号）／最新の出来事／細かい数値・統計／「知らない」と言いにくい流れの質問</td></tr>
+          <tr><td><strong>危険なサイン</strong></td><td>やけに具体的なのに出典がない／同じ質問を言い換えると答えが変わる／自信満々の断定口調</td></tr>
+          <tr><td><strong>見抜き方</strong></td><td>「その根拠は？」「出典を教えて」と聞く／Web検索スキルで裏取りさせる／重要な数字は原典に自分で当たる</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 防ぐ・軌道修正する実践フレーズ</div>
+        <p><strong>予防：</strong>「分からない場合は推測せず『分からない』と言って」「事実と推測を分けて書いて」を依頼に添える。<strong>軌道修正：</strong>怪しい答えが出たら「本当に？根拠を確認して」と一度立ち止まらせる。訂正されたら「以後この点は推測しないで」と釘を刺す。<strong>鉄則：</strong>社外に出す数字・名前・引用は、必ず人間が原典確認。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「思い出してください、第1回で『Claudeは誠実さを重視して設計されている』と学びました。だから『分からないなら分からないと言って』という一言が、Claudeには特によく効きます。AIを疑う技術は、AIを使い倒すための技術です。怖がるためではなく、安心して任せる範囲を広げるために、今日の見抜き方を使ってください。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：実演で1回騙されてみせる</div><p>細かい固有名詞の質問でハルシネーションを誘発し、「根拠は？」で崩れる様子を見せると一発で伝わる（事前に再現する質問を仕込んでおく）。「AIのウソを見抜けた」という成功体験で終えるのがポイント。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>危険なサイン・見抜き方・予防フレーズが1つずつ言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 6 -->
+    <div class="step-content" id="s7-6">
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>まとめ</span>
+        <span class="step-goal"><strong>ゴール：</strong>7回の講座全体を締めくくり、明日からの活用を設計する（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「7回、お疲れさまでした。最後のまとめは、今日1日ではなく<strong>講座全体</strong>のビフォー・アフターです。第1回の自分を思い出しながら見てください。」</p>
+      </div>
+
+
+      <div class="compare">
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 講座の前</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ 今日から</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>AIは「たまに触る便利な検索」だった</li>
+              <li><span class="ci">✕</span>資料づくり・調べもの・整理は全部手作業だった</li>
+              <li><span class="ci">✕</span>AIの答えを鵜呑みにするか、逆に信用しないかの二択だった</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>成果物づくり・自分仕様化・Office連携・自動化・スキル・Codeまで、道具が7段そろった</li>
+              <li><span class="ci">✓</span>「型で頼む→計画を確認→任せる→裏取りする」という仕事の流れができた</li>
+              <li><span class="ci">✓</span>限界を知ったうえで、信頼して任せる範囲を自分で決められる</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">💡 上のタブで「講座の前／今日から」を切り替えて振り返れます</div>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li><strong>定着プランづくり（最後のワーク）：</strong>7回で学んだ中から「明日から毎日使うこと」を1つ、「今月中に仕組み化すること」を1つ選ぶ</li>
+        <li>それぞれ「どの業務で・どの機能を・週何回」まで具体化してメモする</li>
+        <li>隣の人（またはグループ）と宣言し合う——宣言した習慣は続きます</li>
+      </ol>
+
+
+      <div style="margin-top:20px;">
+        <div class="msg-card">「Claudeは検索ではなく、思考するパートナー」</div>
+        <div class="msg-card">「疑う技術があるから、安心して任せられる」</div>
+        <div class="msg-card">「1回できた仕事は、仕組みにして繰り返す」</div>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 講座の締め</div>
+        <p>「AIの世界は進化が速く、来年には新しい機能が出ているでしょう。でも、この講座で身につけた本質——<strong>明確に頼む・文脈を育てる・任せて確認する・限界を知る</strong>——は変わりません。Claudeを『思考するパートナー』として隣に置いて、皆さんの仕事を、皆さんらしく進化させてください。7回のご参加、本当にありがとうございました。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：定着プランは書かせて持ち帰らせる</div><p>最後のワークは口頭でなく必ず書かせる（配布シートかスマホメモ）。可能なら1か月後のフォロー会や連絡先を案内して、講座を「点」で終わらせない。アンケートはこの場で回収する。</p></div>
+    </div>
+
+
+    <!-- STEP 7 : 講師メモ -->
+    <div class="step-content" id="s7-7">
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">💡</span>講師用</span>
+        <span class="step-goal"><strong>この回の運営メモ</strong>（受講者には非表示）</span>
+      </div>
+
+
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>Codeに任せてみる</td><td>🎬体験</td><td>コードタブの見方・最初の依頼</td><td>25分</td></tr>
+          <tr><td>Codeとの使い分け</td><td>📖学ぶ</td><td>Cowork比較・非エンジニアの三種の神器</td><td>25分</td></tr>
+          <tr><td>三種の神器 実践</td><td>✋実践</td><td>CSV分析→グラフ→月次レポート自動生成</td><td>45分</td></tr>
+          <tr><td>意図とズレる理由</td><td>📖学ぶ</td><td>ズレの3原因・コンテキスト圧縮</td><td>25分</td></tr>
+          <tr><td>ウソを見抜く</td><td>📖学ぶ</td><td>ハルシネーションの原因・症状・見抜き方・予防</td><td>30分</td></tr>
+          <tr><td>講座のまとめ</td><td>🎁公開</td><td>講座全体のBefore/After・定着プラン・締め</td><td>30分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約3時間</td></tr>
+        </tbody>
+      </table>
+
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「Codeは怖くない。頼み方は今までと同じです」</div>
+        <div class="msg-card">「AIを疑う技術は、AIを使い倒す技術です」</div>
+        <div class="msg-card">「講座は今日で終わり。皆さんの活用は今日から始まります」</div>
       </div>
     </div>
   </div>
