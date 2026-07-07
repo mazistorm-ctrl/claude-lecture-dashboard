@@ -318,7 +318,7 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     <p class="header-desc">業種を問わず、Claudeを「仕事の相棒」にする。チャットでの文章作成から、Excel・PowerPointの自動化、ブラウザ・PC操作の自動化、Agent Skills・Claude Code まで。7回で体系的に身につけます。</p>
     <div class="header-stats">
       <div class="stat"><div class="stat-num">7</div><div class="stat-label">回の授業</div></div>
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">回公開中</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">回公開中</div></div>
       <div class="stat"><div class="stat-num">2h</div><div class="stat-label">／回の目安</div></div>
     </div>
   </div>
@@ -350,13 +350,13 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
 
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜3回 公開）</div>
-    <div class="progress-track"><div class="progress-fill" style="width:43%;"></div></div>
+    <div class="progress-label">カリキュラム進捗 — 全7回・汎用版（第1〜4回 公開）</div>
+    <div class="progress-track"><div class="progress-fill" style="width:57%;"></div></div>
     <div class="progress-steps">
       <span class="ps-label active">第1回 ✓</span>
       <span class="ps-label active">第2回 ✓</span>
       <span class="ps-label active">第3回 ✓</span>
-      <span class="ps-label">第4回</span>
+      <span class="ps-label active">第4回 ✓</span>
       <span class="ps-label">第5回</span>
       <span class="ps-label">第6回</span>
       <span class="ps-label">第7回</span>
@@ -462,10 +462,10 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
     </div>
 
 
-    <div class="card coming" data-num="04">
+    <div class="card ready" data-num="04">
       <div class="card-header">
         <span class="card-num">第04回</span>
-        <span class="card-status status-coming"><span class="status-dot"></span>準備中</span>
+        <span class="card-status status-ready"><span class="status-dot"></span>公開中</span>
       </div>
       <div class="card-title">Officeと連携する</div>
       <div class="card-subtitle">Claude in Excel / PowerPoint 実践</div>
@@ -479,7 +479,9 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
       <div class="card-deliverable">📦 分析からスライドまでの連携ワークフロー</div>
       <div class="card-footer">
         <span class="card-time">約2.5時間</span>
-        <span style="font-size:11px;color:var(--gray-300);">第1回承認後に作成</span>
+        <div class="card-btns">
+          <button class="btn-material" onclick="toggleDetail('detail-4')">教材を見る <span class="arrow">→</span></button>
+        </div>
       </div>
     </div>
 
@@ -1440,6 +1442,292 @@ footer { text-align:center; padding:28px 24px; border-top:1px solid var(--gray-2
         <div class="msg-card">「毎回説明するのをやめる。それが今日のゴールです」</div>
         <div class="msg-card">「長い資料こそClaudeの主戦場です」</div>
         <div class="msg-card">「プロジェクトは引き継ぎ書。育てた分だけ返ってきます」</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============ 第4回 詳細パネル ============ -->
+  <div class="detail-panel" id="detail-4">
+    <div class="detail-header">
+      <div class="detail-title">第04回｜<span>Officeと連携する</span> 教材</div>
+      <button class="btn-close" onclick="closeDetail('detail-4')">✕ 閉じる</button>
+    </div>
+
+    <div class="steps-nav">
+      <div class="step-tab active" onclick="showStep('s4',1)"><span class="step-tab-num">1</span><span class="tab-cat c-exp"></span>Excelの中のClaude</div>
+      <div class="step-tab" onclick="showStep('s4',2)"><span class="step-tab-num">2</span><span class="tab-cat c-learn"></span>Excel連携の基本</div>
+      <div class="step-tab" onclick="showStep('s4',3)"><span class="step-tab-num">3</span><span class="tab-cat c-prac"></span>予算シート実践</div>
+      <div class="step-tab" onclick="showStep('s4',4)"><span class="step-tab-num">4</span><span class="tab-cat c-learn"></span>PowerPoint連携</div>
+      <div class="step-tab" onclick="showStep('s4',5)"><span class="step-tab-num">5</span><span class="tab-cat c-prac"></span>ワンフロー実践</div>
+      <div class="step-tab" onclick="showStep('s4',6)"><span class="step-tab-num">6</span><span class="tab-cat c-out"></span>まとめ</div>
+      <div class="step-tab instructor-tab" onclick="showStep('s4',7)"><span class="step-tab-num">💡</span>講師メモ</div>
+    </div>
+
+
+    <!-- STEP 1 -->
+    <div class="step-content active" id="s4-1">
+      <div class="step-head">
+        <span class="cat-badge cat-exp"><span class="cat-ico">🎬</span>体験する</span>
+        <span class="step-goal"><strong>ゴール：</strong>Excelの中で動くClaudeを目撃する（目安20分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「これまでは claude.ai に仕事を持ち込んでいました。今日は逆です——皆さんが毎日開いているExcelとPowerPointの中に、Claudeが入ってきます。まず、Excelの中でClaudeがデータを読み解く様子を見てください。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>Excelを開き、アドインから Claude を起動する（入っていない人は講師のデモ画面を見ながらでOK）</li>
+        <li>売上や経費など、数字が並んだシートを開く（練習用データでも可）</li>
+        <li>サイドパネルのClaudeに「このシートのデータの傾向を教えて」と聞く</li>
+        <li>続けて「先月と比べて特に変化が大きいのはどこ？」と深掘りする</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「これが『Claude in Excel』です。ポイントは、Claudeがセルの位置や数式の中身を"見たまま"理解していること。ファイルをアップロードして説明する手間なく、開いているシートについてその場で相談できます。今日の前半はこのExcel連携、後半はPowerPoint連携です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：導入できない環境への備え</div><p>会社PCの権限でアドインを入れられない受講者が必ずいる。冒頭で「今日は講師画面のデモでも十分持ち帰れる」と宣言して安心させ、導入手順は資料として配る。練習用の売上データを事前に配布しておくと全員同じ画面で進められる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>Claudeがシートを読めている（自分の環境またはデモで確認）ならOK。</p></div>
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="step-content" id="s4-2">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claude in Excel でできることを整理する（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「Claude in Excel でできることを整理します。大きく4つ。どれも『Excelは使うけど、関数やピボットは得意じゃない』という人ほど効きます。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>できること</th><th>頼み方の例</th><th>これまでの苦労</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① データ分析</strong></td><td>「このデータの傾向と気になる点を教えて」</td><td>眺めて終わり、勘で判断</td></tr>
+          <tr><td><strong>② 数式の理解・作成</strong></td><td>「このセルの数式を日本語で説明して」「〇〇を計算する式を入れて」</td><td>関数の調べものに30分</td></tr>
+          <tr><td><strong>③ ピボットテーブル</strong></td><td>「月別×担当者別で集計するピボットを作って」</td><td>設定画面で迷子になる</td></tr>
+          <tr><td><strong>④ グラフ・条件付き書式</strong></td><td>「推移が分かるグラフと、目標未達のセルが赤くなる書式を」</td><td>見栄えの調整に時間泥棒</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 セル参照を保つ、とは</div>
+        <p>Claude in Excel は「B列の合計」「C3の数式」のようにセルの場所を指して会話できます。だから「C列とE列の差を新しい列に出して」のような指示がそのまま通ります。数式も値の貼り付けではなく"生きた数式"で入るので、データを更新すれば自動で再計算されます。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「コツは、Excelの用語を知らなくても『やりたいこと』を日本語で言えばいいということ。『ピボット』と言えなくても『月ごと・人ごとに集計した表がほしい』で通じます。Excelの知識ではなく、業務の言葉で頼んでください。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：苦手意識を外す回</div><p>「Excelが苦手」という自己申告の多い層ほど反応が良いパート。②の「数式を日本語で説明して」は感動が出やすいので、実データの複雑な数式で必ずデモする。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>4つのできること（分析・数式・ピボット・グラフ/書式）が言えればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="step-content" id="s4-3">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>予算シートをClaudeと共同作成する（目安35分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「では手を動かします。お題は『来期の予算シート』。ゼロから自分で作るのではなく、Claudeとキャッチボールしながら組み上げていきます。自分の部署・チームの数字に置き換えて構いません。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>「月別の予算管理シートの骨組みを作って。行は費目（人件費・広告費・消耗品など）、列は4月〜3月」と依頼する</li>
+        <li>「各費目の年間合計と、予算比の達成率を計算する列を足して」と数式を追加する</li>
+        <li>手元の実績値（または練習用データ）を数行入力する</li>
+        <li>「実績が予算を超えた月が一目で分かる条件付き書式を設定して」と頼む</li>
+        <li>仕上げに「費目別の構成比が分かる円グラフと、月別推移の折れ線グラフを追加して」</li>
+      </ol>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 うまくいくコツ</div>
+        <p>一度に全部頼まず、<strong>骨組み → 数式 → 書式 → グラフ</strong>の順で1段ずつ積む。各段階で結果を見て「ここを直して」と言えるので、失敗しても戻るのが簡単です。第2回で学んだ「まず作らせて、直しながら仕上げる」がここでも効きます。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「30分前まで存在しなかった予算管理シートが、数式・書式・グラフ込みで手元にあります。これが『財務モデルの共同作成』です。同じ進め方で、売上予測・人員計画・キャッシュフロー表——数字で管理するものは何でも作れます。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：段積みを守らせる</div><p>一気に長いプロンプトを書いて崩れる人が出る。「1段ずつ」を何度も声かけする。数字は架空でよいと明言（実数を出したくない人への配慮にもなる）。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>数式＋書式またはグラフ入りのシートが1本完成していればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="step-content" id="s4-4">
+      <div class="step-head">
+        <span class="cat-badge cat-learn"><span class="cat-ico">📖</span>学ぶ</span>
+        <span class="step-goal"><strong>ゴール：</strong>Claude in PowerPoint でできることを掴む（目安25分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「後半はPowerPointです。第2回でスライドをプロンプトから作りましたが、あれはclaude.ai上での話。今日はPowerPointの中でClaudeが動きます。一番の違いは『会社のテンプレートのまま』作れることです。」</p>
+      </div>
+
+
+      <table class="info-table">
+        <thead><tr><th>できること</th><th>内容</th><th>効く場面</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① テンプレート読み取り</strong></td><td>スライドマスターやブランドカラーを自動で継承する</td><td>会社の書式ルールを守ったまま量産</td></tr>
+          <tr><td><strong>② スライド一括生成</strong></td><td>説明文からデッキを丸ごと作る</td><td>提案書・報告書のたたき台づくり</td></tr>
+          <tr><td><strong>③ 既存スライドの編集</strong></td><td>選択したスライドだけ再構成・リライト</td><td>過去資料の使い回し・磨き込み</td></tr>
+          <tr><td><strong>④ ネイティブチャート生成</strong></td><td>編集可能な形式のグラフ・図表を挿入</td><td>あとから数値や色を自分で直せる</td></tr>
+        </tbody>
+      </table>
+
+
+      <div class="demo-box">
+        <div class="demo-box-title">💡 利用条件に注意</div>
+        <p>Claude in PowerPoint は Max / Team / Enterprise プラン向けの機能です（2026年時点）。自分のプランで使えない場合も、claude.ai でスライドを生成 → PowerPointで開いて仕上げ、という第2回の方法で同じ成果物にたどり着けます。</p>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「④の『ネイティブチャート』が地味に重要です。画像として貼られたグラフは直せませんが、編集可能な形式なら数値の差し替えも色の変更も普段のPowerPoint操作でできる。『AIが作ったあとに人が仕上げる』前提で設計されているんです。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：プラン差の扱い</div><p>使えるプランの受講者が少ない場合は、このSTEPをデモ中心にして、実践（次STEP）はclaude.ai経由のルートで統一するとよい。「どちらのルートでも成果物は同じ」と強調する。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>4つのできることと、自分のプランでのルートが分かっていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 5 -->
+    <div class="step-content" id="s4-5">
+      <div class="step-head">
+        <span class="cat-badge cat-prac"><span class="cat-ico">✋</span>実践する</span>
+        <span class="step-goal"><strong>ゴール：</strong>Excelの分析結果をそのままスライドにする（目安30分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日の総仕上げです。前半で作った予算シートの分析結果を、そのまま報告用スライドに変換します。『Excelで分析 → PowerPointで報告』という毎月の定番業務を、ワンフローでつなげましょう。」</p>
+      </div>
+
+
+      <ol class="instruction-list">
+        <li>前半の予算シートに戻り、Claudeに「このシートから、上司への月次報告に使うポイントを3つ挙げて」と頼む</li>
+        <li>挙がったポイントを確認し、「この内容で報告スライドの構成案を作って」と続ける</li>
+        <li>PowerPoint側のClaude（またはclaude.ai）に構成案を渡し、「表紙＋ポイント3枚＋今後の対応1枚の5枚構成で」と生成する</li>
+        <li>数字の部分は「Excelのこの表をグラフにして2枚目に入れて」とデータごと反映する</li>
+        <li>最後に自分の言葉でタイトルと結論だけ手直しして完成</li>
+      </ol>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 種明かし</div>
+        <p>「データ分析 → 要点抽出 → 構成 → スライド化。この一連の流れ、これまでは半日仕事だったはずです。大事なのは最後に自分の言葉で結論を直したこと——<strong>分析と清書はClaude、判断とメッセージは自分</strong>。この分担が、Office連携の正しい使い方です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：成果発表で締める</div><p>完成したスライドを2〜3名に画面共有してもらう。「月次報告が今後ずっと楽になる」という実感がこの回の持ち帰り。時間が余ったら既存スライドのリライト（できること③）も試させる。</p></div>
+      <div class="checkpoint"><div class="checkpoint-icon">✓</div><p>分析→スライドのワンフローを1周できていればOK。</p></div>
+    </div>
+
+
+    <!-- STEP 6 -->
+    <div class="step-content" id="s4-6">
+      <div class="step-head">
+        <span class="cat-badge cat-out"><span class="cat-ico">🎁</span>まとめ</span>
+        <span class="step-goal"><strong>ゴール：</strong>今日の到達点を確認し、次回へつなぐ（目安15分）</span>
+      </div>
+      <div class="narration intro">
+        <div class="narration-tag">🎙️ 導入トーク</div>
+        <p>「今日のまとめです。毎日使うOfficeの仕事が、今日でどう変わったかを振り返りましょう。」</p>
+      </div>
+
+
+      <div class="compare">
+        <div class="compare-tabs">
+          <button class="compare-tab active" data-side="before" onclick="setCompare(this)">😓 これまで</button>
+          <button class="compare-tab" data-side="after" onclick="setCompare(this)">✨ 今日から</button>
+        </div>
+        <div class="compare-body">
+          <div class="compare-panel active" data-side="before">
+            <ul class="compare-list">
+              <li><span class="ci">✕</span>関数・ピボット・グラフの作り方を毎回検索していた</li>
+              <li><span class="ci">✕</span>データを見ても、どこがポイントか自信が持てなかった</li>
+              <li><span class="ci">✕</span>月次報告はExcelとPowerPointを行き来して半日仕事</li>
+            </ul>
+          </div>
+          <div class="compare-panel" data-side="after">
+            <ul class="compare-list">
+              <li><span class="ci">✓</span>Excelの用語を知らなくても、業務の言葉で頼めば動く</li>
+              <li><span class="ci">✓</span>数式・書式・グラフ込みのシートを共同作成できる</li>
+              <li><span class="ci">✓</span>分析→要点→スライドがワンフローでつながった</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-tip">💡 上のタブで「これまで／今日から」を切り替えて振り返れます</div>
+      </div>
+
+
+      <div style="margin-top:20px;">
+        <div class="msg-card">「Excelの言葉ではなく、業務の言葉で頼む」</div>
+        <div class="msg-card">「骨組み→数式→書式→グラフ、1段ずつ積む」</div>
+        <div class="msg-card">「分析と清書はClaude、判断は自分」</div>
+      </div>
+
+
+      <div class="narration reveal">
+        <div class="narration-tag">✨ 次回予告</div>
+        <p>「次回は『ブラウザとPCを自動化する』。Claudeがブラウザの中でページを読み、フォームを書き、さらにデスクトップではファイル整理や資料の初稿づくりまで自分で動きます。"作業を頼む"から"仕事を任せる"へ、一段ギアが上がる回です。」</p>
+      </div>
+
+
+      <div class="instructor-note"><div class="note-label">講師メモ：宿題（任意）</div><p>「今月の定例のExcel／スライド仕事を1つ、今日の流れで作り直す」を宿題に。次回冒頭で「何分短縮できたか」を聞くと、効果が数字で共有できて場が締まる。</p></div>
+    </div>
+
+
+    <!-- STEP 7 : 講師メモ -->
+    <div class="step-content" id="s4-7">
+      <div class="step-head">
+        <span class="cat-badge cat-set"><span class="cat-ico">💡</span>講師用</span>
+        <span class="step-goal"><strong>この回の運営メモ</strong>（受講者には非表示）</span>
+      </div>
+
+
+      <h3>時間配分の目安</h3>
+      <table class="info-table">
+        <thead><tr><th>パート</th><th>カテゴリー</th><th>内容</th><th>時間</th></tr></thead>
+        <tbody>
+          <tr><td>Excelの中のClaude</td><td>🎬体験</td><td>アドイン起動・データについて質問</td><td>20分</td></tr>
+          <tr><td>Excel連携の基本</td><td>📖学ぶ</td><td>分析・数式・ピボット・グラフ/書式の4機能</td><td>25分</td></tr>
+          <tr><td>予算シート実践</td><td>✋実践</td><td>骨組み→数式→書式→グラフの段積み共同作成</td><td>35分</td></tr>
+          <tr><td>PowerPoint連携</td><td>📖学ぶ</td><td>テンプレ継承・一括生成・選択編集・ネイティブチャート</td><td>25分</td></tr>
+          <tr><td>ワンフロー実践</td><td>✋実践</td><td>Excel分析→要点→報告スライド生成</td><td>30分</td></tr>
+          <tr><td>まとめ</td><td>🎁公開</td><td>Before/After・次回予告</td><td>15分</td></tr>
+          <tr><td style="font-weight:700;color:var(--gold-dark);">合計</td><td></td><td></td><td style="font-weight:700;color:var(--gold-dark);">約2.5時間</td></tr>
+        </tbody>
+      </table>
+
+
+      <h3 style="margin-top:28px;">授業で繰り返し伝える3つのメッセージ</h3>
+      <div style="margin-top:12px;">
+        <div class="msg-card">「Excelが苦手な人ほど、今日は得をします」</div>
+        <div class="msg-card">「いつものファイルの中に、相棒が入っただけです」</div>
+        <div class="msg-card">「月次の報告仕事は、今日から半分になります」</div>
       </div>
     </div>
   </div>
