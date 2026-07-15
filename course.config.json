@@ -1,0 +1,9 @@
+{
+  "title": "実務で使いこなすClaude講座",
+  "subtitle": "全7回カリキュラム",
+  "description": "Claudeを\"仕事の相棒\"として使いこなすための実践講座。",
+  "chapters": [
+    { "dir": "ch1", "title": "カリキュラム（全7回）" }
+  ],
+  "assignments": { "dir": "assignments", "order": [] }
+}
