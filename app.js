@@ -44,7 +44,8 @@
     menuBtn: document.getElementById("menuBtn"),
     sidebarClose: document.getElementById("sidebarClose"),
     scrim: document.getElementById("scrim"),
-    themeBtn: document.getElementById("themeBtn")
+    themeBtn: document.getElementById("themeBtn"),
+    instructorBtn: document.getElementById("instructorBtn")
   };
 
   var totalLessons = flat.length;
@@ -65,6 +66,40 @@
     var cur = document.documentElement.getAttribute("data-theme");
     applyTheme(cur === "dark" ? "light" : "dark");
   });
+
+  // ----- instructor mode（講師メモの表示制御）-----
+  var INSTR_UNLOCK = "claude-course-instr-unlock";
+  var INSTR_SHOW = "claude-course-instr-show";
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function instrUnlocked() { return lsGet(INSTR_UNLOCK) === "1"; }
+  function instrShow() { return lsGet(INSTR_SHOW) !== "off"; } // 既定は表示（解錠時）
+  function applyInstructor() {
+    var on = instrUnlocked() && instrShow();
+    document.documentElement.setAttribute("data-instructor", on ? "on" : "off");
+    if (el.instructorBtn) {
+      el.instructorBtn.hidden = !instrUnlocked();
+      el.instructorBtn.classList.toggle("on", on);
+      el.instructorBtn.setAttribute("aria-pressed", on ? "true" : "false");
+      el.instructorBtn.title = on ? "講師メモ：表示中（クリックで隠す）" : "講師メモ：非表示（クリックで表示）";
+    }
+  }
+  (function initInstructor() {
+    var q = location.search || "";
+    if (/instructor=off/.test(q)) {
+      lsSet(INSTR_UNLOCK, "0");
+    } else if (/[?&]instructor(\b|=)/.test(q)) {
+      lsSet(INSTR_UNLOCK, "1");
+      lsSet(INSTR_SHOW, "on");
+    }
+    applyInstructor();
+  })();
+  if (el.instructorBtn) {
+    el.instructorBtn.addEventListener("click", function () {
+      lsSet(INSTR_SHOW, instrShow() ? "off" : "on");
+      applyInstructor();
+    });
+  }
 
   // ===================================================================
   //  Minimal Markdown renderer (covers the constructs used in lessons)
@@ -343,6 +378,7 @@
         var body = '<div class="doc-breadcrumb">' + esc(m.crumb) + "</div>";
         body += '<div class="doc">' + renderMarkdown(md) + "</div>";
         el.content.innerHTML = body;
+        wrapInstructorSections();
         el.content.scrollTop = 0;
         window.scrollTo(0, 0);
         el.content.focus();
@@ -378,6 +414,26 @@
       el.doneBtn.textContent = nowDone ? "✓ 完了済み" : "完了にする";
       refreshDoneStates();
     };
+  }
+
+  // 「## 講師メモ」以降（直前の <hr> があればそれも含む）を instructor-only で包む
+  function wrapInstructorSections() {
+    var doc = el.content.querySelector(".doc");
+    if (!doc) return;
+    var heads = doc.querySelectorAll("h2");
+    for (var i = 0; i < heads.length; i++) {
+      var h = heads[i];
+      if (h.textContent.indexOf("講師メモ") === -1) continue;
+      var start = h;
+      var prev = h.previousElementSibling;
+      if (prev && prev.tagName === "HR") start = prev;
+      var wrap = document.createElement("div");
+      wrap.className = "instructor-only";
+      start.parentNode.insertBefore(wrap, start);
+      var node = start;
+      while (node) { var next = node.nextSibling; wrap.appendChild(node); node = next; }
+      break;
+    }
   }
 
   function setActiveLesson(path) {
